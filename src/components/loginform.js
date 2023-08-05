@@ -135,7 +135,7 @@ function LoginForm() {
       />
       <div className="form-check text-start my-3">
         <input className="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault" />
-        <label className="form-check-label" htmlFor="flexCheckDefault">
+        <label className="form-check-label" htmlFor="flexCheckDefault" style={{ color: 'black' }}>
           Remember me
         </label>
       </div>
