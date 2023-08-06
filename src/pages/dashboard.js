@@ -50,7 +50,7 @@ function Dashboard() {
                   <CardContent>
                     {Object.keys(item).map((key) => renderField(key, item[key]))}
                     <Link href={item.url.app} target="_blank">
-                      View in App
+                      Raw Item Data
                     </Link>
                   </CardContent>
                 </Card>
