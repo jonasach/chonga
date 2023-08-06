@@ -38,8 +38,12 @@ function Quality() {
               <ListItem key={quality.guid}>
                 <ListItemButton>
                   <ListItemText
-                    primary={`Quality Name: ${quality.name}`}
-                    secondary={`Number: ${quality.number}`}
+                    primary={
+                      <span style={{ color: '#3f51b5' }}>            
+                      Quality Name: {quality.number}
+          </span>
+                  }
+                    secondary={`Number: ${quality.name}`}
                   />
                 </ListItemButton>
               </ListItem>
