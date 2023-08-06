@@ -16,7 +16,6 @@ function Toc({ setSelectedPage }) {
 
   return (
     <div>
-      <Button onClick={() => setMenuVisible(!menuVisible)}>Toggle Menu</Button>
       {menuVisible && (
         <List>
           <ListItem button onClick={() => handleClick('items')}>
