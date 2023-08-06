@@ -11,3 +11,4 @@ git commit -m "[$timestamp] $message"
 
 
 git push origin main
+
