@@ -60,7 +60,7 @@ function LoginForm() {
 
         // Redirect to a new page with the session ID as a query parameter
         router.push({
-          pathname: '/dashboard',
+          pathname: '/items',
           query: { sessionId }
         });
 
