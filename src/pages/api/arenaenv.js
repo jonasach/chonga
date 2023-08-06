@@ -5,11 +5,6 @@ export default function handler(req, res) {
     return;
   }
 
-  console.log('Environment variables: ', {
-    API_URL: process.env.API_URL,
-    API_EMAIL: process.env.API_EMAIL,
-    API_WORKSPACEID: process.env.API_WORKSPACEID,
-  });
 
   const result = {
     API_URL: process.env.API_URL,

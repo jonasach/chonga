@@ -22,7 +22,7 @@ function LoginForm() {
 
   useEffect(() => {
     axios
-      .post('/api/env', {})
+      .post('/api/arenaenv', {})
       .then((response) => {
         const env = response.data.result;
         if ('API_URL' in env) {
