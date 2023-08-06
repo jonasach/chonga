@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 import { Container } from '@mui/material';
 import { useRouter } from 'next/router';
-import ContentArea from '../components/contentarea'; // Ensure the filename matches
+import ContentArea from '../components/ContentArea'; // Ensure the filename matches
 import { Drawer, List, ListItem, ListItemText } from '@mui/material';
 
 function Toc() { // Consider renaming to Toc
