@@ -1,56 +1,42 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import { Grid, Card, CardContent, Typography, Link } from '@mui/material';
+import { Grid, Card, CardContent, Typography } from '@mui/material';
 
-function Dashboard() {
+function Quality() {
   const router = useRouter();
-  const { sessionId } = router.query;
+  const { sessionId, endpoint } = router.query;
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    if (sessionId) {
+    console.log(sessionId);
+    const endpoint1='qualityprocesses?template.guid=HZJ27VMR84NJ2L4FZGTM'
+    console.log(endpoint1);
+    if (sessionId && endpoint1) {
       const fetchData = async () => {
         try {
-          const response = await axios.get('/api/getquality', {
+          const response = await axios.get(`/api/arenaget?endpoint=${endpoint1}`, {
             headers: { 'arena_session_id': sessionId },
           });
           setData(response.data);
-
-          console.log('Results:', response.data.results); // Log the results
- 
-
         } catch (error) {
           console.error('Error fetching data:', error);
-        }
+        } 
       };
-
       fetchData();
     }
-  }, [sessionId]);
+  }, [sessionId, endpoint]);
 
-  const renderField = (key, value) => {
-    if (typeof value === 'object' && value !== null) {
-      return Object.keys(value).map((subKey) => renderField(`${key}.${subKey}`, value[subKey]));
-    }
-
-    return (
-      <Typography variant="body2" key={key}>
-        <strong>{key}:</strong> {value}
-      </Typography>
-    );
-  };
 
   return (
     <div>
-      <h1>Hello from Arena's RESTAPI</h1>
+      <h1>Hello from Arena's Quality</h1>
       {data ? (
         <div>
           <h2>A sampling of qualitys</h2>
           <Grid container spacing={4}>
             {data.results.map((quality) => (
                <Grid item xs={12} sm={6} md={3} key={quality.guid}> {/* Change 'quality' to 'item' */}
-
                 <Card>
                 <div style={{ backgroundColor: '#6ebe4c', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <Typography variant="body2" style={{ color: 'white' }}><strong>Number:</strong> {quality.number}</Typography>
@@ -63,8 +49,8 @@ function Dashboard() {
                     <Typography variant="body2"><strong>Current Step Name:</strong> {quality.currentStep.name}</Typography>
   
                     <Typography variant="body2" style={{ maxWidth: '200px', overflow: 'auto' }}>
-  <strong>Description:</strong> {quality.description}
-</Typography>
+                    <strong>Description:</strong> {quality.description}
+                    </Typography>
   
                     <Typography variant="body2"><strong>Guid:</strong> {quality.guid}</Typography>
                     <Typography variant="body2"><strong>Name:</strong> {quality.name}</Typography>
@@ -92,4 +78,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default Quality;
