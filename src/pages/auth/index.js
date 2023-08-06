@@ -1,11 +1,12 @@
 
 import {Layout} from 'src/layouts/auth/layout';
-import LoginForm from 'src/components/loginform';
+import Login from 'src/components/login';
+import { LocalGasStation } from '@mui/icons-material';
 
-export default function Login() {
+export default function myLogin() {
   return (
     <Layout>
-      <LoginForm />
+      <Login />
     </Layout>
   );
 }

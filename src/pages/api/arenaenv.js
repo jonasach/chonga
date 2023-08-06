@@ -5,7 +5,6 @@ export default function handler(req, res) {
     return;
   }
 
-
   const result = {
     API_URL: process.env.ARENA_API_URL,
     API_EMAIL: process.env.ARENA_API_EMAIL,

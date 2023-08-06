@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { List, ListItem, ListItemText, ListItemIcon, Button } from '@mui/material';
+import { List, ListItem, ListItemText, ListItemIcon } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { useMediaQuery } from '@mui/material';
 import InboxIcon from '@mui/icons-material/Inbox'; // Example icon for "Get Item"
 import GradeIcon from '@mui/icons-material/Grade'; // Example icon for "Get Quality"
 
-function Toc({ setSelectedPage }) {
+function Sidenav({ setSelectedPage }) {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const [menuVisible, setMenuVisible] = useState(true); // State to manage visibility
@@ -15,20 +15,20 @@ function Toc({ setSelectedPage }) {
   };
 
   return (
-    <div>
+    <div style={{ backgroundColor: 'lightgrey', height: '100%', color: 'black' }}>
       {menuVisible && (
         <List>
-          <ListItem button onClick={() => handleClick('items')}>
+          <ListItem button onClick={() => handleClick('items')} style={{ color: 'black' }}>
             <ListItemIcon>
-              {isSmallScreen ? <InboxIcon /> : <InboxIcon />}
+              <InboxIcon />
             </ListItemIcon>
-            {!isSmallScreen && <ListItemText primary="Get Item" />}
+            {!isSmallScreen && <ListItemText primary="Get Item" style={{ color: 'black' }} />}
           </ListItem>
-          <ListItem button onClick={() => handleClick('quality')}>
+          <ListItem button onClick={() => handleClick('quality')} style={{ color: 'black' }}>
             <ListItemIcon>
-              {isSmallScreen ? <GradeIcon /> : <GradeIcon />}
+              <GradeIcon />
             </ListItemIcon>
-            {!isSmallScreen && <ListItemText primary="Get Quality" />}
+            {!isSmallScreen && <ListItemText primary="Get Quality" style={{ color: 'black' }} />}
           </ListItem>
         </List>
       )}
@@ -36,4 +36,4 @@ function Toc({ setSelectedPage }) {
   );
 }
 
-export default Toc;
+export default Sidenav;

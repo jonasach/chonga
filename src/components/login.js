@@ -6,7 +6,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 
 
-function LoginForm() {
+function Login() {
   const [email, setEmail] = useState('');
   const [workspaceId, setWorkspaceID] = useState('');
   const [password, setPassword] = useState('');
@@ -46,7 +46,7 @@ function LoginForm() {
     }
 
     axios
-      .post('/api/arenaapi', {
+      .post('/api/arenalogin', {
         email: email,
         password: password,
         workspaceId: workspaceId,
@@ -191,4 +191,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default Login;

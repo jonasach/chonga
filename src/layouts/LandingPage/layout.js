@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../../components/Header';
+import Header from '../../components/topnav';
 import Footer from '../../components/Footer';
-import Toc from '../../components/Toc';
+import Toc from '../../components/sidenav';
 import dynamic from 'next/dynamic';
 import { Container, Grid } from '@mui/material'; // Import Grid from Material-UI
 
@@ -11,17 +11,13 @@ function MainLayout({ children }) {
   const [showSidebar, setShowSidebar] = useState(true); // Added for sidebar toggle
 
   useEffect(() => {
-    console.log('useEffect triggered, selectedPage:', selectedPage);
-
+ 
     if (selectedPage) {
-      console.log('Loading component for selectedPage:', selectedPage);
       const DynamicComponent = dynamic(() => import(`../../pages/${selectedPage}`));
       setDynamicComponent(() => (props) => {
-        console.log('Rendering component with props:', props);
         return <DynamicComponent selectedPage={selectedPage} {...props} />;
       });
     } else {
-      console.log('No selectedPage, setting DynamicComponent to null');
       setDynamicComponent(null);
     }
   }, [selectedPage]);

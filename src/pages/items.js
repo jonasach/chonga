@@ -29,10 +29,8 @@ function Items() {
 
   return (
     <div>
-      <h1>Hello from Arena's Items</h1>
       {data ? (
         <div>
-          <h2>A sampling of Items</h2>
           <Grid container spacing={4}>
             {data.results.map((item) => (
               <Grid item xs={12} sm={6} md={3} key={item.guid}>

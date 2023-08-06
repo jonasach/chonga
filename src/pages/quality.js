@@ -30,10 +30,8 @@ function Quality() {
 
   return (
     <div>
-      <h1>Hello from Arena's Quality</h1>
       {data ? (
         <div>
-          <h2>A sampling of qualitys</h2>
           <Grid container spacing={4}>
             {data.results.map((quality) => (
                <Grid item xs={12} sm={6} md={3} key={quality.guid}> {/* Change 'quality' to 'item' */}
