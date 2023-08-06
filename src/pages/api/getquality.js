@@ -11,16 +11,20 @@ export default async function handler(req, res) {
       return;
     }
   
+    console.log ('line 12')
     // Call the remote API endpoint for items, passing the session ID as a header
-    const remoteApiResponse = await fetch('https://api.arenasolutions.com/v1/items', {
+    const remoteApiResponse = await fetch('https://api.arenasolutions.com/v1/qualityprocesses?template.guid=HZJ27VMR84NJ2L4FZGTM', {
       method: 'GET', // Assuming it's a GET request
       headers: {
         'arena_session_id': sessionId, // Passing the session ID as a header
       },
     });
   
+
     const data = await remoteApiResponse.json();
-    console.log(data)
+
+  
+    console.log (data)
     res.status(200).json(data);
   }
   

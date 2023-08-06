@@ -3,7 +3,6 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import axios from 'axios';
-
 import { useRouter } from 'next/router';
 
 
@@ -60,7 +59,7 @@ function LoginForm() {
 
         // Redirect to a new page with the session ID as a query parameter
         router.push({
-          pathname: '/items',
+          pathname: '/LandingPage',
           query: { sessionId }
         });
 
@@ -167,7 +166,7 @@ function LoginForm() {
   .responsive-image {
     width: 50%; /* this is the default size, it will apply to all screen sizes */
     max-width: 100%; /* ensure the image never stretches beyond its original size */
-    padding-top: 199px; /* padding to the top */
+    padding-top: 50px; /* padding to the top */
   padding-bottom: 20px; /* padding to the bottom */
 
   }
