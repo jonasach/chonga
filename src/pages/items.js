@@ -39,10 +39,10 @@ function Dashboard() {
 
   return (
     <div>
-      <h1>Welcome to the Dashboard</h1>
+      <h1>Hello from Arena's RESTAPI</h1>
       {data ? (
         <div>
-          <h2>Data from server:</h2>
+          <h2>A sampling of Items</h2>
           <Grid container spacing={4}>
             {data.results.map((item) => (
               <Grid item xs={12} sm={6} md={3} key={item.guid}>
@@ -50,10 +50,7 @@ function Dashboard() {
                 <div style={{ backgroundColor: '#6ebe4c', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
     <Typography variant="body2" style={{ color: 'white' }}><strong>Number:</strong> {item.number}</Typography>
   </div>
-                <CardContent>
-
-
-     
+  <CardContent style={{ backgroundColor: '#e0e0e0' }}>
                     <Typography variant="body2"><strong>Assembly Type:</strong> {item.assemblyType}</Typography>
                     <Typography variant="body2"><strong>Category GUID:</strong> {item.category.guid}</Typography>
                     <Typography variant="body2"><strong>Category Name:</strong> {item.category.name}</Typography>

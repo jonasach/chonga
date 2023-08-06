@@ -167,7 +167,7 @@ function LoginForm() {
   .responsive-image {
     width: 50%; /* this is the default size, it will apply to all screen sizes */
     max-width: 100%; /* ensure the image never stretches beyond its original size */
-    padding-top: 50px; /* padding to the top */
+    padding-top: 199px; /* padding to the top */
   padding-bottom: 20px; /* padding to the bottom */
 
   }
