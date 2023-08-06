@@ -7,9 +7,9 @@ export default function handler(req, res) {
 
 
   const result = {
-    API_URL: process.env.API_URL,
-    API_EMAIL: process.env.API_EMAIL,
-    API_WORKSPACEID: process.env.API_WORKSPACEID,
+    API_URL: process.env.ARENA_API_URL,
+    API_EMAIL: process.env.ARENA_API_EMAIL,
+    API_WORKSPACEID: process.env.ARENA_API_WORKSPACEID,
   };
 
   res.status(200).json({ result });
