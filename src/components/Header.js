@@ -1,10 +1,15 @@
-import { AppBar, Toolbar, Typography } from '@mui/material';
+import React from 'react';
+import { AppBar, Toolbar, IconButton } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 
-function Header() {
+function Header({ toggleMenu }) {
   return (
     <AppBar position="static">
       <Toolbar>
-        <Typography variant="h6">Your App Name</Typography>
+        <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleMenu}>
+          <MenuIcon />
+        </IconButton>
+        {/* Other header content */}
       </Toolbar>
     </AppBar>
   );

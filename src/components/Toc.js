@@ -1,24 +1,38 @@
-import { List, ListItem, ListItemText } from '@mui/material';
+import React, { useState } from 'react';
+import { List, ListItem, ListItemText, ListItemIcon, Button } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import { useMediaQuery } from '@mui/material';
+import InboxIcon from '@mui/icons-material/Inbox'; // Example icon for "Get Item"
+import GradeIcon from '@mui/icons-material/Grade'; // Example icon for "Get Quality"
 
 function Toc({ setSelectedPage }) {
-  console.log('Toc rendered'); // Logs when the component is rendered
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const [menuVisible, setMenuVisible] = useState(true); // State to manage visibility
 
   const handleClick = (page) => {
-    console.log('ListItem clicked', page); // Logs when a ListItem is clicked and the page it represents
-    console.log('Calling setSelectedPage with', page); // Logs the value being passed to setSelectedPage
     setSelectedPage(page);
   };
 
   return (
     <div>
-      <List>
-        <ListItem button onClick={() => handleClick('items')}> 
-          <ListItemText primary="Get Item" />
-        </ListItem>
-        <ListItem button onClick={() => handleClick('quality')}>
-          <ListItemText primary="Get Quality" />
-        </ListItem>
-      </List>
+      <Button onClick={() => setMenuVisible(!menuVisible)}>Toggle Menu</Button>
+      {menuVisible && (
+        <List>
+          <ListItem button onClick={() => handleClick('items')}>
+            <ListItemIcon>
+              {isSmallScreen ? <InboxIcon /> : <InboxIcon />}
+            </ListItemIcon>
+            {!isSmallScreen && <ListItemText primary="Get Item" />}
+          </ListItem>
+          <ListItem button onClick={() => handleClick('quality')}>
+            <ListItemIcon>
+              {isSmallScreen ? <GradeIcon /> : <GradeIcon />}
+            </ListItemIcon>
+            {!isSmallScreen && <ListItemText primary="Get Quality" />}
+          </ListItem>
+        </List>
+      )}
     </div>
   );
 }
