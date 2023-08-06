@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import { Grid, Card, CardContent, Typography } from '@mui/material';
 import { List, ListItem, ListItemButton, ListItemText } from '@mui/material';
-
+import Divider from '@mui/material/Divider';
 
 function Quality() {
   const router = useRouter();
@@ -34,6 +34,7 @@ function Quality() {
         {data ? (
           <List>
             {data.results.map((quality, index) => (
+              <div>
               <ListItem key={quality.guid}>
                 <ListItemButton>
                   <ListItemText
@@ -42,6 +43,8 @@ function Quality() {
                   />
                 </ListItemButton>
               </ListItem>
+               <Divider />
+              </div>
             ))}
           </List>
         ) : (
