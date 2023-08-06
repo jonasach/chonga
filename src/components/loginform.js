@@ -4,6 +4,9 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import axios from 'axios';
 
+import { useRouter } from 'next/router';
+
+
 function LoginForm() {
   const [email, setEmail] = useState('');
   const [workspaceId, setWorkspaceID] = useState('');
@@ -13,6 +16,9 @@ function LoginForm() {
 
   const passwordInputRef = useRef(null);
   const sessionIDInputRef = useRef(null);
+
+  const router = useRouter();
+
 
   useEffect(() => {
     axios
@@ -50,7 +56,15 @@ function LoginForm() {
       .then((response) => {
         const sessionId = response.data.arenaSessionId;
         setSessionID(sessionId);
-        sessionIDInputRef.current.focus();
+        //sessionIDInputRef.current.focus();
+
+        // Redirect to a new page with the session ID as a query parameter
+        router.push({
+          pathname: '/dashboard',
+          query: { sessionId }
+        });
+
+
       })
       .catch((error) => {
         console.error(`POST /login error:`, error);
