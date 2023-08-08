@@ -7,9 +7,6 @@ export default async function handler(req, res) {
   const sessionId = req.headers['arena_session_id'];
   const endpointName = req.query.endpoint; // Retrieve endpoint name from query
 
-console.log("My Endpoint", endpointName)
-console.log("My sessionId", sessionId)
-
   if (!sessionId || !endpointName) {
     res.status(400).json({ message: 'Session ID and endpoint name are required' });
     return;
@@ -17,8 +14,6 @@ console.log("My sessionId", sessionId)
 
   // Construct the URL based on the endpoint name
   const remoteApiUrl = `https://api.arenasolutions.com/v1/${endpointName}`;
-
-  console.log("remote url", remoteApiUrl)
 
   // Call the remote API endpoint, passing the session ID as a header
   const remoteApiResponse = await fetch(remoteApiUrl, {

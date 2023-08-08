@@ -1,22 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import Divider from '@mui/material/Divider';
-import QualityDetail from './qualitydetail'; // Import the QualityDetail component here
+import AppContext from '../contexts/ArenaContext';
 
-function Quality() {
+function Items() {
   const router = useRouter();
-  const { sessionId, endPoint } = router.query; // Here sessionId is from the query, not a prop
+  const { sessionId, endpoint } = router.query;
   const [data, setData] = useState(null);
-const selectedItem = null
+  const { arenaEndPoint } = useContext(AppContext); // Get the arenaEndPoint from the context
 
   useEffect(() => {
-    const endpoint1 = 'qualityprocesses';
-    if (sessionId && endpoint1) {
+    if (sessionId && arenaEndPoint) {
       const fetchData = async () => {
         try {
-          const response = await axios.get(`/api/arenaget?endpoint=${endpoint1}`, {
+          const response = await axios.get(`/api/arenaget?endpoint=${arenaEndPoint}`, {
             headers: { 'arena_session_id': sessionId },
           });
           setData(response.data);
@@ -26,19 +25,19 @@ const selectedItem = null
       };
       fetchData();
     }
-  }, [sessionId, endpoint]);
+  }, [sessionId, arenaEndPoint]); // React to changes in sessionId and arenaEndPoint
 
   return (
     <div>
       {data ? (
         <List>
-          {data.results.map((quality, index) => (
-            <div key={quality.guid}>
+          {data.results.map((item, index) => (
+            <div key={item.guid}>
               <ListItem>
                 <ListItemButton>
                   <ListItemText
-                    primary={<span style={{ color: 'red' }}>Name: {Number.number}</span>}
-                    secondary={`name: ${quality.name}`}
+                    primary={<span style={{ color: '#3f51b5' }}> Number: {item.number}</span>}
+                    secondary={`Name: ${item.name}`}
                   />
                 </ListItemButton>
               </ListItem>
@@ -53,4 +52,4 @@ const selectedItem = null
   );
 }
 
-export default Quality;
+export default Items;
