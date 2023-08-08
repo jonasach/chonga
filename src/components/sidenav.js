@@ -5,6 +5,10 @@ import { useMediaQuery } from '@mui/material';
 import InboxIcon from '@mui/icons-material/Inbox'; // Example icon for "Get Item"
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import AppContext from '../contexts/ArenaContext';
+import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
+import BookIcon from '@mui/icons-material/Book';
+import ContentPasteIcon from '@mui/icons-material/ContentPaste';
+
 
 function Sidenav({ setSelectedPage, setSelectedItem }) {
   const theme = useTheme();
@@ -24,7 +28,7 @@ function Sidenav({ setSelectedPage, setSelectedItem }) {
 
           <ListItem button onClick={() => handleClick('arenalist','items')} style={{ color: 'black' }}>
             <ListItemIcon>
-              <InboxIcon style={{ color: '#3f51b5' }} />
+              <FormatListNumberedIcon style={{ color: '#3f51b5' }} />
             </ListItemIcon>
             {!isSmallScreen && <ListItemText primary="Item" style={{ color: 'black' }} />}
           </ListItem>
@@ -36,11 +40,26 @@ function Sidenav({ setSelectedPage, setSelectedItem }) {
             {!isSmallScreen && <ListItemText primary="Quality" style={{ color: 'black' }} />}
           </ListItem>
 
-          <ListItem button onClick={() => handleClick('arenalist','changes')} style={{ color: 'black' }}>
+          <ListItem button onClick={() => handleClick('arenachanges','changes')} style={{ color: 'black' }}>
             <ListItemIcon>
               <AutorenewIcon style={{ color: 'green' }} />
             </ListItemIcon>
             {!isSmallScreen && <ListItemText primary="Changes" style={{ color: 'black' }} />}
+          </ListItem>
+
+          <ListItem button onClick={() => handleClick('arenachanges','requests')} style={{ color: 'black' }}>
+            <ListItemIcon>
+              <ContentPasteIcon style={{ color: 'green' }} />
+            </ListItemIcon>
+            {!isSmallScreen && <ListItemText primary="Requests" style={{ color: 'black' }} />}
+          </ListItem>
+
+
+          <ListItem button onClick={() => handleClick('arenalist','trainingplans')} style={{ color: 'black' }}>
+            <ListItemIcon>
+              <BookIcon style={{ color: 'purple' }} />
+            </ListItemIcon>
+            {!isSmallScreen && <ListItemText primary="Training" style={{ color: 'black' }} />}
           </ListItem>
 
 
