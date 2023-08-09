@@ -3,12 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "onshapestart": "bin/www",
     "dev": "HOST=192.168.1.179 next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "heroku-postbuild": "rollup -c"
+    "lint": "next lint"
   },
   "author": "Ron Gajdos <rgajdos@ptc.com>",
   "license": "MIT",
