@@ -3,21 +3,26 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import { List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import Divider from '@mui/material/Divider';
-import AppContext from '../contexts/ArenaContext';
+import AppContext from 'src/contexts/ArenaContext';
 
 function Items() {
+  console.log("a.start")
   const router = useRouter();
-  const { sessionId, endpoint } = router.query;
   const [data, setData] = useState(null);
-  const { arenaEndPoint } = useContext(AppContext); // Get the arenaEndPoint from the context
+  const { arenaSessionId, arenaEndPoint,arenaListName, arenaListNumber } = useContext(AppContext);
+
+console.log("arenalist1.arenaEndPoint", arenaEndPoint)
+console.log("arenalist1.sessionId", arenaSessionId)
 
   useEffect(() => {
-    if (sessionId && arenaEndPoint) {
+    if (arenaSessionId && arenaEndPoint) {
+      console.log("arenalist.sessionId", arenaSessionId)
       const fetchData = async () => {
         try {
           const response = await axios.get(`/api/arenaget?endpoint=${arenaEndPoint}`, {
-            headers: { 'arena_session_id': sessionId },
+            headers: { 'arena-session-id': arenaSessionId },
           });
+          console.log("arenalist1.js.data:", response.data)
           setData(response.data);
         } catch (error) {
           console.error('Error fetching data:', error);
@@ -25,7 +30,7 @@ function Items() {
       };
       fetchData();
     }
-  }, [sessionId, arenaEndPoint]); // React to changes in sessionId and arenaEndPoint
+  }, [arenaSessionId, arenaEndPoint]); 
 
   return (
     <div>
@@ -36,8 +41,8 @@ function Items() {
               <ListItem>
                 <ListItemButton>
                   <ListItemText
-                    primary={<span style={{ color: '#3f51b5' }}> Number: {item.number}</span>}
-                    secondary={`Name: ${item.name}`}
+                    primary={<span style={{ color: '#3f51b5' }}> Number: {item[arenaListName]}</span>}
+                    secondary={`Name: ${item[arenaListNumber]}`}
                   />
                 </ListItemButton>
               </ListItem>
@@ -46,7 +51,7 @@ function Items() {
           ))}
         </List>
       ) : (
-        <div>Loading data...</div>
+        <div>Loading some data...</div>
       )}
     </div>
   );

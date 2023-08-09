@@ -1,29 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import Header from '../../components/topnav';
-import Footer from '../../components/Footer';
-import Toc from '../../components/sidenav';
+import React, { useContext, useState, useEffect } from 'react';
+import Header from 'src/components/topnav';
+import Footer from 'src/components/Footer';
+import Toc from 'src/components/sidenav';
 import dynamic from 'next/dynamic';
 import { Container, Grid } from '@mui/material';
-import QualityDetail from '../../pages/qualitydetail'; // Import QualityDetail component
+import AppContext from 'src/contexts/ArenaContext';
 
-function MainLayout({ children, selectedItem, setSelectedItem, selectedPage, setSelectedPage }) {
+
+function MainLayout({ children}) {
   const [DynamicComponent, setDynamicComponent] = useState(null);
   const [showSidebar, setShowSidebar] = useState(true);
+  const { setArenaSessionId, setSelectedItem, setSelectedPage, selectedItem, selectedPage } = useContext(AppContext);
+  
 
   useEffect(() => {
-    if (selectedItem) {
-      // If an item is selected, show the Detail component for that item
-      setDynamicComponent(() => (props) => {
-        return <QualityDetail guid={selectedItem} goBack={() => setSelectedItem(null)} {...props} />;
+    console.log("layout.selectedPage",selectedPage)
+     if (selectedPage) {
+        const DynamicComponent = dynamic(() => import(`../../pages/${selectedPage}`));
+        setDynamicComponent(() => (props) => {
+          return <DynamicComponent {...props} />;
       });
-    } else if (selectedPage) {
-      // If a page is selected, import and render the page component
-      const DynamicComponent = dynamic(() => import(`../../pages/${selectedPage}`));
-      setDynamicComponent(() => (props) => {
-        return <DynamicComponent setSelectedItem={setSelectedItem} {...props} />;
-      });
-    } else {
-      setDynamicComponent(null);
     }
   }, [selectedPage, selectedItem]);
 

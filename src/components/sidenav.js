@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import { List, ListItem, ListItemText, ListItemIcon } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { useMediaQuery } from '@mui/material';
-import InboxIcon from '@mui/icons-material/Inbox'; // Example icon for "Get Item"
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import AppContext from '../contexts/ArenaContext';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
@@ -10,44 +9,54 @@ import BookIcon from '@mui/icons-material/Book';
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 
 
-function Sidenav({ setSelectedPage, setSelectedItem }) {
+function Sidenav({ }) {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
-  const [menuVisible, setMenuVisible] = useState(true); // State to manage visibility
-  const context = useContext(AppContext)
+  const [menuVisible, setMenuVisible] = useState(true); 
+  const { setArenaEndPoint, setArenaListName, setArenaListNumber, setSelectedPage } = useContext(AppContext);
+  
+  const handleClick = (selectedPage,arenaEndPoint,arenaListName,arenaListNumber) => {
+    console.log("clickaway the moments that make up a dull day");
+    console.log("arenaEndPoint:", arenaEndPoint);
+    console.log("arenaListName:", arenaListName);
+    console.log("arenaListNumber:", arenaListNumber);
+    console.log("page:", selectedPage);
 
-  const handleClick = (page, arenaEndPoint) => {
-      setSelectedPage(page);    
-      context.setArenaEndPoint(arenaEndPoint);
-  };
+    setSelectedPage(selectedPage);
+    
+    setArenaEndPoint(arenaEndPoint);
+    setArenaListName(arenaListName);
+    setArenaListNumber(arenaListNumber);
+
+    };
 
   return (
     <div style={{ backgroundColor: 'lightgrey', height: '100%', color: 'black' }}>
       {menuVisible && (
         <List>
 
-          <ListItem button onClick={() => handleClick('arenalist','items')} style={{ color: 'black' }}>
+          <ListItem button onClick={() => handleClick('arenalist','items','number','name')} style={{ color: 'black' }}>
             <ListItemIcon>
               <FormatListNumberedIcon style={{ color: '#3f51b5' }} />
             </ListItemIcon>
             {!isSmallScreen && <ListItemText primary="Item" style={{ color: 'black' }} />}
           </ListItem>
 
-          <ListItem button onClick={() => handleClick('arenalist','qualityprocesses')} style={{ color: 'black' }}>
+          <ListItem button onClick={() => handleClick('arenalist','qualityprocesses','number','name')} style={{ color: 'black' }}>
             <ListItemIcon>
               <AutorenewIcon style={{ color: 'red' }} />
             </ListItemIcon>
             {!isSmallScreen && <ListItemText primary="Quality" style={{ color: 'black' }} />}
           </ListItem>
 
-          <ListItem button onClick={() => handleClick('arenachanges','changes')} style={{ color: 'black' }}>
+          <ListItem button onClick={() => handleClick('arenalist','changes','number','title')} style={{ color: 'black' }}>
             <ListItemIcon>
               <AutorenewIcon style={{ color: 'green' }} />
             </ListItemIcon>
             {!isSmallScreen && <ListItemText primary="Changes" style={{ color: 'black' }} />}
           </ListItem>
 
-          <ListItem button onClick={() => handleClick('arenachanges','requests')} style={{ color: 'black' }}>
+          <ListItem button onClick={() => handleClick('arenalist','requests','number','title')} style={{ color: 'black' }}>
             <ListItemIcon>
               <ContentPasteIcon style={{ color: 'green' }} />
             </ListItemIcon>
@@ -55,7 +64,7 @@ function Sidenav({ setSelectedPage, setSelectedItem }) {
           </ListItem>
 
 
-          <ListItem button onClick={() => handleClick('arenalist','trainingplans')} style={{ color: 'black' }}>
+          <ListItem button onClick={() => handleClick('arenalist','trainingplans','number','')} style={{ color: 'black' }}>
             <ListItemIcon>
               <BookIcon style={{ color: 'purple' }} />
             </ListItemIcon>

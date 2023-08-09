@@ -3,11 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "onshapestart": "bin/www",
     "dev": "HOST=192.168.1.179 next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "heroku-postbuild": "rollup -c"
   },
+  "author": "Ron Gajdos <rgajdos@ptc.com>",
+  "license": "MIT",
+  "main": "bin/www",
   "dependencies": {
     "@emotion/cache": "11.10.5",
     "@emotion/react": "^11.11.1",
@@ -23,24 +28,43 @@
     "@mui/x-date-pickers": "5.0.19",
     "axios": "^1.4.0",
     "date-fns": "2.29.3",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
     "formik": "^2.4.3",
+    "fs": "^0.0.1-security",
     "next": "13.4.12",
+    "node-fetch": "^2.6.1",
     "nprogress": "0.2.0",
+    "passport": "^0.4.1",
+    "passport-onshape": "^1.1.2",
     "prop-types": "15.8.1",
     "react": "18.2.0",
     "react-apexcharts": "1.4.0",
     "react-dom": "18.2.0",
     "react-resizable": "^3.0.5",
     "simplebar-react": "^3.2.4",
+    "three": "^0.125.0",
+    "uuid": "^8.3.1",
+    "webpack": "^5.88.2",
     "yup": "^1.2.0"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-node-resolve": "^11.0.0",
     "@types/node": "18.13.0",
     "@types/nprogress": "0.2.0",
     "@types/numeral": "2.0.2",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
     "eslint": "8.34.0",
-    "eslint-config-next": "13.1.6"
+    "eslint-config-next": "13.1.6",
+    "rollup": "^2.34.2"
+  },
+
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "src/*": ["src/*"]
+    }
   }
 }

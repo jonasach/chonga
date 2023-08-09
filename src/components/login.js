@@ -1,17 +1,18 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useContext,useEffect, useState, useRef } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-
+import AppContext from 'src/contexts/ArenaContext';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [workspaceId, setWorkspaceID] = useState('');
   const [password, setPassword] = useState('');
-  const [sessionId, setSessionID] = useState('');
-  const [apiUrl, setApiUrl] = useState(''); // Add this line
+  const [apiUrl, setApiUrl] = useState(''); 
+
+  const { arenaSessionId, setArenaSessionId} = useContext(AppContext);
 
   const passwordInputRef = useRef(null);
   const sessionIDInputRef = useRef(null);
@@ -54,13 +55,17 @@ function Login() {
       })
       .then((response) => {
         const sessionId = response.data.arenaSessionId;
-        setSessionID(sessionId);
+        setArenaSessionId(sessionId)
+
+        console.log("login.sessionId:",sessionId)
+        console.log("login.arenaSessionId:",arenaSessionId)
+
         //sessionIDInputRef.current.focus();
 
         // Redirect to a new page with the session ID as a query parameter
         router.push({
-          pathname: '/LandingPage',
-          query: { sessionId }
+          pathname: '/home',
+          query: { arenaSessionId }
         });
 
 
@@ -140,7 +145,7 @@ function Login() {
         id="sessionId"
         label="Session ID"
         variant="outlined"
-        value={sessionId}
+        value={arenaSessionId}
         InputProps={{
           readOnly: true,
           ref: sessionIDInputRef,

@@ -4,27 +4,26 @@ export default async function handler(req, res) {
     return;
   }
 
-  const sessionId = req.headers['arena_session_id'];
-  const endpointName = req.query.endpoint; // Retrieve endpoint name from query
 
-console.log("My Endpoint", endpointName)
-console.log("My sessionId", sessionId)
+  const arenaSessionId = req.headers['arena-session-id']; 
+  const endpointName = req.query.endpoint; 
 
-  if (!sessionId || !endpointName) {
-    res.status(400).json({ message: 'Session ID and endpoint name are required' });
+  console.log("arenaget2.endpoint", endpointName)
+  console.log("arenaget2.arenaSessionId", arenaSessionId)
+
+  if (!arenaSessionId || !endpointName) {
+    res.status(400).json({ message: 'arena2.get:Session ID and endpoint name are required' });
     return;
   }
 
   // Construct the URL based on the endpoint name
   const remoteApiUrl = `https://api.arenasolutions.com/v1/${endpointName}`;
 
-  console.log("remote url", remoteApiUrl)
-
   // Call the remote API endpoint, passing the session ID as a header
   const remoteApiResponse = await fetch(remoteApiUrl, {
     method: 'GET', // Assuming it's a GET request
     headers: {
-      'arena_session_id': sessionId, // Passing the session ID as a header
+      'arena_session_id': arenaSessionId, // Passing the session ID as a header
     },
   });
 
