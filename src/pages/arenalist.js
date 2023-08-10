@@ -11,8 +11,6 @@ function Items() {
   const [data, setData] = useState(null);
   const { arenaSessionId, arenaEndPoint,arenaListName, arenaListNumber } = useContext(AppContext);
 
-console.log("arenalist1.arenaEndPoint", arenaEndPoint)
-console.log("arenalist1.sessionId", arenaSessionId)
 
   useEffect(() => {
     if (arenaSessionId && arenaEndPoint) {
@@ -51,7 +49,7 @@ console.log("arenalist1.sessionId", arenaSessionId)
           ))}
         </List>
       ) : (
-        <div>Loading some data...</div>
+        <div>Loading some list data...</div>
       )}
     </div>
   );

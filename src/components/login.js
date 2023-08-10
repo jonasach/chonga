@@ -57,11 +57,6 @@ function Login() {
         const sessionId = response.data.arenaSessionId;
         setArenaSessionId(sessionId)
 
-        console.log("login.sessionId:",sessionId)
-        console.log("login.arenaSessionId:",arenaSessionId)
-
-        //sessionIDInputRef.current.focus();
-
         // Redirect to a new page with the session ID as a query parameter
         router.push({
           pathname: '/home',

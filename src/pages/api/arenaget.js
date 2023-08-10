@@ -4,12 +4,8 @@ export default async function handler(req, res) {
     return;
   }
 
-
   const arenaSessionId = req.headers['arena-session-id']; 
   const endpointName = req.query.endpoint; 
-
-  console.log("arenaget2.endpoint", endpointName)
-  console.log("arenaget2.arenaSessionId", arenaSessionId)
 
   if (!arenaSessionId || !endpointName) {
     res.status(400).json({ message: 'arena2.get:Session ID and endpoint name are required' });

@@ -12,7 +12,7 @@ const footerStyle = {
 function Footer() {
   return (
     <Container style={footerStyle} maxWidth="none">
-      <Typography variant="body2">© Your App Name</Typography>
+      <Typography variant="body2">© PTC 2023 - FTLPD Team 5</Typography>
     </Container>
   );
 }

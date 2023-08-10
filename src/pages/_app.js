@@ -11,6 +11,7 @@ function App ({Component,pageProps}){
   const [arenaListNumber, setArenaListNumber] = useState("default");
   const [arenaSessionId, setArenaSessionId] = useState("default");
 
+
   useEffect(() => {
     console.log("Updated arenaSessionId:", arenaSessionId);
   }, [arenaEndPoint,arenaSessionId]); // React to changes in selectedEndpoin
