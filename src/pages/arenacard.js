@@ -71,9 +71,9 @@ function ArenaCards() {
           alt="green iguana"
         />
             <CardContent>
-                {item.name}
-                {item.description} 
-                {item.assemblyType}
+                Revsion Status: {item.revisionStatus} <br />
+                Name: {item.name} <br />
+                Type: {item.assemblyType} <br />
             </CardContent>
             <IconButton
               onClick={handleExpandClick}
