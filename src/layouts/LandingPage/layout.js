@@ -3,25 +3,36 @@ import Header from 'src/components/topnav';
 import Footer from 'src/components/Footer';
 import Toc from 'src/components/sidenav';
 import dynamic from 'next/dynamic';
-import { Container, Grid } from '@mui/material';
+import { Container, Grid, Divider, IconButton } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu'; // Replace with your preferred icon
 import AppContext from 'src/contexts/ArenaContext';
 
-
-function MainLayout({ children}) {
+function MainLayout({ children }) {
   const [DynamicComponent, setDynamicComponent] = useState(null);
   const [showSidebar, setShowSidebar] = useState(true);
   const { setArenaSessionId, setSelectedItem, setSelectedPage, selectedItem, selectedPage } = useContext(AppContext);
-  
+
+  const [externalUrl, setExternalUrl] = useState(null);
+  const [isListNavOpen, setIsListNavOpen] = useState(true);
 
   useEffect(() => {
-    console.log("layout.selectedPage",selectedPage)
-     if (selectedPage) {
-        const DynamicComponent = dynamic(() => import(`../../pages/${selectedPage}`));
-        setDynamicComponent(() => (props) => {
-          return <DynamicComponent {...props} />;
+    if (selectedPage === 'externalLink') {
+      setExternalUrl('');
+      setDynamicComponent(null);
+      return;
+    }
+
+    if (selectedPage) {
+      const DynamicComponent = dynamic(() => import(`../../pages/${selectedPage}`));
+      setDynamicComponent(() => (props) => {
+        return <DynamicComponent {...props} />;
       });
     }
   }, [selectedPage, selectedItem]);
+
+  const toggleListNav = () => {
+    setIsListNavOpen(!isListNavOpen);
+  };
 
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
@@ -39,9 +50,35 @@ function MainLayout({ children}) {
               <Toc setSelectedPage={setSelectedPage} setSelectedItem={setSelectedItem} />
             </Grid>
           )}
-          <Grid item xs={showSidebar ? 10 : 12}>
+          {showSidebar && <Divider orientation="vertical" flexItem />}
+          <Grid item xs={isListNavOpen ? 2 : 0} style={{ backgroundColor: 'white', overflowY: 'auto', transition: 'all 0.3s' }}>
+            {externalUrl ? (
+              <iframe src={externalUrl} style={{ width: '100%', height: '100%' }} />
+            ) : DynamicComponent ? (
+              <DynamicComponent />
+            ) : (
+              children
+            )}
+          </Grid>
+          {isListNavOpen && <Divider orientation="vertical" flexItem />}
+          <div
+            style={{
+              width: '48px', // Adjust to your desired width
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: 'white',
+              position: 'sticky',
+              top: '20px', // Adjust to your desired position
+            }}
+          >
+            <IconButton onClick={toggleListNav}>
+              <MenuIcon /> {/* Replace with your preferred icon */}
+            </IconButton>
+          </div>
+          <Grid item xs={isListNavOpen ? 8 : 10}>
             <Container style={{ padding: '16px', backgroundColor: 'white', flex: 1, overflowY: 'auto' }}>
-              {DynamicComponent ? <DynamicComponent /> : children}
+              {/* Main Body - Empty for Now */}
             </Container>
           </Grid>
         </Grid>
@@ -51,6 +88,8 @@ function MainLayout({ children}) {
       </div>
     </div>
   );
+  
+  
 }
 
 export default MainLayout;

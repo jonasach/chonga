@@ -8,6 +8,8 @@ export default async function handler(req, res) {
   
     // Now make the remote API call with the required parameters (email, password, workspaceId)
   
+console.log("arenalogin.line11")
+
     const remoteApiResponse = await fetch('https://api.arenasolutions.com/v1/login', {
 
       method: 'POST',
