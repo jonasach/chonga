@@ -1,10 +1,9 @@
 import React, { useContext, useState } from 'react';
-import { List, ListItem, ListItemText, ListItemIcon } from '@mui/material';
+import { List, ListItem, ListItemText, ListItemIcon, Typography} from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { useMediaQuery } from '@mui/material';
 import Divider from '@mui/material/Divider';
-import { 
-  FcWorkflow,FcSettings, FcBiohazard, FcTreeStructure, FcDocument, FcGraduationCap, 
+import { FcWorkflow,FcSettings, FcBiohazard, FcTreeStructure, FcDocument, FcGraduationCap, 
   FcBarChart, FcPlanner, FcInspection, FcFactory, FcProcess } from 'react-icons/fc';
 import AppContext from 'src/contexts/ArenaContext';
 import { menuItems } from './menuConfig';
@@ -13,7 +12,7 @@ function Sidenav({}) {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const [menuVisible] = useState(true);
-  const { setExternalUrl, setArenaEndPoint, setArenaListName, setArenaListNumber, setSelectedPage } = useContext(AppContext);
+  const { setExternalUrl, setArenaEndPoint, setArenaListName, setArenaListNumber, setSelectedPage, selectedGUID } = useContext(AppContext);
 
   const handleClick = (item) => {
     if (item.selectedPage === 'externalLink') {
@@ -30,6 +29,8 @@ function Sidenav({}) {
     <div style={{ backgroundColor: 'white', height: '100%', color: 'black' }}>
       {menuVisible && (
         <List>
+      <div style={{ padding: '16px' }}>
+        </div>
           {menuItems.map((item, index) => (
             <div key={index}>
               <ListItem button onClick={() => handleClick(item)} style={{ color: 'black' }}>
@@ -41,6 +42,7 @@ function Sidenav({}) {
               {index === 2 || index === 4 || index === 7 || index === 8 ? <Divider /> : null}
             </div>
           ))}
+          
         </List>
       )}
     </div>

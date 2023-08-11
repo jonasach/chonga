@@ -163,14 +163,12 @@ function topnav({ toggleMenu }) {
     <AppBar position="static">
         <Toolbar>
         <IconButton             
-            size="large"
-            edge="start"
-            color="inherit"
             aria-label="open drawer"
-            sx={{ mr: 2 }} edge="start" color="inherit" aria-label="menu" onClick={toggleMenu}>
+            sx={{ mr: 2 }} edge="start" color="inherit"  onClick={toggleMenu}>
           <MenuIcon />
         </IconButton>
-
+ 
+ 
           <Typography
             variant="h6"
             noWrap
@@ -188,6 +186,9 @@ function topnav({ toggleMenu }) {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
+
+
+          
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">

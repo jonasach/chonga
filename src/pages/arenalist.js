@@ -6,21 +6,17 @@ import Divider from '@mui/material/Divider';
 import AppContext from 'src/contexts/ArenaContext';
 
 function Items() {
-  console.log("a.start")
   const router = useRouter();
   const [data, setData] = useState(null);
-  const { arenaSessionId, arenaEndPoint,arenaListName, arenaListNumber } = useContext(AppContext);
-
+  const { arenaSessionId, arenaEndPoint, arenaListName, arenaListNumber, setSelectedGUID } = useContext(AppContext);
 
   useEffect(() => {
     if (arenaSessionId && arenaEndPoint) {
-      console.log("arenalist.sessionId", arenaSessionId)
       const fetchData = async () => {
         try {
           const response = await axios.get(`/api/arenaget?endpoint=${arenaEndPoint}`, {
             headers: { 'arena-session-id': arenaSessionId },
           });
-          console.log("arenalist1.js.data:", response.data)
           setData(response.data);
         } catch (error) {
           console.error('Error fetching data:', error);
@@ -28,7 +24,11 @@ function Items() {
       };
       fetchData();
     }
-  }, [arenaSessionId, arenaEndPoint]); 
+  }, [arenaSessionId, arenaEndPoint]);
+
+  const handleItemClick = (guid) => {
+    setSelectedGUID(guid); 
+  };
 
   return (
     <div>
@@ -37,9 +37,9 @@ function Items() {
           {data.results.map((item, index) => (
             <div key={item.guid}>
               <ListItem>
-                <ListItemButton>
+                <ListItemButton onClick={() => handleItemClick(item.guid)}>
                   <ListItemText
-                    primary={<span style={{ color: '#3f51b5' }}> Number: {item[arenaListName]}</span>}
+                    primary={<span style={{ color: '#3f51b5' }}>Number: {item[arenaListName]}</span>}
                     secondary={`Name: ${item[arenaListNumber]}`}
                   />
                 </ListItemButton>

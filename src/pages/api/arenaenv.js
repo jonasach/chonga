@@ -9,6 +9,8 @@ export default function handler(req, res) {
     API_URL: process.env.ARENA_API_URL,
     API_EMAIL: process.env.ARENA_API_EMAIL,
     API_WORKSPACEID: process.env.ARENA_API_WORKSPACEID,
+    API_PASSWORD: process.env.ARENA_API_PASSWORD,
+
   };
 
   res.status(200).json({ result });

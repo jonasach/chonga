@@ -11,7 +11,7 @@ export const menuItems = [
       label: 'Files',
       icon: 'FcDocument',
       selectedPage: 'arenalist',
-      arenaEndPoint: '?format=pdf',
+      arenaEndPoint: 'files?format=pdf',
       arenaListName: 'number',
       arenaListNumber: 'title',
     },

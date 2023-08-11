@@ -6,6 +6,8 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import AppContext from 'src/contexts/ArenaContext';
 
+
+
 function Login() {
   const [email, setEmail] = useState('');
   const [workspaceId, setWorkspaceID] = useState('');
@@ -18,7 +20,7 @@ function Login() {
   const sessionIDInputRef = useRef(null);
 
   const router = useRouter();
-
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     axios
@@ -45,7 +47,9 @@ function Login() {
     if (!email || !password || !workspaceId || !apiUrl) { // Update this line
       return;
     }
-
+  
+    setError(null); // Reset the error before making the request
+  
     axios
       .post('/api/arenalogin', {
         email: email,
@@ -54,22 +58,27 @@ function Login() {
         apiUrl: apiUrl, // Add this line
       })
       .then((response) => {
+        if (response.status === 400) {
+          setError(response.data.errors[0].message);
+          return;
+        }
+  
         const sessionId = response.data.arenaSessionId;
-        setArenaSessionId(sessionId)
-
+        setArenaSessionId(sessionId);
+  
         // Redirect to a new page with the session ID as a query parameter
         router.push({
           pathname: '/home',
           query: { arenaSessionId }
         });
-
-
       })
       .catch((error) => {
         console.error(`POST /login error:`, error);
+        setError('email or password invalid please try again'); 
         passwordInputRef.current.focus();
       });
   };
+  
 
   return (
     <Box
@@ -99,6 +108,7 @@ function Login() {
             }}
         />
       </div>
+   
 
       <h2 className="h4 mb-3 fw-normal text-custom" style={{ textAlign: 'center' }}>RESTAPI Sign In</h2>
       <TextField
@@ -151,6 +161,8 @@ function Login() {
         <label className="form-check-label" htmlFor="flexCheckDefault" style={{ color: 'black' }}>
           Remember me
         </label>
+        {error && <div className="error" style={{ color: 'red' }}>{error}</div>}
+
       </div>
       <Button id="signInButton" variant="contained" style=
       {{ 
