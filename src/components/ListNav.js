@@ -7,12 +7,12 @@ import AppContext from 'src/contexts/ArenaContext';
 import { useTheme } from '@mui/material/styles';
 import useSession from 'src/hooks/useSession';
 import { menuItems } from './menuConfig';
+import { useTheme } from '@mui/material/styles';
 
 
 function ListNav({ onSelect }) { // Added onSelect prop here
   const arenaSessionId = useSession(); // Using the custom hook
   const theme = useTheme();
-  const router = useRouter();
   const [data, setData] = useState(null);
   const {arenaEndPoint, arenaListName, arenaListNumber, setSelectedGUID } = useContext(AppContext);
 

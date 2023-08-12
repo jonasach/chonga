@@ -34,7 +34,9 @@ const StyledInputBase = styled(InputBase)({
   },
 });
 
-function MenuListNav({ toggleListNav, onBackArrowClick }) { // Pass the onBackArrowClick function as a prop
+function MenuListNav({ toggleListNav, onBackArrowClick }) { 
+  const theme = useTheme();
+  
   return (
     <>
           <Typography

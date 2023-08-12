@@ -1,14 +1,13 @@
 import React, { useContext } from 'react';
 import { List, ListItemButton, ListItemText, ListItemIcon } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { useMediaQuery } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import AppContext from 'src/contexts/ArenaContext';
 import { menuItems } from './menuConfig';
 
 function SideNav({ onSelect }) { // Added the onSelect prop here
   const theme = useTheme();
-  const { setExternalUrl, setArenaEndPoint, setArenaListName, setArenaListNumber, setSelectedPage, selectedGUID } = useContext(AppContext);
+  const { setExternalUrl, setArenaEndPoint, setArenaListName, setArenaListNumber, setSelectedPage } = useContext(AppContext);
 
   // Determine text and background color based on theme
   const textColor = theme.palette.text.primary;

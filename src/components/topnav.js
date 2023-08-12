@@ -2,13 +2,10 @@ import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-
 import MenuIcon from '@mui/icons-material/Menu';
-
-
-import MenuSideNav from 'src/components/MenuSideNav'; // Correct path
-import MenuListNav from 'src/components/MenuListNav'; // Correct path
-import MenuMainBodyNav from 'src/components/MenuMainBodyNav'; // Correct path
+import MenuSideNav from 'src/components/MenuSideNav'; 
+import MenuListNav from 'src/components/MenuListNav'; 
+import MenuMainBodyNav from 'src/components/MenuMainBodyNav'; 
 
 function TopNav({ toggleMenu, toggleListNav, activeView, onBackArrowClick }) {
   
