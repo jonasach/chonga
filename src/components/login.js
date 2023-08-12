@@ -64,6 +64,7 @@ function Login() {
   
         const sessionId = response.data.arenaSessionId;
         setArenaSessionId(sessionId);
+        sessionStorage.setItem('arenaSessionId', sessionId);
   
         // Redirect to a new page with the session ID as a query parameter
         router.push({

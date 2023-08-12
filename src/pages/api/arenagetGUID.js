@@ -1,4 +1,5 @@
 export default async function handler(req, res) {
+
   if (req.method !== 'GET') {
     res.status(405).json({ message: 'Method not allowed' });
     return;
@@ -6,6 +7,12 @@ export default async function handler(req, res) {
 
   const arenaSessionId = req.headers['arena-session-id']; 
   const endpointName = req.query.endpoint; 
+  const guid = req.query.guid; // Extract the guid from query parameters
+
+  if (!guid) {
+    res.status(400).json({ message: 'GUID is required' });
+    return;
+  }
 
   if (!arenaSessionId || !endpointName) {
     res.status(400).json({ message: 'arena2.get:Session ID and endpoint name are required' });
@@ -13,8 +20,7 @@ export default async function handler(req, res) {
   }
 
   // Construct the URL based on the endpoint name
-  const remoteApiUrl = `https://api.arenasolutions.com/v1/${endpointName}`;
- 
+  const remoteApiUrl = `https://api.arenasolutions.com/v1/${endpointName}/${guid}`;
 
   // Call the remote API endpoint, passing the session ID as a header
   const remoteApiResponse = await fetch(remoteApiUrl, {

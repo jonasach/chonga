@@ -5,12 +5,16 @@ import { List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import AppContext from 'src/contexts/ArenaContext';
 import { useTheme } from '@mui/material/styles';
+import useSession from 'src/hooks/useSession';
+import { menuItems } from './menuConfig';
+
 
 function ListNav({ onSelect }) { // Added onSelect prop here
+  const arenaSessionId = useSession(); // Using the custom hook
   const theme = useTheme();
   const router = useRouter();
   const [data, setData] = useState(null);
-  const { arenaSessionId, arenaEndPoint, arenaListName, arenaListNumber, setSelectedGUID } = useContext(AppContext);
+  const {arenaEndPoint, arenaListName, arenaListNumber, setSelectedGUID } = useContext(AppContext);
 
 
     // Determine text and background color based on theme

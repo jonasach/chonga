@@ -8,7 +8,6 @@ import { menuItems } from './menuConfig';
 
 function SideNav({ onSelect }) { // Added the onSelect prop here
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const { setExternalUrl, setArenaEndPoint, setArenaListName, setArenaListNumber, setSelectedPage, selectedGUID } = useContext(AppContext);
 
   // Determine text and background color based on theme
