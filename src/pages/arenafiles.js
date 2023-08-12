@@ -15,7 +15,7 @@ function ArenaFiles() {
   const [pdfData, setPdfData] = useState(null);
   const [numPages, setNumPages] = useState(null);
   const { arenaSessionId, selectedGUID } = useContext(AppContext); 
-  const scaleFactor = 0.6;
+  const scaleFactor = 1;
   const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
   };

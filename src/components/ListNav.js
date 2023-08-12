@@ -4,11 +4,18 @@ import axios from 'axios';
 import { List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import AppContext from 'src/contexts/ArenaContext';
+import { useTheme } from '@mui/material/styles';
 
-function Items() {
+function ListNav({ onSelect }) { // Added onSelect prop here
+  const theme = useTheme();
   const router = useRouter();
   const [data, setData] = useState(null);
   const { arenaSessionId, arenaEndPoint, arenaListName, arenaListNumber, setSelectedGUID } = useContext(AppContext);
+
+
+    // Determine text and background color based on theme
+    const textColor = theme.palette.text.primary;
+    const backgroundColor = theme.palette.background.paper;
 
   useEffect(() => {
     if (arenaSessionId && arenaEndPoint) {
@@ -28,10 +35,11 @@ function Items() {
 
   const handleItemClick = (guid) => {
     setSelectedGUID(guid); 
+    onSelect(); // Added this line to trigger the MainBody to show
   };
 
   return (
-    <div>
+    <div style={{ backgroundColor: backgroundColor, height: '100%', color: textColor }}>
       {data ? (
         <List>
           {data.results.map((item, index) => (
@@ -39,11 +47,13 @@ function Items() {
               <ListItem>
                 <ListItemButton onClick={() => handleItemClick(item.guid)}>
                   <ListItemText
-                    primary={<span style={{ color: '#3f51b5' }}>Number: {item[arenaListName]}</span>}
+                    primary={<span>Number: {item[arenaListName]}</span>}
                     secondary={`Name: ${item[arenaListNumber]}`}
-                  />
+         />
+                       <div style={{ color: textColor }}>{" > "}</div> 
                 </ListItemButton>
               </ListItem>
+
               <Divider />
             </div>
           ))}
@@ -55,4 +65,4 @@ function Items() {
   );
 }
 
-export default Items;
+export default ListNav;

@@ -6,8 +6,6 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import AppContext from 'src/contexts/ArenaContext';
 
-
-
 function Login() {
   const [email, setEmail] = useState('');
   const [workspaceId, setWorkspaceID] = useState('');
@@ -21,6 +19,7 @@ function Login() {
 
   const router = useRouter();
   const [error, setError] = useState(null);
+
 
   useEffect(() => {
     axios
@@ -89,40 +88,37 @@ function Login() {
         alignItems: 'center',
         '& > :not(style)': {
           m: 1,
-          width: '50ch',
+          width: '40ch',
         },
       }}
       noValidate
       autoComplete="off"
     >
 
-
-<div style={{ width: '100%', textAlign: 'center' }}>
- 
-
-        <img className="responsive-image"   
-                src="/assets/logos/arena-solutions-login.png" alt="Your description" 
-            style={{ 
-                maxWidth: '80%', 
-                height: 'auto' 
-            }}
-        />
+    <div style={{ width: '90%', textAlign: 'center' }}>
+          <img className="responsive-image"   
+                  src="/assets/logos/arachne1.png" alt="Your description" 
+              style={{ 
+                  maxWidth: '60%', 
+                  height: 'auto' 
+              }}
+          />
       </div>
    
 
-      <h2 className="h4 mb-3 fw-normal text-custom" style={{ textAlign: 'center' }}>RESTAPI Sign In</h2>
-      <TextField
+      <h2 className="h4 mb-3 fw-normal text-custom" style={{ textAlign: 'center' }}>FTLPD 2023 - US Team 5</h2>
+      <TextField 
         id="apiUrl"
         label="API URL"
-        variant="outlined"
+        variant="filled"
         value={apiUrl}
         onChange={(e) => setApiUrl(e.target.value)}
         required
-      />
+      />  
       <TextField
         id="email"
         label="Email address"
-        variant="outlined"
+        variant="filled"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
@@ -132,7 +128,7 @@ function Login() {
         id="password"
         label="Password"
         type="password"
-        variant="outlined"
+        variant="filled"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         required
@@ -141,7 +137,7 @@ function Login() {
       <TextField
         id="workspaceId"
         label="Workspace ID"
-        variant="outlined"
+        variant="filled"
         value={workspaceId}
         onChange={(e) => setWorkspaceID(e.target.value)}
         required
@@ -149,7 +145,7 @@ function Login() {
       <TextField
         id="sessionId"
         label="Session ID"
-        variant="outlined"
+        variant="filled"
         value={arenaSessionId}
         InputProps={{
           readOnly: true,
@@ -175,28 +171,26 @@ function Login() {
         Sign in
       </Button>
       <style jsx>{`
-  .responsive-image {
-    width: 50%; /* this is the default size, it will apply to all screen sizes */
-    max-width: 100%; /* ensure the image never stretches beyond its original size */
-    padding-top: 50px; /* padding to the top */
-  padding-bottom: 20px; /* padding to the bottom */
+        .responsive-image {
+          width: 50%; /* this is the default size, it will apply to all screen sizes */
+          max-width: 100%; /* ensure the image never stretches beyond its original size */
+          padding-top: 50px; /* padding to the top */
+        padding-bottom: 20px; /* padding to the bottom */
 
-  }
+        }
 
-  @media (min-width: 768px) {
-    .responsive-image {
-      width: 40%; /* scale down to 40% on medium screens */
-    }
-  }
+        @media (min-width: 768px) {
+          .responsive-image {
+            width: 40%; /* scale down to 40% on medium screens */
+          }
+        }
 
-  @media (min-width: 1024px) {
-    .responsive-image {
-      width: 30%; /* scale down to 30% on large screens */
-    }
-  }
-`}</style>
-
-
+        @media (min-width: 1024px) {
+          .responsive-image {
+            width: 30%; /* scale down to 30% on large screens */
+          }
+        }
+      `}</style>
 
 
     </Box>

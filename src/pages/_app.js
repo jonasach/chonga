@@ -1,5 +1,14 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import AppContext from 'src/contexts/ArenaContext';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 
 function App({ Component, pageProps }) {
   const [selectedItem, setSelectedItem] = useState("default");
@@ -15,21 +24,31 @@ function App({ Component, pageProps }) {
     console.log("Updated arenaSessionId:", arenaSessionId);
   }, [arenaEndPoint, arenaSessionId]); // React to changes in selectedEndpoint
 
+  const darkTheme = createTheme({
+    palette: {
+      mode: 'dark',
+    },
+  });
+  
+
   return (
-    <AppContext.Provider
-      value={
-        {
-          arenaSessionId, setArenaSessionId,
-          selectedItem, setSelectedItem,
-          selectedPage, setSelectedPage,
-          arenaEndPoint, setArenaEndPoint,
-          arenaListName, setArenaListName,
-          arenaListNumber, setArenaListNumber,
-          selectedGUID, setSelectedGUID // Include selectedGUID and setSelectedGUID in the context value
-        }
-      }>
-      <Component {...pageProps} />
-    </AppContext.Provider>
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <AppContext.Provider
+        value={
+          {
+            arenaSessionId, setArenaSessionId,
+            selectedItem, setSelectedItem,
+            selectedPage, setSelectedPage,
+            arenaEndPoint, setArenaEndPoint,
+            arenaListName, setArenaListName,
+            arenaListNumber, setArenaListNumber,
+            selectedGUID, setSelectedGUID // Include selectedGUID and setSelectedGUID in the context value
+          }
+        }>
+        <Component {...pageProps} />
+      </AppContext.Provider>
+    </ThemeProvider>
   );
 };
 
