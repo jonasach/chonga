@@ -6,8 +6,6 @@ import Divider from '@mui/material/Divider';
 import AppContext from 'src/contexts/ArenaContext';
 import { useTheme } from '@mui/material/styles';
 import useSession from 'src/hooks/useSession';
-import { menuItems } from './menuConfig';
-import { useTheme } from '@mui/material/styles';
 
 
 function ListNav({ onSelect }) { // Added onSelect prop here
