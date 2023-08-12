@@ -6,6 +6,7 @@ import { styled } from '@mui/system';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import IconButton from '@mui/material/IconButton';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import { useTheme } from '@mui/material/styles';
 
 const Search = styled('div')({
   position: 'relative',

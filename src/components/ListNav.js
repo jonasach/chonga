@@ -15,9 +15,9 @@ function ListNav({ onSelect }) { // Added onSelect prop here
   const {arenaEndPoint, arenaListName, arenaListNumber, setSelectedGUID } = useContext(AppContext);
 
 
-    // Determine text and background color based on theme
-    const textColor = theme.palette.text.primary;
-    const backgroundColor = theme.palette.background.paper;
+  // Determine text and background color based on theme
+  const textColor = theme.palette.text.primary;
+  const backgroundColor = theme.palette.background.paper;
 
   useEffect(() => {
     if (arenaSessionId && arenaEndPoint) {
