@@ -1,0 +1,16 @@
+.responsive-image {
+  width: 40%; /* Default size for large screens */
+  height: auto;
+}
+
+@media screen and (max-width: 1024px) {
+  .responsive-image {
+    width: 60%; /* Size for medium screens */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .responsive-image {
+    width: 80%; /* Size for small screens */
+  }
+}

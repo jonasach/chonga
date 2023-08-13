@@ -7,81 +7,34 @@ export const Layout = (props) => {
   const { children } = props;
 
   return (
-    <Box
-      component="main"
-      sx={{
-        display: 'flex',
-        flex: '1 1 auto',
-        flexDirection: 'column',
-        height: '100vh'
-      }}
-    >
-      <Grid
-        container
-        sx={{ flex: '1 1 auto' }}
-      >
-        <Grid
-          xs={12}
-          lg={6}
-          sx={{
-            backgroundColor: 'background.paper',
-            display: 'flex',
-            flexDirection: 'column',
-            position: 'relative',
-            height: '100vh'
-          }}
-        >
-          <Box
-            component="header"
-            sx={{
-              left: 0,
-              p: 3,
-              position: 'fixed',
-              top: 0,
-              width: '100%'
-            }}
-          >
-            <Box
-              component={NextLink}
-              href="/"
-              sx={{
-                display: 'inline-flex',
-                height: 32,
-                width: 32
-              }}
-            >
-
-            </Box>
-          </Box>
-          {children}
-        </Grid>
-        <Grid
-          item
-          xs={false}
-          lg={6}
-          sx={{
-            alignItems: 'center',
-            background: 'radial-gradient(50% 50% at 50% 50%, #122647 0%, #090E23 100%)',
-            color: 'white',
-            display: { xs: 'none', lg: 'flex' },
-            justifyContent: 'center',
-            '& img': {
-              maxWidth: '80%'
-            }
-          }}
-        >
-          <Box sx={{ p: 3 }}>
-
-
-            <img
-              alt=""
-              src="/assets/splash.png"
-            />
-          </Box>
-        </Grid>
-      </Grid>
-    </Box>
+    <Box component="main" sx={{ display: 'flex', flex: '1 1 auto', flexDirection: 'column', height: '100vh'}}>
+        <Grid container sx={{ flex: '1 1 auto' }}>
+              <Grid id="left" xs={12} lg={6} 
+                    sx={{ backgroundColor: 'background.paper', display: 'flex', flexDirection: 'column',
+                          position: 'relative', height: '100vh', paddingTop: '50px', paddingBottom: '50px' }}> {/* Added paddingTop */}
+                  <Box component="header" sx={{ left: 0, p: 3, position: 'fixed', top: 0, width: '100%'}}>
+                    <Box component={NextLink} href="/" sx={{ display: 'inline-flex', height: 32, width: 32}}></Box>
+                  </Box>    
+                  {children}
+              </Grid>
+  
+              <Grid id="right" item xs={false} lg={6}
+                  sx={{ alignItems: 'center', background: 'radial-gradient(50% 50% at 50% 50%, #122647 0%, #090E23 100%)',
+                        color: 'white', display: { xs: 'none', lg: 'flex' }, justifyContent: 'center', overflow: 'hidden',
+                        paddingTop: '20px' }}> {/* Added paddingTop */}
+                  <Box
+                      width="100%"
+                      height="100%"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center">
+                    <img alt="" src="/assets/splash.png" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  </Box>
+            </Grid>
+          </Grid>
+      </Box>
   );
+  
 };
 
 Layout.propTypes = {

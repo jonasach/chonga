@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AppContext from 'src/contexts/ArenaContext';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import '../../public/css/login.css';
 
 
 const darkTheme = createTheme({

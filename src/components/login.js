@@ -6,17 +6,17 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import AppContext from 'src/contexts/ArenaContext';
 
+
+
+
 function Login() {
   const [email, setEmail] = useState('');
   const [workspaceId, setWorkspaceID] = useState('');
   const [password, setPassword] = useState('');
   const [apiUrl, setApiUrl] = useState(''); 
-
   const { arenaSessionId, setArenaSessionId} = useContext(AppContext);
-
   const passwordInputRef = useRef(null);
   const sessionIDInputRef = useRef(null);
-
   const router = useRouter();
   const [error, setError] = useState(null);
 
@@ -84,8 +84,7 @@ function Login() {
     <Box
       component="form"
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
+        display: 'flex',  flexDirection: 'column',
         alignItems: 'center',
         '& > :not(style)': {
           m: 1,
@@ -96,13 +95,9 @@ function Login() {
       autoComplete="off"
     >
 
-    <div style={{ width: '90%', textAlign: 'center' }}>
-          <img className="responsive-image"   
-                  src="/assets/logos/arachne1.png" alt="Your description" 
-              style={{ 
-                  maxWidth: '60%', 
-                  height: 'auto' 
-              }}
+    <div style={{ width: '80%', textAlign: 'center' }}>
+          <img className="responsive-image"
+                  src="/assets/logos/ptc2.svg" alt="Your description" 
           />
       </div>
    
@@ -155,7 +150,7 @@ function Login() {
       />
       <div className="form-check text-start my-3">
         <input className="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault" />
-        <label className="form-check-label" htmlFor="flexCheckDefault" style={{ color: 'black' }}>
+        <label className="form-check-label" htmlFor="flexCheckDefault" >
           Remember me
         </label>
         {error && <div className="error" style={{ color: 'red' }}>{error}</div>}
@@ -171,28 +166,6 @@ function Login() {
       onClick={handleSignIn}>
         Sign in
       </Button>
-      <style jsx>{`
-        .responsive-image {
-          width: 50%; /* this is the default size, it will apply to all screen sizes */
-          max-width: 100%; /* ensure the image never stretches beyond its original size */
-          padding-top: 50px; /* padding to the top */
-        padding-bottom: 20px; /* padding to the bottom */
-
-        }
-
-        @media (min-width: 768px) {
-          .responsive-image {
-            width: 40%; /* scale down to 40% on medium screens */
-          }
-        }
-
-        @media (min-width: 1024px) {
-          .responsive-image {
-            width: 30%; /* scale down to 30% on large screens */
-          }
-        }
-      `}</style>
-
 
     </Box>
   );
