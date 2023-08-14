@@ -7,31 +7,43 @@ import useSession from 'src/hooks/useSession';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 function ListNav({ style }) {
-  const arenaSessionId = useSession();
+  
   const theme = useTheme();
-  const [data, setData] = useState(null);
+
   const {
-    setPopulateMainBody,
-    setShowMainBody,
-    setShowListNav,
-    setPopulateSideNav,
-    setPopulateListNav,
-    setArenaEndPoint,
-    arenaListName,
-    arenaListNumber,
-    setSelectedPage,
-    setSelectedGUID,
-    arenaEndPoint
+    setSelectedGUID, selectedGUID,
+    setArenaListName,arenaListName,
+    setArenaListNumber,arenaListNumber,
+    setSelectedPage,selectedPage,
+    setArenaEndPoint, arenaEndPoint,
+    showSideNav, setShowSideNav ,
+    showListNav, setShowListNav ,
+    showMainBody, setShowMainBody,
+    showSettingsNav, setShowSettingsNav, 
+    populateSideNav, setPopulateSideNav ,
+    populateListNav, setPopulateListNav ,
+    populateMainBody, setPopulateMainBody,
+    setArenaSessionId
+
   } = useContext(AppContext);
+
+  const arenaSessionId = useSession();
+  const [data, setData] = useState(null);
 
   const textColor = theme.palette.text.primary;
   const backgroundColor = theme.palette.background.paper;
+
   const isXS = useMediaQuery('(max-width:600px)');
+  const isSM = useMediaQuery('(min-width:601px) and (max-width:768px)');
+  const isMD = useMediaQuery('(min-width:769px) and (max-width:992px)');
+  const isLG = useMediaQuery('(min-width:993px) and (max-width:1200px)');
+  const isXL = useMediaQuery('(min-width:1201px)');
 
   const handleItemClick = (guid) => {
+
     setSelectedGUID(guid)
     
-    if (isXS) {
+    if (isXS || isSM) {
       setShowSideNav(false);
       setPopulateSideNav(false);
       setShowListNav(false);
@@ -39,12 +51,18 @@ function ListNav({ style }) {
       setShowMainBody(true);
       setPopulateMainBody(true);
     } else {
+      setShowListNav(false);
+      setPopulateListNav(false);
       setShowMainBody(true);
       setPopulateMainBody(true);
     }
   };
 
   useEffect(() => {
+    console.log('ListNav.arenaEndPoint', arenaEndPoint);
+    console.log('ListNav.selectedPage', selectedPage);
+    console.log('ListNav.arenaSessionId', arenaSessionId);
+  
     if (arenaSessionId && arenaEndPoint) {
       const fetchData = async () => {
         try {
@@ -58,8 +76,9 @@ function ListNav({ style }) {
       };
       fetchData();
     }
-  }, [arenaSessionId, arenaEndPoint]);
+  }, [arenaEndPoint,setPopulateListNav]); // Empty dependency array means this effect will run once after the initial render
 
+  
   return (
     <div style={{ ...style, backgroundColor: backgroundColor, height: '100%', color: textColor }}>
       {data ? (

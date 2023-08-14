@@ -15,15 +15,12 @@ import Switch from '@mui/material/Switch';
 function TopNav({ toggleMenu, toggleListNav, activeView, onBackArrowClick }) {
   const { showSettingsNav, setShowSettingsNav } = useContext(AppContext); // Get the setShowSettingsNav function from the context
 
-  // Toggle the showSettingsNav variable
-  const handleToggleSettingsNav = () => {
-    setShowSettingsNav(!showSettingsNav);
-  };
 
   return (
     <AppBar position="static">
-      <Toolbar>
-
+  <Toolbar
+      sx={{ display: 'flex', justifyContent: 'space-between' }} // Using Flexbox to align items
+    >
 
       <div style={{ width: '20%', textAlign: 'left' }}>
           <img className="responsive-image"
@@ -31,26 +28,8 @@ function TopNav({ toggleMenu, toggleListNav, activeView, onBackArrowClick }) {
           />
       </div>
 
-        <IconButton
-          aria-label="open drawer"
-          sx={{ mr: 2 }}
-          edge="start"
-          color="inherit"
-          onClick={toggleMenu}
-        >
-        <MenuIcon />
-        </IconButton>
-
         {/* Add a switch to toggle showSettingsNav */}
-        <div>
-        <ListItem>
-          <FormControlLabel
-             control={<Switch checked={showSettingsNav} onChange={() => setShowSettingsNav(!showSettingsNav)} />}
-            label="Settings"
-          />
-        </ListItem>
-        </div>
-
+  
         {/* Conditionally render MenuAcount based on activeView */}
         {activeView === 'sidenav' && <MenuSideNav />} 
 
@@ -59,6 +38,15 @@ function TopNav({ toggleMenu, toggleListNav, activeView, onBackArrowClick }) {
 
         {/* Conditionally render MenuSearch based on activeView */}
         {activeView === 'mainbody' && <MenuMainBodyNav onBackArrowClick={onBackArrowClick} />} 
+
+        <div>
+        <ListItem>
+          <FormControlLabel
+             control={<Switch checked={showSettingsNav} onChange={() => setShowSettingsNav(!showSettingsNav)} />}
+            label="Settings"
+          />
+        </ListItem>
+        </div>
 
      
       </Toolbar>

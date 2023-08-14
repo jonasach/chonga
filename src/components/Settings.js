@@ -47,7 +47,7 @@ function Settings() {
 
   const list = (anchor) => (
     <Box
-      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 300 }}
       role="presentation"
       onClick={toggleDrawer(anchor, true)}
       onKeyDown={toggleDrawer(anchor, true)}
@@ -95,11 +95,7 @@ function Settings() {
       <Divider />
       <List>
         {/* Read-Only Fields */}
-        <ListItem><ListItemText primary={`isXS: ${isXS}`} /></ListItem>
-        <ListItem><ListItemText primary={`isSM: ${isSM}`} /></ListItem>
-        <ListItem><ListItemText primary={`isMD: ${isMD}`} /></ListItem>
-        <ListItem><ListItemText primary={`isLG: ${isLG}`} /></ListItem>
-        <ListItem><ListItemText primary={`isXL: ${isXL}`} /></ListItem>
+
         <ListItem><ListItemText primary={`Show Side Nav: ${showSideNav}`} /></ListItem>
         <ListItem><ListItemText primary={`Selected Item: ${selectedItem}`} /></ListItem>
         <ListItem><ListItemText primary={`Selected Page: ${selectedPage}`} /></ListItem>
@@ -108,6 +104,11 @@ function Settings() {
         <ListItem><ListItemText primary={`Arena List Number: ${arenaListNumber}`} /></ListItem>
         <ListItem><ListItemText primary={`Arena Session ID: ${arenaSessionId}`} /></ListItem>
         <ListItem><ListItemText primary={`Selected GUID: ${selectedGUID}`} /></ListItem>
+        <ListItem><ListItemText primary={`isXS: ${isXS}`} /></ListItem>
+        <ListItem><ListItemText primary={`isSM: ${isSM}`} /></ListItem>
+        <ListItem><ListItemText primary={`isMD: ${isMD}`} /></ListItem>
+        <ListItem><ListItemText primary={`isLG: ${isLG}`} /></ListItem>
+        <ListItem><ListItemText primary={`isXL: ${isXL}`} /></ListItem>
       </List>
     </Box>
   );

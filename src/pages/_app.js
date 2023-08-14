@@ -4,7 +4,6 @@ import { ThemeProvider, createTheme, useTheme } from '@mui/material/styles'; // 
 import { useMediaQuery } from '@mui/material'; // Correct import path for useMediaQuery
 import CssBaseline from '@mui/material/CssBaseline';
 import '../../public/css/login.css';
-import { FcCableRelease } from 'react-icons/fc';
 
 function App({ Component, pageProps }) {
   const theme = createTheme({
@@ -38,6 +37,7 @@ function App({ Component, pageProps }) {
   const [arenaListName, setArenaListName] = useState("default");
   const [arenaListNumber, setArenaListNumber] = useState("default");
   const [arenaSessionId, setArenaSessionId] = useState("default");
+  
   const [selectedGUID, setSelectedGUID] = useState(null);
 
   useEffect(() => {

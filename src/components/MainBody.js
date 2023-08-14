@@ -6,12 +6,28 @@
     import { Switch, FormControlLabel } from '@mui/material';
     import { Hidden, Container, Grid, Divider, IconButton } from '@mui/material';
     import useMediaQuery from '@mui/material/useMediaQuery'; // If you are using MUI
+    import useSession from 'src/hooks/useSession';
     
     function MainBody({  onSelect }) {
       const isXS = useMediaQuery('(max-width:600px)'); // Adjust the breakpoint as needed
       const theme = useTheme();
       const [data, setData] = useState(null);
-      const { selectedGUID, arenaSessionId, arenaEndPoint, setSelectedGUID } = useContext(AppContext);
+
+      const {
+        setSelectedGUID, selectedGUID,
+        setArenaListName,arenaListName,
+        setArenaListNumber,arenaListNumber,
+        setSelectedPage,selectedPage,
+        setArenaEndPoint, arenaEndPoint,
+        showSideNav, setShowSideNav ,
+        showListNav, setShowListNav ,
+        showMainBody, setShowMainBody,
+        showSettingsNav, setShowSettingsNav, 
+        populateSideNav, setPopulateSideNav ,
+        populateListNav, setPopulateListNav ,
+      } = useContext(AppContext);
+
+      const arenaSessionId = useSession();
 
       const textColor = theme.palette.text.primary;
       const backgroundColor = theme.palette.background.paper;
@@ -156,7 +172,10 @@
           };
           fetchData();
         }
-      }, [arenaSessionId, arenaEndPoint, selectedGUID]);
+      }, [selectedGUID]); // Empty dependency array means this effect will run once after the initial render
+
+
+
       return (
         <div style={{ backgroundColor: backgroundColor, height: '100%', color: textColor }}>
           {data ? (
@@ -176,12 +195,9 @@
               {/* Use Grid for a 2-column layout */}
               <Grid container spacing={2}>
                     {Object.keys(data).map((key) => {
-                      // Skip rendering fields with "guid" in the key
-                      if (key.toLowerCase().includes('guid')) {
-                        return null;
-                      }
+            
 
-                      return (
+                    return (
                         <Grid item xs={12} sm={6} key={key}>
                           {renderField(key, data[key])}
                         </Grid>

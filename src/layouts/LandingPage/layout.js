@@ -15,15 +15,21 @@ import AppContext from 'src/contexts/ArenaContext';
 import ArenaFiles from 'src/pages/arenafiles';
 
 import {  Container, Grid, Divider } from '@mui/material';
-
+import useSession from 'src/hooks/useSession';
 import { useTheme } from '@mui/material/styles'; // If you are using MUI
 import useMediaQuery from '@mui/material/useMediaQuery'; // If you are using MUI
+import isSameMinute from 'date-fns/fp/isSameMinute';
 //
 function MainLayout() {
   const {arenaEndPoint,  populateListNav, populateMainBody, populateSideNav, selectedPage, showSideNav, showListNav, showMainBody } = useContext(AppContext);
  
+  const arenaSessionId = useSession();
 
-  const isXS = useMediaQuery('(max-width:600px)'); // Adjust the breakpoint as needed
+  const isXS = useMediaQuery('(max-width:600px)');
+  const isSM = useMediaQuery('(min-width:601px) and (max-width:768px)');
+  const isMD = useMediaQuery('(min-width:769px) and (max-width:992px)');
+  const isLG = useMediaQuery('(min-width:993px) and (max-width:1200px)');
+  const isXL = useMediaQuery('(min-width:1201px)');
 
   const navStyle = {
     width: '100%', // Full width
@@ -41,7 +47,7 @@ function MainLayout() {
     const theme = useTheme();
 
     const renderTopNav = () => {
-      if (isXS) {
+      if (isXS || isSM) {
         if (showSideNav) {
           return <MenuSideNav style={navStyle} />;
         } else if (showListNav) {
@@ -52,7 +58,8 @@ function MainLayout() {
       } else {
         return <TopNav />;
       }
-    };
+    }; // This semicolon is correct, and it should be here
+    
   
 
   useEffect(() => {
@@ -60,14 +67,14 @@ function MainLayout() {
  //     const ListNavComponentImport = dynamic(() => import(`src/pages/${selectedPage}`));
   //    setListNavComponent(() => (props) => <ListNavComponentImport {...props} />);
  //   }
-  }, [populateListNav, populateSideNav, populateMainBody, selectedPage, showSideNav, showListNav, showMainBody]);
+  }, [ ]);
 
     return (
-      <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+      <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', overflow: 'auto' }}>
     
       {renderTopNav()}
 
-        <Grid container style={{ maxHeight: 'calc(100vh - 10px)', overflowY: 'hidden' }}> {/* fixed typo in 'calc' */}
+        <Grid container style={{ maxHeight: 'calc(100vh - 10px)', overflowY: 'auto' }}> {/* fixed typo in 'calc' */}
           {showSideNav && 
             <Grid id='SideNav'  style={gridStyle}> {/* Adjust the width as needed */}
             <Container style={{ height: '100%', padding: '0px', backgroundColor: 'black', flex: 1, overflowY: 'auto' }}>

@@ -4,25 +4,38 @@ import { useTheme } from '@mui/material/styles';
 import AppContext from 'src/contexts/ArenaContext';
 import { menuItems } from './menuConfig';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import useSession from 'src/hooks/useSession';
+
 
 function SideNav() {
+  const arenaSessionId = useSession();
+  
   const {
-    setPopulateMainBody,
-    setShowMainBody,
-    setShowListNav,
-    setPopulateSideNav,
-    setPopulateListNav,
-    setArenaEndPoint,
-    setArenaListName,
-    setArenaListNumber,
-    setSelectedPage,
+    setSelectedGUID, selectedGUID,
+    setArenaListName,arenaListName,
+    setArenaListNumber,arenaListNumber,
+    setSelectedPage,selectedPage,
+    setArenaEndPoint, arenaEndPoint,
+    showSideNav, setShowSideNav ,
+    showListNav, setShowListNav ,
+    showMainBody, setShowMainBody,
+    showSettingsNav, setShowSettingsNav, 
+    populateSideNav, setPopulateSideNav ,
+    populateListNav, setPopulateListNav ,
+    setPopulateMainBody, populateMainBody
   } = useContext(AppContext);
 
   const theme = useTheme();
   const textColor = theme.palette.text.primary;
   const backgroundColor = theme.palette.background.paper;
-  const isXS = useMediaQuery('(max-width:600px)');
 
+  const isXS = useMediaQuery('(max-width:600px)');
+  const isSM = useMediaQuery('(min-width:601px) and (max-width:768px)');
+  const isMD = useMediaQuery('(min-width:769px) and (max-width:992px)');
+  const isLG = useMediaQuery('(min-width:993px) and (max-width:1200px)');
+  const isXL = useMediaQuery('(min-width:1201px)');
+
+  
   const handleClick = (item) => {
 
 
@@ -32,7 +45,11 @@ function SideNav() {
     setArenaListName(item.arenaListName);
     setArenaListNumber(item.arenaListNumber);
 
-    if (isXS) {
+    console.log('SideNav.arenaEndPoint', item.arenaEndPoint)
+    console.log('SideNav.selectedPage', item.selectedPage)
+
+
+    if (isXS || isSM) {
       setShowSideNav(false);
       setPopulateSideNav(false);
       setShowListNav(true);
@@ -40,6 +57,7 @@ function SideNav() {
       setShowMainBody(false);
       setPopulateMainBody(false);
     } else {
+      setPopulateMainBody(false);
       setShowListNav(true);
       setShowMainBody(true);
       setPopulateListNav(true);
