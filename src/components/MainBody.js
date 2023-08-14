@@ -193,7 +193,7 @@
                 />
               </div>
               {/* Use Grid for a 2-column layout */}
-              <Grid container spacing={2}>
+              <Grid container >
                     {Object.keys(data).map((key) => {
             
 

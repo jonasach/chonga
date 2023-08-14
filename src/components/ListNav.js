@@ -51,8 +51,8 @@ function ListNav({ style }) {
       setShowMainBody(true);
       setPopulateMainBody(true);
     } else {
-      setShowListNav(false);
-      setPopulateListNav(false);
+      setShowListNav(true);
+      setPopulateListNav(true);
       setShowMainBody(true);
       setPopulateMainBody(true);
     }

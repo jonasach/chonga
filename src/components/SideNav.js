@@ -9,7 +9,7 @@ import useSession from 'src/hooks/useSession';
 
 function SideNav() {
   const arenaSessionId = useSession();
-  
+
   const {
     setSelectedGUID, selectedGUID,
     setArenaListName,arenaListName,
@@ -57,7 +57,7 @@ function SideNav() {
       setShowMainBody(false);
       setPopulateMainBody(false);
     } else {
-      setPopulateMainBody(false);
+      setPopulateMainBody(true);
       setShowListNav(true);
       setShowMainBody(true);
       setPopulateListNav(true);
