@@ -1,29 +1,49 @@
 import React, { useContext } from 'react';
 import { List, ListItemButton, ListItemText, ListItemIcon } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import Divider from '@mui/material/Divider';
 import AppContext from 'src/contexts/ArenaContext';
 import { menuItems } from './menuConfig';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
-function SideNav({ onSelect }) { // Added the onSelect prop here
+function SideNav() {
+  const {
+    setPopulateMainBody,
+    setShowMainBody,
+    setShowListNav,
+    setPopulateSideNav,
+    setPopulateListNav,
+    setArenaEndPoint,
+    setArenaListName,
+    setArenaListNumber,
+    setSelectedPage,
+  } = useContext(AppContext);
+
   const theme = useTheme();
-  const { setExternalUrl, setArenaEndPoint, setArenaListName, setArenaListNumber, setSelectedPage } = useContext(AppContext);
-
-  // Determine text and background color based on theme
   const textColor = theme.palette.text.primary;
   const backgroundColor = theme.palette.background.paper;
+  const isXS = useMediaQuery('(max-width:600px)');
 
   const handleClick = (item) => {
-    if (item.selectedPage === 'externalLink') {
-      setExternalUrl('https://your-url-here'); // Replace with the URL
-      return;
-    }
+
+
+    // set the context value here so they dont need to be passed.
     setSelectedPage(item.selectedPage);
     setArenaEndPoint(item.arenaEndPoint);
     setArenaListName(item.arenaListName);
     setArenaListNumber(item.arenaListNumber);
 
-    onSelect(); // This will trigger the ListNav to show
+    if (isXS) {
+      setShowSideNav(false);
+      setPopulateSideNav(false);
+      setShowListNav(true);
+      setPopulateListNav(true);
+      setShowMainBody(false);
+      setPopulateMainBody(false);
+    } else {
+      setShowListNav(true);
+      setShowMainBody(true);
+      setPopulateListNav(true);
+    }
   };
 
   return (
@@ -37,9 +57,8 @@ function SideNav({ onSelect }) { // Added the onSelect prop here
                 {React.createElement(require('react-icons/fc')[item.icon], { size: 32 })}
               </ListItemIcon>
              <ListItemText primary={item.label} style={{ color: textColor }} />
-             <div style={{ color: textColor }}>{" > "}</div> {/* Adding the ">" symbol */}
-            </ListItemButton>
-             <Divider />
+             <div style={{ color: textColor }}>{" > "}</div> 
+            </ListItemButton>            
           </div>
         ))}
       </List>

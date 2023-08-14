@@ -15,7 +15,7 @@ export default async function handler(req, res) {
   // Construct the URL based on the endpoint name
   const remoteApiUrl = `https://api.arenasolutions.com/v1/${endpointName}`;
  
-
+console.log('arenaget.remoteApiUrl', remoteApiUrl)
   // Call the remote API endpoint, passing the session ID as a header
   const remoteApiResponse = await fetch(remoteApiUrl, {
     method: 'GET', // Assuming it's a GET request

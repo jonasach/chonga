@@ -1,23 +1,48 @@
 import { useContext, useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import axios from 'axios';
 import { List, ListItem, ListItemButton, ListItemText } from '@mui/material';
-import Divider from '@mui/material/Divider';
 import AppContext from 'src/contexts/ArenaContext';
 import { useTheme } from '@mui/material/styles';
 import useSession from 'src/hooks/useSession';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
-
-function ListNav({ onSelect }) { // Added onSelect prop here
-  const arenaSessionId = useSession(); // Using the custom hook
+function ListNav({ style }) {
+  const arenaSessionId = useSession();
   const theme = useTheme();
   const [data, setData] = useState(null);
-  const {arenaEndPoint, arenaListName, arenaListNumber, setSelectedGUID } = useContext(AppContext);
+  const {
+    setPopulateMainBody,
+    setShowMainBody,
+    setShowListNav,
+    setPopulateSideNav,
+    setPopulateListNav,
+    setArenaEndPoint,
+    arenaListName,
+    arenaListNumber,
+    setSelectedPage,
+    setSelectedGUID,
+    arenaEndPoint
+  } = useContext(AppContext);
 
-
-  // Determine text and background color based on theme
   const textColor = theme.palette.text.primary;
   const backgroundColor = theme.palette.background.paper;
+  const isXS = useMediaQuery('(max-width:600px)');
+
+  const handleItemClick = (guid) => {
+    setSelectedGUID(guid)
+    
+    if (isXS) {
+      setShowSideNav(false);
+      setPopulateSideNav(false);
+      setShowListNav(false);
+      setPopulateListNav(false);
+      setShowMainBody(true);
+      setPopulateMainBody(true);
+    } else {
+      setShowMainBody(true);
+      setPopulateMainBody(true);
+    }
+  };
 
   useEffect(() => {
     if (arenaSessionId && arenaEndPoint) {
@@ -35,28 +60,21 @@ function ListNav({ onSelect }) { // Added onSelect prop here
     }
   }, [arenaSessionId, arenaEndPoint]);
 
-  const handleItemClick = (guid) => {
-    setSelectedGUID(guid); 
-    onSelect(); // Added this line to trigger the MainBody to show
-  };
-
   return (
-    <div style={{ backgroundColor: backgroundColor, height: '100%', color: textColor }}>
+    <div style={{ ...style, backgroundColor: backgroundColor, height: '100%', color: textColor }}>
       {data ? (
         <List>
           {data.results.map((item, index) => (
             <div key={item.guid}>
               <ListItem>
                 <ListItemButton onClick={() => handleItemClick(item.guid)}>
-                  <ListItemText
+                <ListItemText
                     primary={<span>Number: {item[arenaListName]}</span>}
                     secondary={`Name: ${item[arenaListNumber]}`}
-         />
-                       <div style={{ color: textColor }}>{" > "}</div> 
+                  />
+                  <div style={{ color: textColor }}>{" > "}</div>
                 </ListItemButton>
               </ListItem>
-
-              <Divider />
             </div>
           ))}
         </List>

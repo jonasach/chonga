@@ -9,7 +9,7 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 
 function MenuSideNav({ handleProfileMenuOpen, handleMobileMenuOpen, menuId, mobileMenuId }) {
   return (
-    <>
+    <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center" width="100%">
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="error">
             <MailIcon />
@@ -35,7 +35,6 @@ function MenuSideNav({ handleProfileMenuOpen, handleMobileMenuOpen, menuId, mobi
         >
           <AccountCircle />
         </IconButton>
-
         <IconButton
           size="large"
           aria-label="show more"
@@ -46,7 +45,7 @@ function MenuSideNav({ handleProfileMenuOpen, handleMobileMenuOpen, menuId, mobi
         >
           <MoreIcon />
         </IconButton>
-    </>
+    </Box>
   );
 }
 

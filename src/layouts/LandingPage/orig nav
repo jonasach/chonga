@@ -1,0 +1,77 @@
+ot actually getting a divider between sidenav and listnav and then listnav and mainbody import React, { useContext, useState } from 'react';
+import TopNav from 'src/components/TopNav';
+import Footer from 'src/components/Footer';
+import SideNav from 'src/components/SideNav';
+import ListNav from 'src/components/ListNav';
+import MainBody from 'src/components/MainBody';
+import Divider from '@mui/material/Divider';
+
+import AppContext from 'src/contexts/ArenaContext';
+import ArenaFiles from 'src/pages/arenafiles'; 
+
+function MainLayout({ children }) {
+  const { arenaEndPoint  } = useContext(AppContext);
+  const [loadListNav, setLoadListNav] = useState(false);
+  const [loadMainNav, setLoadMainNav] = useState(false);
+  const VIEWS = { SIDENAV: 'sidenav', LISTNAV: 'listnav', MAINBODY: 'mainbody' };
+  const [activeView, setActiveView] = useState(VIEWS.SIDENAV);
+  
+  const listNavStyle = {
+    width: '300px', // or whatever width you want
+  };
+
+
+  const containerStyle = {
+    minHeight: '100vh',
+    display: 'flex',
+    flexDirection: 'column',
+    overflow: 'hidden',
+  };
+
+  const contentStyle = {
+    flexGrow: 1,
+    display: 'flex',
+    flexDirection: window.innerWidth >= 1024 ? 'row' : 'column',
+  };
+
+  const handleBackArrowClick = () => {
+    console.log('Back arrow clicked'); // Debugging line
+    switch (activeView) {
+      case VIEWS.MAINBODY:
+        setActiveView(VIEWS.LISTNAV);
+        break;
+      case VIEWS.LISTNAV:
+        setActiveView(VIEWS.SIDENAV);
+        break;
+    }
+  };
+
+  const handleSideNavSelect = () => {
+    setActiveView(VIEWS.LISTNAV);
+    setLoadListNav(true); // Enable loading for ListNav
+  };
+
+  const handleListNavSelect = () => {
+    setActiveView(VIEWS.MAINBODY);
+    setLoadMainNav(true); // Enable loading for MainNav
+  };
+
+  return (
+    <div style={containerStyle}>
+      <TopNav onBackArrowClick={handleBackArrowClick} activeView={activeView} />
+      <div style={contentStyle}>
+        <SideNav onSelect={handleSideNavSelect} />
+ 
+        {window.innerWidth >= 1024 && <Divider orientation="vertical" />}
+ 
+        {loadListNav ? <ListNav style={listNavStyle} onSelect={ {/* no action needed here */}} /> : <div className="placeholder"></div>}
+        {window.innerWidth >= 1024 && <Divider orientation="vertical" />}
+ 
+        {loadMainNav ? (arenaEndPoint === 'files?format=pdf' ? <ArenaFiles /> : <MainBody />) : <div className="placeholder"></div>}
+      </div>
+      <Footer />
+    </div>
+  );
+}
+
+export default MainLayout;
