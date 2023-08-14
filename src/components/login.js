@@ -102,7 +102,7 @@ function Login() {
       </div>
    
 
-      <h2 className="h4 mb-3 fw-normal text-custom" style={{ textAlign: 'center' }}>FTLPD 2023 - US Team 5</h2>
+      <h2 className="h4 mb-3 fw-normal text-custom" style={{ textAlign: 'center' }}>FTLDP 2023 - US Team 5</h2>
       <TextField 
         id="apiUrl"
         label="API URL"
