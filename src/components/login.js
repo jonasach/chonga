@@ -6,9 +6,6 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import AppContext from 'src/contexts/ArenaContext';
 
-
-
-
 function Login() {
   const [email, setEmail] = useState('');
   const [workspaceId, setWorkspaceID] = useState('');
@@ -19,7 +16,6 @@ function Login() {
   const sessionIDInputRef = useRef(null);
   const router = useRouter();
   const [error, setError] = useState(null);
-
 
   useEffect(() => {
     axios

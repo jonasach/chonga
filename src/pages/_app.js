@@ -34,6 +34,8 @@ function App({ Component, pageProps }) {
   const [selectedItem, setSelectedItem] = useState("default");
   const [selectedPage, setSelectedPage] = useState("default");
   const [arenaEndPoint, setArenaEndPoint] = useState("default");
+  const [arenaSearchEndPoint, setArenaSearchEndPoint] = useState("default");
+
   const [arenaListName, setArenaListName] = useState("default");
   const [arenaListNumber, setArenaListNumber] = useState("default");
   const [arenaSessionId, setArenaSessionId] = useState("default");
@@ -53,6 +55,7 @@ function App({ Component, pageProps }) {
           selectedItem, setSelectedItem,
           selectedPage, setSelectedPage,
           arenaEndPoint, setArenaEndPoint,
+          arenaSearchEndPoint, setArenaSearchEndPoint,
           arenaListName, setArenaListName,
           arenaListNumber, setArenaListNumber,
           selectedGUID, setSelectedGUID,

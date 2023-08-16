@@ -26,7 +26,7 @@ const ExpandMore = styled((props) => {
 function ArenaCards() {
   const [expanded, setExpanded] = useState(false);
   const [data, setData] = useState(null);
-  const { arenaSessionId, arenaListName, arenaListNumber } = useContext(AppContext);
+  const { arenaSessionId, arenaSearchEndPoint } = useContext(AppContext);
   const arenaEndPoint = 'items';
 
   const handleExpandClick = () => {
@@ -47,7 +47,7 @@ function ArenaCards() {
       };
       fetchData();
     }
-  }, [arenaSessionId, arenaEndPoint]);
+  }, [arenaSessionId, arenaEndPoint, arenaSearchEndPoint]);
 
   return (
 <div>

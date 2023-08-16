@@ -23,7 +23,14 @@ export const menuItems = [
       arenaListName: 'number',
       arenaListNumber: 'title',
     },
-
+    {
+      label: 'Requests',
+      icon: 'FcInspection',
+      selectedPage: 'arenalist',
+      arenaEndPoint: 'requests',
+      arenaListName: 'number',
+      arenaListNumber: 'title',
+    },
     {
       label: 'Quality',
       icon: 'FcProcess',
@@ -33,7 +40,30 @@ export const menuItems = [
       arenaListName: 'number',
       arenaListNumber: 'name',
     },
-
+    {
+      label: 'Suppliers',
+      icon: 'FcFactory',
+      selectedPage: 'arenalist',
+      arenaEndPoint: 'suppliers',
+      arenaListName: 'name',
+      arenaListNumber: 'description',
+    },
+    {
+      label: 'Audit Planner',
+      icon: 'FcPlanner',
+      selectedPage: 'externalLink',
+      arenaEndPoint: '',
+      arenaListName: '',
+      arenaListNumber: '',
+    },
+    {
+      label: 'Training',
+      icon: 'FcGraduationCap',
+      selectedPage: 'arenalist',
+      arenaEndPoint: 'trainingplans',
+      arenaListName: 'number',
+      arenaListNumber: 'name',
+    },
     {
       label: 'ThingWorx',
       icon: 'FcBarChart',
@@ -42,7 +72,14 @@ export const menuItems = [
       arenaListName: '',
       arenaListNumber: '',
     },
-
+    {
+        label: 'Outbound Events',
+        icon: 'FcWorkflow',
+        selectedPage: 'outbound Events',
+        arenaEndPoint: 'outboundevents/XFZINB27OKVTCVEXG1NK/events',
+        arenaListName: 'guid',
+        arenaListNumber: 'status',
+    },
       
   ];
   

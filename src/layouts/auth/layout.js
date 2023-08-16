@@ -11,17 +11,17 @@ export const Layout = (props) => {
         <Grid container sx={{ flex: '1 1 auto' }}>
               <Grid id="left" xs={12} lg={6} 
                     sx={{ backgroundColor: 'background.paper', display: 'flex', flexDirection: 'column',
-                          position: 'relative', height: '100vh', paddingTop: '40px', paddingBottom: '20px' }}> {/* Added paddingTop */}
+                          position: 'relative', height: '100vh', paddingTop: '40px', paddingBottom: '20px' }}> 
                   <Box component="header" sx={{ left: 0, p: 3, position: 'fixed', top: 0, width: '100%'}}>
                     <Box component={NextLink} href="/" sx={{ display: 'inline-flex', height: 32, width: 32}}></Box>
                   </Box>    
                   {children}
               </Grid>
   
-              <Grid id="right" item xs={false} lg={6}
+              <Grid id="right" xs={false} lg={6}
                   sx={{ alignItems: 'center', background: 'radial-gradient(50% 50% at 50% 50%, #122647 0%, #090E23 100%)',
                         color: 'white', display: { xs: 'none', lg: 'flex' }, justifyContent: 'center', overflow: 'hidden',
-                        paddingTop: '20px' }}> {/* Added paddingTop */}
+                        paddingTop: '20px' }}> 
                   <Box
                       width="100%"
                       height="100%"

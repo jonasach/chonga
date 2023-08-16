@@ -12,6 +12,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 function Settings() {
   const {
     selectedGUID, arenaEndPoint,
+    setArenaEndPoint, arenaSearchEndPoint,
     selectedPage, selectedItem,
     arenaListName, arenaListNumber,
     arenaSessionId,
@@ -100,6 +101,7 @@ function Settings() {
         <ListItem><ListItemText primary={`Selected Item: ${selectedItem}`} /></ListItem>
         <ListItem><ListItemText primary={`Selected Page: ${selectedPage}`} /></ListItem>
         <ListItem><ListItemText primary={`Arena End Point: ${arenaEndPoint}`} /></ListItem>
+        <ListItem><ListItemText primary={`Arena Search End Point: ${arenaSearchEndPoint}`} /></ListItem>
         <ListItem><ListItemText primary={`Arena List Name: ${arenaListName}`} /></ListItem>
         <ListItem><ListItemText primary={`Arena List Number: ${arenaListNumber}`} /></ListItem>
         <ListItem><ListItemText primary={`Arena Session ID: ${arenaSessionId}`} /></ListItem>

@@ -5,6 +5,7 @@ import AppContext from 'src/contexts/ArenaContext';
 import { menuItems } from './menuConfig';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import useSession from 'src/hooks/useSession';
+import Drawer from '@mui/material/Drawer';
 
 
 function SideNav() {
@@ -16,6 +17,7 @@ function SideNav() {
     setArenaListNumber,arenaListNumber,
     setSelectedPage,selectedPage,
     setArenaEndPoint, arenaEndPoint,
+    setArenaSearchEndPoint, arenaSearchEndPoint,
     showSideNav, setShowSideNav ,
     showListNav, setShowListNav ,
     showMainBody, setShowMainBody,
@@ -41,14 +43,14 @@ function SideNav() {
 
     // set the context value here so they dont need to be passed.
     setSelectedPage(item.selectedPage);
+
     setArenaEndPoint(item.arenaEndPoint);
+    setArenaSearchEndPoint(item.arenaSearchEndPoint);
+
     setArenaListName(item.arenaListName);
     setArenaListNumber(item.arenaListNumber);
 
-    console.log('SideNav.arenaEndPoint', item.arenaEndPoint)
-    console.log('SideNav.selectedPage', item.selectedPage)
-
-
+    
     if (isXS || isSM) {
       setShowSideNav(false);
       setPopulateSideNav(false);
@@ -65,7 +67,7 @@ function SideNav() {
   };
 
   return (
-    <div style={{ backgroundColor: backgroundColor, height: '100%', color: textColor }}>
+    <Drawer>
       <List>
         <div style={{ padding: '16px' }}></div>
         {menuItems.map((item, index) => (
@@ -80,7 +82,8 @@ function SideNav() {
           </div>
         ))}
       </List>
-    </div>
+
+    </Drawer>
   );
 }
 

@@ -16,6 +16,7 @@ function ListNav({ style }) {
     setArenaListNumber,arenaListNumber,
     setSelectedPage,selectedPage,
     setArenaEndPoint, arenaEndPoint,
+    setArenaSearchEndPoint, arenaSearchEndPoint,
     showSideNav, setShowSideNav ,
     showListNav, setShowListNav ,
     showMainBody, setShowMainBody,
@@ -40,13 +41,20 @@ function ListNav({ style }) {
   const isXL = useMediaQuery('(min-width:1201px)');
 
   const handleItemClick = (guid) => {
-
     setSelectedGUID(guid)
+    console.log('listnav.showListNav', showListNav)
     
-    if (isXS || isSM) {
+    if (isXS ) {
       setShowSideNav(false);
       setPopulateSideNav(false);
       setShowListNav(false);
+      setPopulateListNav(false);
+      setShowMainBody(true);
+      setPopulateMainBody(true);
+    } else if (isSM) {
+      setShowSideNav(false);
+      setPopulateSideNav(false);
+      setShowListNav(true);
       setPopulateListNav(false);
       setShowMainBody(true);
       setPopulateMainBody(true);
@@ -56,17 +64,20 @@ function ListNav({ style }) {
       setShowMainBody(true);
       setPopulateMainBody(true);
     }
+    
+    console.log('SideNav.setShowMainBod:1', setShowMainBody )
+  
   };
 
   useEffect(() => {
-    console.log('ListNav.arenaEndPoint', arenaEndPoint);
-    console.log('ListNav.selectedPage', selectedPage);
-    console.log('ListNav.arenaSessionId', arenaSessionId);
-  
+console.log('SideNav.arenaSearchEndPoint', arenaSearchEndPoint )
     if (arenaSessionId && arenaEndPoint) {
       const fetchData = async () => {
+        // If arenaSearchEndPoint is not empty, use it. Otherwise, use arenaEndPoint.
+        const endpoint = arenaSearchEndPoint ? arenaSearchEndPoint : arenaEndPoint;
+    
         try {
-          const response = await axios.get(`/api/arenaget?endpoint=${arenaEndPoint}`, {
+          const response = await axios.get(`/api/arenaget?endpoint=${endpoint}`, {
             headers: { 'arena-session-id': arenaSessionId },
           });
           setData(response.data);
@@ -76,7 +87,8 @@ function ListNav({ style }) {
       };
       fetchData();
     }
-  }, [arenaEndPoint,setPopulateListNav]); // Empty dependency array means this effect will run once after the initial render
+    
+  }, [arenaSearchEndPoint, arenaEndPoint,setPopulateListNav]); // Empty dependency array means this effect will run once after the initial render
 
   
   return (

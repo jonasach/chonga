@@ -10,11 +10,14 @@ import MainBody from 'src/components/MainBody';
 import Settings from 'src/components/Settings';
 import AppContext from 'src/contexts/ArenaContext';
 import ArenaFiles from 'src/pages/arenafiles';
-import { Container, Grid, Divider } from '@mui/material';
 import useSession from 'src/hooks/useSession';
-import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import isSameMinute from 'date-fns/fp/isSameMinute';
+
+
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+
+
 
 function MainLayout() {
   const {
@@ -22,7 +25,6 @@ function MainLayout() {
     populateListNav,
     populateMainBody,
     populateSideNav,
-    selectedPage,
     showSideNav,
     showListNav,
     showMainBody,
@@ -48,7 +50,6 @@ function MainLayout() {
     alignItems: 'stretch',
   };
 
-  const theme = useTheme();
 
   const renderTopNav = () => {
     if (isXS || isSM) {
@@ -65,44 +66,33 @@ function MainLayout() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', overflow: 'auto' }}>
-      {renderTopNav()}
+    <Box>
 
-      <Grid container style={{ maxHeight: 'calc(100vh - 10px)', overflowY: 'auto' }}>
-        {showSideNav && (
-          <Grid id="SideNav" style={gridStyle}>
-            <div style={{ height: '100%', backgroundColor: 'black', flex: 1, overflowY: 'auto' }}>
-              {populateSideNav && <SideNav />}
-            </div>
-            <Divider orientation="vertical" />
+        <Grid container>
+          <Grid item>
+            {/* Header Content goes here */}
           </Grid>
-        )}
-        {showListNav && (
-          <Grid id="ListNav" style={gridStyle}>
-            <div style={{ height: '100%', backgroundColor: 'black', flex: 1, overflowY: 'auto' }}>
-              {populateListNav && <ListNav />}
-            </div>
-            <Divider orientation="vertical" />
+        </Grid>
+
+        <Grid container>
+          <Grid xs={12} md={3} item>
+            <SideNav />
+            </Grid>
+          <Grid xs={12} md={3} item>
+            {populateListNav && <ListNav />}
           </Grid>
-        )}
-        {showMainBody && (
-          <Grid
-            id="MainBody"
-            item
-            xs={showSideNav && showListNav ? 8 : 12}
-            style={{ backgroundColor: 'black', overflowY: 'auto' }}
-          >
-            <div style={{ height: '100%', backgroundColor: 'black', flex: 1, overflowY: 'hidden' }}>
-              {populateMainBody && (arenaEndPoint === 'files?format=pdf' ? <ArenaFiles /> : <MainBody />)}
-            </div>
-            <Divider orientation="vertical" />
+          <Grid xs={12} md={3} item>
+            {/* Mainbody Content goes here */}
           </Grid>
-        )}
       </Grid>
-      <Footer />
-      <Settings />
-    </div>
-  );
+  
+        <Grid container>
+          <Grid item>
+             <Footer />{/* Footer Content goes here */}
+          </Grid>
+        </Grid>
+    </Box>
+    )
+  
 }
-
 export default MainLayout;
