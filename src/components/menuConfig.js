@@ -38,7 +38,7 @@ export const menuItems = [
       label: 'ThingWorx',
       icon: 'FcBarChart',
       selectedPage: 'externalLink',
-      arenaEndPoint: '',
+      arenaEndPoint: 'iframetester.com',
       arenaListName: '',
       arenaListNumber: '',
     },

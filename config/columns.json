@@ -1,0 +1,18 @@
+{
+    "items": [
+      { "name": "name", "label": "Name", "editable": false },
+      { "name": "number", "label": "Number", "editable": true },
+      { "name": "guid", "label": "guid", "editable": true }
+    ],
+    "changes": [
+      { "name": "number", "label": "Number", "editable": false },
+      { "name": "title", "label": "Title", "editable": true },
+      { "name": "guid", "label": "guid", "editable": false }
+    ],
+    "qualityprocesses": [
+      { "name": "number", "label": "Number", "editable": false },
+      { "name": "name", "label": "Name", "editable": true },
+      { "name": "guid", "label": "guid", "editable": false }
+    ]
+  }
+  

@@ -3,55 +3,68 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import MenuSideNav from 'src/components/MenuSideNav'; 
-import MenuListNav from 'src/components/MenuListNav'; 
-import MenuMainBodyNav from 'src/components/MenuMainBodyNav'; 
-import AppContext from 'src/contexts/ArenaContext'; // Import the context
+import MenuSideNav from 'src/components/MenuSideNav';
+import MenuListNav from 'src/components/MenuListNav';
+import MenuMainBodyNav from 'src/components/MenuMainBodyNav';
+import AppContext from 'src/contexts/ArenaContext';
 import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-
-function TopNav({ toggleMenu, toggleListNav, activeView, onBackArrowClick }) {
-  const { showSettingsNav, setShowSettingsNav } = useContext(AppContext); // Get the setShowSettingsNav function from the context
+import Button from '@mui/material/Button'; // Import Button from MUI
 
 
-  return (
-    <AppBar position="static">
-  <Toolbar
-      sx={{ display: 'flex', justifyContent: 'space-between' }} // Using Flexbox to align items
-    >
 
-      <div style={{ width: '20%', textAlign: 'left' }}>
-          <img className="responsive-image"
-                  src="/assets/logos/ptc2.svg" alt="Your description" 
-          />
-      </div>
-
-        {/* Add a switch to toggle showSettingsNav */}
-  
-        {/* Conditionally render MenuAcount based on activeView */}
-        {activeView === 'sidenav' && <MenuSideNav />} 
-
-        {/* Conditionally render MenuSearch based on activeView */}
-        {activeView === 'listnav' && <MenuListNav toggleListNav={toggleListNav} onBackArrowClick={onBackArrowClick} />} 
-
-        {/* Conditionally render MenuSearch based on activeView */}
-        {activeView === 'mainbody' && <MenuMainBodyNav onBackArrowClick={onBackArrowClick} />} 
-
-        <div>
-        <ListItem>
-          <FormControlLabel
-             control={<Switch checked={showSettingsNav} onChange={() => setShowSettingsNav(!showSettingsNav)} />}
-            label="Settings"
-          />
-        </ListItem>
-        </div>
-
-     
-      </Toolbar>
-    </AppBar>
+function TopNav({ toggleListNav, activeView, onBackArrowClick }) {
+  const { showSettingsNav, setShowSettingsNav, setArenaSessionId } = useContext(
+    AppContext
   );
-}
 
+  // Function to handle logout
+  const handleLogout = () => {
+    // Clear session-related data and redirect to login
+    setArenaSessionId(''); // Clear session ID
+    sessionStorage.removeItem('arenaSessionId'); // Clear session ID from sessionStorage
+    // You can also clear any other user-related data if necessary
+
+    // Redirect to the login page
+    window.location.href = '/'; // Change this URL to your login page's URL
+  }; 
+
+  return (  
+    
+     <Toolbar>
+        <IconButton
+        size="large"
+        edge="start"
+        color="inherit"
+        aria-label="menu"
+        sx={{ mr: 2 }}
+      >
+            <MenuIcon />
+          </IconButton>
+      
+      {/* Switch to control visibility of settings */}
+      <ListItem>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={showSettingsNav}
+              onChange={() => setShowSettingsNav(!showSettingsNav)}
+            />
+          }
+          label="Settings"
+        />
+      </ListItem>
+  
+      {/* Logout button */}
+      <Button
+        variant="outlined"
+        color="primary"
+        onClick={handleLogout} // Call the logout function
+      >
+        Logout
+      </Button>
+          </Toolbar>
+  );  
+        }; 
 export default TopNav;

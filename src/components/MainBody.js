@@ -1,218 +1,198 @@
-    import { useContext, useEffect, useState } from 'react';
-    import axios from 'axios';
-    import AppContext from 'src/contexts/ArenaContext';
-    import { useTheme } from '@mui/material/styles';
-    import { Button, TextField, FormControl } from '@mui/material';
-    import { Switch, FormControlLabel } from '@mui/material';
-    import { Hidden, Container, Grid, Divider, IconButton } from '@mui/material';
-    import useMediaQuery from '@mui/material/useMediaQuery'; // If you are using MUI
-    import useSession from 'src/hooks/useSession';
-    
-    function MainBody({  onSelect }) {
-      const isXS = useMediaQuery('(max-width:600px)'); // Adjust the breakpoint as needed
-      const theme = useTheme();
-      const [data, setData] = useState(null);
+import React, { useContext, useEffect, useState } from 'react';
+import axios from 'axios';
+import AppContext from 'src/contexts/ArenaContext';
+import { useTheme } from '@mui/material/styles';
+import { FormControl, TextField } from '@mui/material';
+import { Switch, FormControlLabel } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import useSession from 'src/hooks/useSession';
+import Grid from '@mui/material/Grid';
+import columnConfig from '../../config/columns.json'; // Adjust the path accordingly
+import Divider from '@mui/material/Divider';
+import Button from '@mui/material/Button'; // Import Button from MUI
+import { Document, Page, pdfjs } from 'react-pdf';
 
-      const {
-        setSelectedGUID, selectedGUID,
-        setArenaListName,arenaListName,
-        setArenaListNumber,arenaListNumber,
-        setSelectedPage,selectedPage,
-        setArenaEndPoint, arenaEndPoint,
-        showSideNav, setShowSideNav ,
-        showListNav, setShowListNav ,
-        showMainBody, setShowMainBody,
-        showSettingsNav, setShowSettingsNav, 
-        populateSideNav, setPopulateSideNav ,
-        populateListNav, setPopulateListNav ,
-      } = useContext(AppContext);
+import { Text, View, StyleSheet } from '@react-pdf/renderer';
+import 'react-pdf/dist/esm/Page/TextLayer.css';
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 
-      const arenaSessionId = useSession();
 
-      const textColor = theme.palette.text.primary;
-      const backgroundColor = theme.palette.background.paper;
+// The workerSrc property shall be specified.
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
-      const [isEditMode, setIsEditMode] = useState(false);
 
-      // You may need to implement a function to handle changes to these fields
-      const handleValueChange = (field, value) => {
-        // Your logic here yoeman 
-      };
+function MainBody({ onSelect }) {
+  const isXS = useMediaQuery('(max-width:600px)');
+  const theme = useTheme();
+  const [data, setData] = useState(null);
 
-      const renderField = (key, value, readOnly = false, isChild = false) => {
-        if (typeof value === 'object' && value !== null) {
-          if (!isChild && key.toLowerCase().includes('guid')) {
-            return null;
-          }
-      
-          return (
-            <div key={key}>
-              <div>{key}</div>
-              {Object.keys(value).map((childKey) =>
-                renderField(childKey, value[childKey], true, key.toLowerCase().includes('guid'))
-              )}
-            </div>
-          );
+  const {
+    selectedGUID,
+    arenaEndPoint, selectedPage
+  } = useContext(AppContext);
+
+  const arenaSessionId = useSession();
+
+  const textColor = theme.palette.text.primary;
+  const backgroundColor = theme.palette.background.paper;
+
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [pdfData, setPdfData] = useState(null);
+  const [numPages, setNumPages] = useState(null);
+  const scaleFactor = 0.6;
+
+  const onDocumentLoadSuccess = ({ numPages }) => {
+    setNumPages(numPages);
+  };
+
+
+
+
+// if we are getting a file
+useEffect(() => {
+
+
+  if (selectedPage === 'externalLink') {
+    // Do nothing here if selectedPage is 'externalLink'
+    console.log('MainBody.js:selectedPage', selectedPage)
+    console.log('MainBody.js:arenaEndPoint', arenaEndPoint)
+
+    return;
+  }
+
+
+  if (selectedGUID && arenaEndPoint && arenaEndPoint !== 'files?format=pdf') {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`/api/arenagetGUID?endpoint=${arenaEndPoint}&guid=${selectedGUID}`, {
+          headers: { 'arena-session-id': arenaSessionId },
+        });
+        setData(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+  } else if (selectedGUID && arenaEndPoint === 'files?format=pdf') {
+      console.log('MainBody.js:selectedGUID:line67', selectedGUID)
+   
+      const fetchData = async () => {
+        try {
+          const response = await axios.get(`/api/arenafilecontent?guid=${selectedGUID}`, {
+            headers: { 'arena-session-id': arenaSessionId },
+            responseType: 'arraybuffer',
+          });
+          console.log('MainBody.js:selectedGUID:response.data', response.data)
+          setPdfData(new Blob([response.data], { type: 'application/pdf' }));
+        } catch (error) {
+          console.error('Error fetching PDF data:', error);
         }
-      
-        if (value === true || value === false) {
-          return (
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={value}
-                  onChange={() => handleValueChange(key, !value)}
-                  color="primary"
-                />
-              }
-              label={key}
-              key={key}
-              style={{ borderBottom: `2px solid white` }}
-            />
-          );
-        }
-        if (value === true || value === false) {
-          return (
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={value}
-                  onChange={() => handleValueChange(key, !value)}
-                  color="primary"
-                />
-              }
-              label={key}
-              key={key} // Added key here
-            />
-          );
-        }
-      
-        if (typeof value === 'string' && value.startsWith('https')) {
-          return (
-            <div key={key}>
-              <a href={value} target="_blank" rel="noopener noreferrer" style={{ color: 'white' }}>
-                {key}
-              </a>
-              <br />
-            </div>
-          );
-        }
-      
-        if (key.includes('Date') && typeof value === 'string') {
-          const date = new Date(value);
-          const formattedDate = date.toLocaleDateString(); // Change this to format as you prefer
-          return (
-            <FormControl fullWidth key={key}>
-              <TextField
-                label={key}
-                value={formattedDate}
-                variant="filled"
-                InputLabelProps={{
-                  style: {
-                    color: readOnly || !isEditMode ? textColor : 'white',
-                  },
-                }}
-                InputProps={{
-                  readOnly: readOnly || !isEditMode,
-                  style: {
-                    color: readOnly || !isEditMode ? textColor : 'white',
-                    backgroundColor: readOnly || !isEditMode ? 'transparent' : 'blue',
-                  },
-                }}
+      };  
+      fetchData();
+  }
+}, [selectedGUID, arenaEndPoint, selectedPage]);
+
+
+
+const handleValueChange = (event) => {
+    // Handle changes to the field value
+  };
+
+  const columns = columnConfig[arenaEndPoint] || [];
+
+  return (
+    <div style={{ backgroundColor: backgroundColor, height: '100%', color: textColor }}>
+      {selectedPage !== 'externalLink'  && arenaEndPoint !== 'files?format=pdf' && selectedGUID && (
+        <div style={{ backgroundColor: '#222', padding: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={isEditMode}
+                onChange={() => setIsEditMode(!isEditMode)}
+                color="primary"
               />
-            </FormControl>
-          );
-        }
-      
-        if (key.includes('email') && typeof value === 'string') {
-          return (
-            <FormControl fullWidth key={key}>
-              <a href={`mailto:${value}`} style={{ color: 'white' }}>
-                {key}
-              </a>
-            </FormControl>
-          );
-        }
-      
-        return (
-          <FormControl fullWidth key={key}>
-            <TextField
-              label={key}
-              value={value}
-              onChange={readOnly ? undefined : (e) => handleValueChange(key, e.target.value)}
-              variant="filled"
-              InputLabelProps={{
-                style: {
-                  color: readOnly || !isEditMode ? textColor : 'white',
-                },
-              }}
-              InputProps={{
-                readOnly: readOnly || !isEditMode,
-                style: {
-                  color: readOnly || !isEditMode ? textColor : 'white',
-                  backgroundColor: readOnly || !isEditMode ? 'transparent' : 'blue',
-                },
-              }}
-            />
-          </FormControl>
-        );
-      };
-      
-      useEffect(() => {
-        if (arenaSessionId && arenaEndPoint) {
-          const fetchData = async () => {
-            try {
-              const response = await axios.get(`/api/arenagetGUID?endpoint=${arenaEndPoint}&guid=${selectedGUID}`, {
-                headers: { 'arena-session-id': arenaSessionId },
-              });
-              setData(response.data);
-            } catch (error) {
-              console.error('Error fetching data:', error);
             }
-          };
-          fetchData();
-        }
-      }, [selectedGUID]); // Empty dependency array means this effect will run once after the initial render
-
-
-
-      return (
-        <div style={{ backgroundColor: backgroundColor, height: '100%', color: textColor }}>
-          {data ? (
-            <form style={{ height: '100%', display: 'flex', flexDirection: 'column', paddingLeft: '16px' }}>
-              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <FormControlLabel
-                  control={
-                    <Switch
-                      checked={isEditMode}
-                      onChange={() => setIsEditMode(!isEditMode)}
-                      color="primary"
-                    />
-                  }
-                  label={isEditMode ? 'Edit Mode' : 'View Mode'}
-                />
-              </div>
-              {/* Use Grid for a 2-column layout */}
-              <Grid container >
-                    {Object.keys(data).map((key) => {
-            
-
-                    return (
-                        <Grid item xs={12} sm={6} key={key}>
-                          {renderField(key, data[key])}
-                        </Grid>
-                      );
-                    })}
-                  </Grid>
-            </form>
-          ) : (
-            <div>Loading...</div>
+            label={isEditMode ? 'Edit Mode' : 'View Mode'}
+            style={{ color: 'white' }}
+          />
+          {isEditMode && (
+            <Button
+              variant="contained"
+              color="primary"
+              style={{ backgroundColor: 'green', color: 'white' }}
+              onClick={() => {}}
+            >
+              Submit
+            </Button>
           )}
         </div>
-      );
-
-
-
-    }
-
-    export default MainBody;
+      )}
+      <div style={{ height: 'calc(100% - 48px)', overflowY: 'auto' }}>
+        {selectedGUID && (
+          <div>
+            {arenaEndPoint !== 'files?format=pdf' ? (
+              data ? (
+                <form style={{ height: '100%', display: 'flex', flexDirection: 'column', paddingLeft: '16px' }}>
+                  <Grid container>
+                    {columns.map(column => (
+                      <Grid item xs={12} sm={12} key={column.name}>
+                        <div style={{ paddingBottom: '16px' }}>
+                          <div>{column.label}</div>
+                          {isEditMode ? (
+                            <FormControl style={{ width: '100%' }}>
+                              <TextField
+                                label={column.label}
+                                value={data[column.name]}
+                                onChange={handleValueChange}
+                                variant="filled"
+                                disabled={!isEditMode || !column.editable}
+                                style={{
+                                  width: isEditMode ? '100%' : 'auto',
+                                  backgroundColor: column.editable ? '#007bff' : 'transparent',
+                                  color: isEditMode ? '#fff' : textColor,
+                                }}
+                              />
+                            </FormControl>
+                          ) : (
+                            <div>{data[column.name]}</div>
+                          )}
+                        </div>
+                        <Divider />
+                      </Grid>
+                    ))}
+                  </Grid>
+                </form>
+              ) : (
+                <></>
+              )
+            ) : (
+              <div style={{ height: 'calc(100% - 48px)', overflowY: 'auto' }}>
+                {pdfData ? (
+                  <Document 
+                    file={pdfData}
+                    onLoadSuccess={onDocumentLoadSuccess}
+                  >
+                    {Array.from(new Array(numPages), (el, index) => (
+                      <Page 
+                        key={`page_${index + 1}`} 
+                        pageNumber={index + 1} 
+                        width={window.innerWidth * scaleFactor}
+                      />
+                    ))}
+                  </Document>
+                ) : (
+                  <></>
+                )}
+              </div>
+            )}
+          </div>
+        )}
+        {/* Render an iframe if arenaEndPoint is an external link */}
+        {selectedPage === 'externalLink' && arenaEndPoint && arenaEndPoint !== 'files?format=pdf' && (
+          <iframe frameborder="0" src="https://arenasolutions.na.gooddata.com/dashboard.html#workspace=/gdc/workspaces/qy77hw96y43e7f55o8dkj8rzwyoggan3&dashboard=/gdc/md/qy77hw96y43e7f55o8dkj8rzwyoggan3/obj/213880" width="100%" height="950px" allowTransparency="false"></iframe>
+        )}
+      </div>
+    </div>
+  );
+        };
+export default MainBody;

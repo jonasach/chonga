@@ -1,14 +1,11 @@
-export async function getServerSideProps(context) {
-  return {
-    redirect: {
-      destination: '/auth',
-      permanent: false,
-    },
-  }
-}
 
-export default function Home() {
+import {Layout} from 'src/layouts/auth/layout';
+import Login from 'src/components/login';
+
+export default function myLogin() {
   return (
-    <div></div>
+    <Layout>
+      <Login />
+    </Layout>
   );
-} 
+}
