@@ -1,3 +1,4 @@
+
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { List, ListItem, ListItemButton, ListItemText } from '@mui/material';
@@ -10,22 +11,30 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 function ListNav({ style }) {
   
   const theme = useTheme();
-
+  const isMdOrLess = useMediaQuery(theme.breakpoints.down('md'));
+  
   const {
     setSelectedGUID,
     arenaListName,
     arenaListNumber,
     arenaEndPoint,
     arenaSearchEndPoint,
-   arenaSessionId
-
+    arenaSessionId,
+    showMainBody,
+    setShowMainBody,
+    showListNav,
+    setShowListNav
   } = useContext(AppContext);
 
   const [data, setData] = useState(null);
   const textColor = theme.palette.text.primary;
 
   const handleItemClick = (guid) => {
-    setSelectedGUID(guid)
+    setSelectedGUID(guid);
+    if (isMdOrLess) {
+      setShowListNav(false); // Hide ListNav
+      setShowMainBody(true); // Show MainBody
+    }
   };
   
   useEffect(() => {
@@ -55,27 +64,27 @@ function ListNav({ style }) {
 
   return (
     <Box sx={{ maxHeight: 'calc(100vh - 64px)', overflowY: 'auto' }}>
-    <List>
-      {data && data.results ? (
-        data.results.map((item, index) => (
-          <React.Fragment key={item.guid}>
-            <ListItemButton onClick={() => handleItemClick(item.guid)}>
-              <ListItemText
-                primary={<span>Number: {item[arenaListName]}</span>}
-                secondary={`Name: ${item[arenaListNumber]}`}
-              />
-              <div style={{ color: textColor }}>{" > "}</div>
-            </ListItemButton>
-            <Divider />
-          </React.Fragment>
-        ))
-      ) : (
-        <></>
-      )}
-    </List>
+      <List>
+        {data && data.results ? (
+          data.results.map((item, index) => (
+            <React.Fragment key={item.guid}>
+              <ListItemButton onClick={() => handleItemClick(item.guid)}>
+                <ListItemText
+                  primary={<span>Number: {item[arenaListName]}</span>}
+                  secondary={`Name: ${item[arenaListNumber]}`}
+                />
+                <div style={{ color: textColor }}>{" > "}</div>
+              </ListItemButton>
+              <Divider />
+            </React.Fragment>
+          ))
+        ) : (
+          <></>
+        )}
+      </List>
     </Box>
   );
-  
 }
 
 export default ListNav;
+

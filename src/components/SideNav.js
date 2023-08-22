@@ -1,42 +1,56 @@
 import React, { useContext } from 'react';
 import { List, ListItemButton, ListItemText, ListItemIcon } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
-import AppContext from 'src/contexts/ArenaContext';
 import { menuItems } from './menuConfig';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
+import AppContext from 'src/contexts/ArenaContext';
+
 function SideNav() {
 
-  
   const {
     setArenaListName,
     setArenaListNumber,
     setSelectedPage,
-    setArenaEndPoint, 
-    setArenaSearchEndPoint
+    setArenaEndPoint,
+    setArenaSearchEndPoint,
+    showListNav,
+    setShowListNav,
+    showSideNav,
+    setShowSideNav,
   } = useContext(AppContext);
   
   const theme = useTheme();
-  const textColor = theme.palette.text.primary;
-  const handleClick = (item) => {
-    if (item.selectedPage !== 'externalLink') { // Check if selectedPage is not 'externalLink'   
-      setSelectedPage(item.selectedPage);
+  const isMdOrLess = useMediaQuery(theme.breakpoints.down('md'));
 
+  const textColor = theme.palette.text.primary;
+
+
+ const handleClick = (item) => {
+
+  console.log('sidenav.js.line 33:isMdOrLess',isMdOrLess )
+
+    if (isMdOrLess) {
+      console.log('sidenav.js.line 36:isMdOrLess',isMdOrLess )
+      setShowSideNav(false); // Hide SideNav
+      setShowListNav(true);  // Show ListNav
+    }
+
+    if (item.selectedPage !== 'externalLink') {
+      setSelectedPage(item.selectedPage);
       setArenaEndPoint(item.arenaEndPoint);
       setArenaSearchEndPoint(item.arenaSearchEndPoint);
-
       setArenaListName(item.arenaListName);
       setArenaListNumber(item.arenaListNumber);
     } else {
       setSelectedPage(item.selectedPage);
-
       setArenaEndPoint(item.arenaEndPoint);
-
     }
-
   };
+
+
   return (
     <List>
       {menuItems.map((item, index) => (
@@ -54,5 +68,5 @@ function SideNav() {
       ))}
     </List>
   );
-      };
+};
 export default SideNav;
