@@ -11,8 +11,9 @@
     ],
     "qualityprocesses": [
       { "name": "number", "label": "Number", "editable": false },
-      { "name": "name", "label": "Name", "editable": true },
-      { "name": "guid", "label": "guid", "editable": false }
+      { "name": "name", "label": "Name", "editable": false },
+      { "name": "guid", "label": "guid", "editable": false },
+      { "name": "description", "label": "Description", "editable": true, "multiline":true }
     ]
   }
   
