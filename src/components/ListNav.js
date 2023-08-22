@@ -26,7 +26,7 @@ function ListNav({ style }) {
     setShowListNav
   } = useContext(AppContext);
 
-  const [data, setData] = useState(null);
+  const [data, setData] = useState(null); 
   const textColor = theme.palette.text.primary;
 
   const handleItemClick = (guid) => {

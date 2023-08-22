@@ -94,8 +94,8 @@ function MainLayout() {
         <Divider orientation="vertical" />
 
         {!isMdOrLess || (isMdOrLess && showMainBody) ? (
-            <Grid item xs={isMdOrLess ? 12 : 1} md={2}>
-                < Box sx={{ maxHeight: 'calc(100vh - 64px)', overflowY: 'auto' }}>
+            <Grid item xs={isMdOrLess ? 12 : 1} md={7} style={{ height: '100%' }}>
+                < Box sx={{ maxHeight: 'calc(100vh - 0px)', overflowY: 'auto' } }>
                   <Toolbar />
                   <MainBody />
                 </Box>
