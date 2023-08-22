@@ -3,9 +3,6 @@ import TopNav from 'src/components/TopNav';
 import Footer from 'src/components/Footer';
 import SideNav from 'src/components/SideNav';
 import ListNav from 'src/components/ListNav';
-import MenuSideNav from 'src/components/MenuSideNav';
-import MenuListNav from 'src/components/MenuListNav';
-import MenuMainBodyNav from 'src/components/MenuMainBodyNav';
 import MainBody from 'src/components/MainBody';
 import Settings from 'src/components/Settings';
 import AppContext from 'src/contexts/ArenaContext';
@@ -18,12 +15,44 @@ import Grid from '@mui/material/Grid';
 
 import Toolbar from '@mui/material/Toolbar';
 
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
+
 
 function MainLayout() {
-  const {
 
-  } = useContext(AppContext);
 
+  const theme = useTheme();
+  const isMdOrLess = useMediaQuery(theme.breakpoints.down('md'));
+  const { showListNav, setShowListNav } = useContext(AppContext);
+  const { showMainBody, setShowMainBody  } = useContext(AppContext);
+ 
+  
+  useEffect(() => {
+    // Set showListNav based on the value of isMdOrLess
+    if (isMdOrLess) {
+      setShowListNav(false);
+      setShowMainBody(false);
+
+    } else {
+      setShowListNav(true);
+      setShowMainBody(true);
+    }
+  }, [isMdOrLess]);
+
+
+
+  const { 
+    setArenaSessionId ,
+    showSideNav, setShowSideNav,
+    showSettingsNav, setShowSettingsNav,
+    populateSideNav, setPopulateSideNav,
+    populateListNav, setPopulateListNav,
+    populateMainBody, setPopulateMainBody
+
+  } = useContext(
+    AppContext
+  );
 
    return (
 
@@ -37,28 +66,46 @@ function MainLayout() {
           </AppBar>
         </Grid>
 
-        <Grid item xs={12} md={2}>    
+        <Grid item xs={1} md={2}>    
             <Toolbar />
             <SideNav />
         </Grid>
 
         <Divider orientation="vertical" />
   
-        <Grid item xs={12} md={2}>   
-          <Toolbar />
-          <ListNav />
-        </Grid>
+    
+          {!isMdOrLess || (isMdOrLess && showListNav) ? (
+            <Grid item xs={isMdOrLess ? 12 : 1} md={2}>
+              <Toolbar />
+              {/* You can replace ListNav with your actual component */}
+              <div><ListNav /></div>
+            </Grid>
+          ) : null}
 
+          {/* Example toggle button; you can replace this with your own toggle logic */}
+          {isMdOrLess && (
+            <button onClick={() => setToggled(!showListNav)}>Toggle</button>
+          )}
+   
 
         <Divider orientation="vertical" />
 
-        <Grid item xs={12} md={7}>
-        < Box sx={{ maxHeight: 'calc(100vh - 64px)', overflowY: 'auto' }}>
-            <Toolbar />
-            <MainBody />
-          </Box>
+        {!isMdOrLess || (isMdOrLess && showListNav) ? (
+            <Grid item xs={isMdOrLess ? 12 : 1} md={2}>
+                      < Box sx={{ maxHeight: 'calc(100vh - 64px)', overflowY: 'auto' }}>
+                          <Toolbar />
+                        <MainBody />
+                      </Box>
+            </Grid>
+          ) : null}
+
           <Settings />
-        </Grid>
+
+          {/* Example toggle button; you can replace this with your own toggle logic */}
+          {isMdOrLess && (
+            <button onClick={() => setToggled(!showListNav)}>Toggle</button>
+          )}
+
 </Grid>
     );
 }
