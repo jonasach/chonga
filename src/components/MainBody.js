@@ -132,40 +132,39 @@ const handleValueChange = (event) => {
           <div>
             {arenaEndPoint !== 'files?format=pdf' ? (
               data ? (
-<
-  form style={{ height: '100%', display: 'flex', flexDirection: 'column', paddingLeft: '16px' }}>
-  <Grid container>
-    {columns.map(column => (
-      <Grid item xs={12} sm={12} key={column.name}>
-        <div style={{ paddingBottom: '16px' }}>
-          <div>{column.label}</div>
-          {isEditMode ? (
-            <FormControl style={{ width: '100%' }}>
-              <TextField
-                label={column.label}
-                value={data[column.name]}
-                onChange={handleValueChange}
-                variant="filled"
-                disabled={!isEditMode || !column.editable}
-                multiline={column.multiline} 
-                rows={column.multiline ? 3 : 1} 
-                style={{
-                  width: isEditMode ? '100%' : 'auto',
-                  backgroundColor: column.editable ? '#007bff' : 'transparent',
-                  color: isEditMode ? '#fff' : textColor,
-     
-                }}
-              />
-            </FormControl>
-          ) : (
-            <div>{data[column.name]}</div>
-          )}
-        </div>
-        <Divider />
-      </Grid>
-    ))}
-  </Grid>
-</form>
+                    <form style={{ height: '100%', display: 'flex', flexDirection: 'column', paddingLeft: '16px' }}>
+                      <Grid container>
+                        {columns.map(column => (
+                          <Grid item xs={12} sm={12} key={column.name}>
+                            <div style={{ paddingBottom: '16px' }}>
+                              <div>{column.label}</div>
+                              {isEditMode ? (
+                                <FormControl style={{ width: '100%' }}>
+                                  <TextField
+                                    label={column.label}
+                                    value={data[column.name]}
+                                    onChange={handleValueChange}
+                                    variant="filled"
+                                    disabled={!isEditMode || !column.editable}
+                                    multiline={column.multiline} 
+                                    rows={column.multiline ? 3 : 1} 
+                                    style={{
+                                      width: isEditMode ? '100%' : 'auto',
+                                      backgroundColor: column.editable ? '#007bff' : 'transparent',
+                                      color: isEditMode ? '#fff' : textColor,
+                        
+                                    }}
+                                  />
+                                </FormControl>
+                              ) : (
+                                <div>{data[column.name]}</div>
+                              )}
+                            </div>
+                            <Divider />
+                          </Grid>
+                        ))}
+                      </Grid>
+                    </form>
 
 
               ) : (
@@ -194,6 +193,7 @@ const handleValueChange = (event) => {
           </div>
         )}
         {/* Render an iframe if arenaEndPoint is an external link */}
+        
         {selectedPage === 'externalLink' && arenaEndPoint && arenaEndPoint !== 'files?format=pdf' && (
           <iframe frameborder="0" src="https://arenasolutions.na.gooddata.com/dashboard.html#workspace=/gdc/workspaces/qy77hw96y43e7f55o8dkj8rzwyoggan3&dashboard=/gdc/md/qy77hw96y43e7f55o8dkj8rzwyoggan3/obj/213880" width="100%" height="950px" allowTransparency="false"></iframe>
         )}

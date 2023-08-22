@@ -8,6 +8,12 @@ import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import Toolbar from '@mui/material/Toolbar';
+import Grid from '@mui/material/Grid';
+
+import TextField from '@mui/material/TextField'; // <-- Import the TextField component
+
+
 
 function Settings() {
   const {
@@ -15,7 +21,7 @@ function Settings() {
     setArenaEndPoint, arenaSearchEndPoint,
     selectedPage, selectedItem,
     arenaListName, arenaListNumber,
-    arenaSessionId,
+    arenaSessionId, setArenaSessionId,
     showSideNav, setShowSideNav,
     showListNav, setShowListNav,
     showMainBody, setShowMainBody,
@@ -54,7 +60,7 @@ function Settings() {
       role="presentation"
       onClick={toggleDrawer(anchor, true)}
       onKeyDown={toggleDrawer(anchor, true)}
-    >
+    >< Toolbar />    <Grid item xs={12}></Grid>
       <List>
         {/* Visibility Controls */}
         <ListItem>
@@ -106,7 +112,18 @@ function Settings() {
         <ListItem><ListItemText primary={`Arena Search End Point: ${arenaSearchEndPoint}`} /></ListItem>
         <ListItem><ListItemText primary={`Arena List Name: ${arenaListName}`} /></ListItem>
         <ListItem><ListItemText primary={`Arena List Number: ${arenaListNumber}`} /></ListItem>
-        <ListItem><ListItemText primary={`Arena Session ID: ${arenaSessionId}`} /></ListItem>
+
+        <ListItem>
+            <ListItemText primary="Arena Session ID:" />
+            <TextField
+              value={arenaSessionId}
+              onChange={(e) => setArenaSessionId(e.target.value)}
+              variant="outlined"
+              fullWidth
+            />
+        </ListItem>
+        
+        
         <ListItem><ListItemText primary={`Selected GUID: ${selectedGUID}`} /></ListItem>
         <ListItem><ListItemText primary={`isXS: ${isXS}`} /></ListItem>
         <ListItem><ListItemText primary={`isSM: ${isSM}`} /></ListItem>

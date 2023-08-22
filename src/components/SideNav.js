@@ -20,6 +20,8 @@ function SideNav() {
     setShowListNav,
     showSideNav,
     setShowSideNav,
+    setShowMainBody
+
   } = useContext(AppContext);
   
   const theme = useTheme();
@@ -39,12 +41,18 @@ function SideNav() {
     }
 
     if (item.selectedPage !== 'externalLink') {
+
+
       setSelectedPage(item.selectedPage);
       setArenaEndPoint(item.arenaEndPoint);
       setArenaSearchEndPoint(item.arenaSearchEndPoint);
       setArenaListName(item.arenaListName);
       setArenaListNumber(item.arenaListNumber);
     } else {
+      setShowSideNav(false); // Hide SideNav
+      setShowListNav(false); // Hide ListNav
+      setShowMainBody(true); // Show MainBody
+      
       setSelectedPage(item.selectedPage);
       setArenaEndPoint(item.arenaEndPoint);
     }
