@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "HOST=192.168.1.179 next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "next start"
   },
   "author": "Ron Gajdos <rgajdos@ptc.com>",
   "license": "MIT",
@@ -61,8 +60,6 @@
     "@types/numeral": "2.0.2",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
-    "eslint": "8.34.0",
-    "eslint-config-next": "13.1.6",
     "rollup": "^2.34.2"
   },
   "compilerOptions": {

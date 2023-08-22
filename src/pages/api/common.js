@@ -1,7 +1,7 @@
 const passport = require('passport');
 const session = require('express-session');
 const OnshapeStrategy = require('passport-onshape');
-const config = require('./config');
+const config = require('src/utils/config');
 
 // Passport strategy setup using Onshape
 passport.use(new OnshapeStrategy({
