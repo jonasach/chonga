@@ -1,11 +1,14 @@
-
-import {Layout} from 'src/layouts/auth/layout';
-import Login from 'src/components/login';
-
-export default function myLogin() {
-  return (
-    <Layout>
-      <Login />
-    </Layout>
-  );
+export async function getServerSideProps(context) {
+  return {
+    redirect: {
+      destination: '/auth',
+      permanent: false,
+    },
+  }
 }
+
+export default function Home() {
+  return (
+    <div></div>
+  );
+} 
