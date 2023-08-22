@@ -114,14 +114,15 @@ function Settings() {
         <ListItem><ListItemText primary={`Arena List Number: ${arenaListNumber}`} /></ListItem>
 
         <ListItem>
-            <ListItemText primary="Arena Session ID:" />
-            <TextField
-              value={arenaSessionId}
-              onChange={(e) => setArenaSessionId(e.target.value)}
-              variant="outlined"
-              fullWidth
-            />
-        </ListItem>
+    <ListItemText primary="Arena Session ID:" />
+    <TextField
+      value={arenaSessionId}
+      onChange={(e) => setArenaSessionId(e.target.value)}
+      variant="outlined"
+      fullWidth
+      readOnly={arenaSessionId ? true : false}  
+    />
+</ListItem>
         
         
         <ListItem><ListItemText primary={`Selected GUID: ${selectedGUID}`} /></ListItem>
