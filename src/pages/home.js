@@ -35,6 +35,11 @@ function Home() {
   const [arenaListNumber, setArenaListNumber] = useState("default");
   const [arenaSessionId, setArenaSessionId] = useState("default");
 
+  const [externalURL, setExternalURL] = useState("default");
+  const [searchParams, setSearchParams] = useState("default");
+  const [outputPage, setOutputPage] = useState("default");
+
+
   const [selectedGUID, setSelectedGUID] = useState(null);
 
   useEffect(() => {
@@ -46,11 +51,11 @@ function Home() {
       
     }, {}).arenaSessionId;
     setArenaSessionId(storedSessionId);  
-    console.log('home.js.arenaSessionId:47', arenaSessionId );
+      //console.log('home.js.arenaSessionId:47', arenaSessionId );
     if (storedSessionId) {
-      console.log('home.js.storedSessionId:49', storedSessionId);
+      //console.log('home.js.storedSessionId:49', storedSessionId);
       setArenaSessionId(storedSessionId);
-      console.log('home.js.arenaSessionId51', arenaSessionId);   
+      //console.log('home.js.arenaSessionId51', arenaSessionId);   
     }
   }, []);
 
@@ -79,6 +84,9 @@ function Home() {
           arenaListNumber, setArenaListNumber,
           arenaSessionId, setArenaSessionId,
           selectedGUID, setSelectedGUID,
+          externalURL, setExternalURL,
+          searchParams, setSearchParams,
+          outputPage, setOutputPage,
           isXS, isSM, isMD, isLG, isXL,
         }}
       >

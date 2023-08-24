@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { List, ListItemButton, ListItemText, ListItemIcon } from '@mui/material';
-import { menuItems } from './menuConfig';
+import menuItems from '../../config/arenaworlds.json';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 
@@ -16,11 +16,11 @@ function SideNav() {
     setSelectedPage,
     setArenaEndPoint,
     setArenaSearchEndPoint,
-    showListNav,
     setShowListNav,
     showSideNav,
     setShowSideNav,
-    setShowMainBody
+    setShowMainBody, setExternalURL,
+    outputPage, setOutputPage
 
   } = useContext(AppContext);
   
@@ -28,11 +28,11 @@ function SideNav() {
   const isMdOrLess = useMediaQuery(theme.breakpoints.down('md'));
 
   const textColor = theme.palette.text.primary;
-
-
- const handleClick = (item) => {
+  const handleClick = (item) => {
 
   console.log('sidenav.js.line 33:isMdOrLess',isMdOrLess )
+
+      setOutputPage(item.outputPage);
 
     if (isMdOrLess) {
       console.log('sidenav.js.line 36:isMdOrLess',isMdOrLess )
@@ -49,15 +49,15 @@ function SideNav() {
       setArenaListName(item.arenaListName);
       setArenaListNumber(item.arenaListNumber);
     } else {
-      setShowSideNav(false); // Hide SideNav
+      setShowSideNav(true); // Hide SideNav
       setShowListNav(false); // Hide ListNav
       setShowMainBody(true); // Show MainBody
-      
+
+      setExternalURL(item.arenaEndPoint)
       setSelectedPage(item.selectedPage);
       setArenaEndPoint(item.arenaEndPoint);
     }
   };
-
 
   return (
     <List>

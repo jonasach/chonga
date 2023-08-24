@@ -29,12 +29,13 @@ function Settings() {
     populateListNav, setPopulateListNav,
     populateMainBody, setPopulateMainBody,
     showSettingsNav, setShowSettingsNav, 
+    externalURL, setExternalURL, 
+    searchParams, setSearchParams,
+    outputPage, setOutputPage,
     isXS, isSM, isMD, isLG, isXL
   } = useContext(AppContext);
 
   const [state, setState] = React.useState({ right: false });
-
-  
 
 
 
@@ -113,18 +114,43 @@ function Settings() {
         <ListItem><ListItemText primary={`Arena List Name: ${arenaListName}`} /></ListItem>
         <ListItem><ListItemText primary={`Arena List Number: ${arenaListNumber}`} /></ListItem>
 
+
         <ListItem>
-    <ListItemText primary="Arena Session ID:" />
-    <TextField
-      value={arenaSessionId}
-      onChange={(e) => setArenaSessionId(e.target.value)}
-      variant="outlined"
-      fullWidth
-      readOnly={arenaSessionId ? true : false}  
-    />
-</ListItem>
-        
-        
+        <ListItemText primary="External URL:" />
+        <TextField
+          value={externalURL}
+          onChange={(e) => setExternalURL(e.target.value)}
+          variant="outlined"
+          fullWidth
+          readOnly={externalURL ? true : false}  
+        />
+        </ListItem>
+
+        <ListItem>
+        <ListItemText primary="Search Criterial:" />
+        <TextField
+          value={searchParams}
+          onChange={(e) => setSearchParams(e.target.value)}
+          variant="outlined"
+          fullWidth
+          readOnly={searchParams ? true : false}  
+        />
+        </ListItem>
+
+
+        <ListItem>
+        <ListItemText primary="Arena Session ID:" />
+        <TextField
+          value={arenaSessionId}
+          onChange={(e) => setArenaSessionId(e.target.value)}
+          variant="outlined"
+          fullWidth
+          readOnly={arenaSessionId ? true : false}  
+        />
+        </ListItem>
+            
+
+        <ListItem><ListItemText primary={`outputPage: ${outputPage}`} /></ListItem>
         <ListItem><ListItemText primary={`Selected GUID: ${selectedGUID}`} /></ListItem>
         <ListItem><ListItemText primary={`isXS: ${isXS}`} /></ListItem>
         <ListItem><ListItemText primary={`isSM: ${isSM}`} /></ListItem>
@@ -139,8 +165,8 @@ function Settings() {
     <div>
       <Drawer
         anchor='right'
-        open={showSettingsNav} // Use showSettingsNav here
-        onClose={toggleSettingsNav} // Use the toggleSettingsNav function
+        open={showSettingsNav}
+        onClose={toggleSettingsNav} 
       >
         {list('right')}
       </Drawer>

@@ -21,19 +21,13 @@ import AppContext from 'src/contexts/ArenaContext';
 
 function MainLayout() {
 
-
   const theme = useTheme();
   const isMdOrLess = useMediaQuery(theme.breakpoints.down('md'));
   const { showSideNav, setShowSideNav  } = useContext(AppContext);
   const { showListNav, setShowListNav } = useContext(AppContext);
   const { showMainBody, setShowMainBody  } = useContext(AppContext);
   
-  //setShowSideNav(true);
-
-  //console.log('layout.js.line 33:setShowSideNav',showSideNav )
-
   useEffect(() => {
-    // Set showListNav based on the value of isMdOrLess
     if (isMdOrLess) {
       setShowListNav(false);
       setShowMainBody(false);
@@ -43,25 +37,10 @@ function MainLayout() {
       setShowMainBody(true);
       setShowSideNav(true);
     }
-
-
-    console.log('layout.js.line 48:setShowSideNav',showSideNav )
-
   }, [isMdOrLess]);
 
-  const { 
-    setArenaSessionId ,
-    showSettingsNav, setShowSettingsNav,
-    populateSideNav, setPopulateSideNav,
-    populateListNav, setPopulateListNav,
-    populateMainBody, setPopulateMainBody
-
-  } = useContext(
-    AppContext
-  );
 
    return (
-
 
   <Grid container >
 
@@ -73,13 +52,11 @@ function MainLayout() {
         </Grid>
 
 
-          <Grid item xs={isMdOrLess ? 12 : 1} md={2} style={{ display: showSideNav ? 'block' : 'none' }}>
-            <Toolbar />
-              <div><SideNav /></div>
-          </Grid>
+        <Grid item xs={isMdOrLess ? 12 : 1} md={2} style={{ display: showSideNav ? 'block' : 'none' }}>
+          <Toolbar />
+            <div><SideNav /></div>
+        </Grid>
   
-
-
         <Divider orientation="vertical" />
   
     
@@ -89,7 +66,6 @@ function MainLayout() {
               <div><ListNav /></div>
             </Grid>
           ) : null}
-
 
         <Divider orientation="vertical" />
 

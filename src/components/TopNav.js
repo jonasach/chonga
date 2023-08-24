@@ -6,7 +6,9 @@
   import ListItem from '@mui/material/ListItem';
   import FormControlLabel from '@mui/material/FormControlLabel';
   import Switch from '@mui/material/Switch';
-  import Button from '@mui/material/Button'; // Import Button from MUI
+  import Avatar from '@mui/material/Avatar';
+  import Button from '@mui/material/Button';
+  
 
   import useMediaQuery from '@mui/material/useMediaQuery';
   import { useTheme } from '@mui/material/styles';
@@ -16,7 +18,7 @@
     const { 
       showSettingsNav, 
       setShowSettingsNav, 
-      setArenaSessionId    , 
+      setArenaSessionId, 
       setShowSideNav,
       setShowMainBody,
       setShowListNav
@@ -48,7 +50,13 @@
 
     return (  
       
+
+
       <Toolbar>
+
+      <Avatar alt="Joe Erickson" src="/assets/images/avatar/1.jpg" />
+
+
           <IconButton
           size="large"
           edge="start"
@@ -56,8 +64,8 @@
           aria-label="menu"
           sx={{ mr: 2 }}
         >
-              <MenuIcon />
-            </IconButton>
+        <MenuIcon />
+        </IconButton>
         
         {/* Switch to control visibility of settings */}
         <ListItem>
@@ -72,16 +80,17 @@
           />
         </ListItem>
     
+
         {isMdOrLess && (
-  <Button
-    variant="outlined"
-    color="primary"
-    onClick={handleHomeClick}
-    style={{ marginRight: '10px' }} // Some spacing between Home and Logout buttons
-  >
-    Home
-  </Button>
-)}
+        <Button
+            variant="outlined"
+            color="primary"
+            onClick={handleHomeClick}
+            style={{ marginRight: '10px' }} 
+        >
+          Home
+        </Button>
+      )}
 
 
         {/* Logout button */}
@@ -92,7 +101,7 @@
         >
           Logout
         </Button>
-            </Toolbar>
+        </Toolbar>
     );  
           }; 
   export default TopNav;
