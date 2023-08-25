@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
+import Image from 'next/image';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -107,11 +108,9 @@ function Login() {
       autoComplete="off"
     >
       <div style={{ width: '80%', textAlign: 'center' }}>
-        <img
-          className="responsive-image"
-          src="/assets/logos/ptc2.svg"
-          alt="Your description"
-        />
+
+      <img src="/assets/logos/ptc2.svg" alt="" style={{ maxWidth: "100%", height: "auto" }} />
+
       </div>
       <h2 className="h4 mb-3 fw-normal text-custom" style={{ textAlign: 'center' }}>
         FTLDP 2023 - US Team 5

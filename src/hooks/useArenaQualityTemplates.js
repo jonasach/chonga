@@ -1,16 +1,11 @@
 // hooks/useArenaQualityTemplates.js
-import { useEffect,useContext } from 'react';
+import React, { useEffect,useContext } from 'react';
 import axios from 'axios';
-import useSession from 'src/hooks/useSession';
 import AppContext from 'src/contexts/ArenaContext';
 
-
 function useArenaQualityTemplates() {
-  console.log( "useArenaQualityTemplates:arenaQualityTemplates", "line 9")
 
-  const {qualityTemplates, setQualityTemplates, arenaSessionId } = useContext(AppContext);
-
-  console.log( "useArenaQualityTemplates:arenaSessionId", arenaSessionId)
+  const {setQualityTemplates, arenaSessionId } = useContext(AppContext);
 
   useEffect(() => {
     if (arenaSessionId) {
@@ -28,7 +23,7 @@ function useArenaQualityTemplates() {
       };
       fetchData();
     }
-  }, [arenaSessionId]);
+  }, [arenaSessionId,setQualityTemplates]);
 }
 
 export default useArenaQualityTemplates;

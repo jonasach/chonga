@@ -1,4 +1,4 @@
-
+import React from 'react';
 import {Layout} from 'src/layouts/auth/layout';
 import Login from 'src/components/login';
 

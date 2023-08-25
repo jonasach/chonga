@@ -1,6 +1,5 @@
-import React, { useContext, useState, useEffect} from 'react';
+import React, { useContext, useEffect} from 'react';
 import TopNav from 'src/components/navigators/TopNav';
-import Footer from 'src/components/navigators/Footer';
 import SideNav from 'src/components/navigators/SideNav';
 import ListNav from 'src/components/navigators/ListNav';
 import MainBody from 'src/components/navigators/MainBody';
@@ -41,7 +40,7 @@ function MainLayout() {
       setShowMainBody(true);
       setShowSideNav(true);
     }
-  }, [isMdOrLess]);
+  }, [isMdOrLess,setShowSideNav,setShowMainBody,setShowListNav]);
 
  useArenaQualityTemplates(); // This will run the logic to fetch and set the data
   

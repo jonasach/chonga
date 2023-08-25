@@ -18,7 +18,7 @@ import TextField from '@mui/material/TextField'; // <-- Import the TextField com
 function Settings() {
   const {
     selectedGUID, arenaEndPoint,
-    setArenaEndPoint, arenaSearchEndPoint,
+    arenaSearchEndPoint,
     selectedPage, selectedItem,
     arenaListName, arenaListNumber,
     arenaSessionId, setArenaSessionId,
@@ -31,7 +31,7 @@ function Settings() {
     showSettingsNav, setShowSettingsNav, 
     externalURL, setExternalURL, 
     searchParams, setSearchParams,
-    outputPage, setOutputPage,
+    outputPage,
     isXS, isSM, isMD, isLG, isXL
   } = useContext(AppContext);
 

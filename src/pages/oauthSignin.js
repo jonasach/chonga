@@ -1,8 +1,7 @@
-// src/pages/api/oauthSignin.js
-import { v4 as uuidv4 } from 'uuid';
-import passport from 'passport';
+//import { v4 as uuidv4 } from 'uuid';
+//import passport from 'passport';
 
-export default (req) => {
+const handleOauthSignin = (req) => {
   if (req.method === 'GET') {
     const state = {
       docId: req.query.documentId,
@@ -10,9 +9,17 @@ export default (req) => {
       elId: req.query.elementId,
     };
     req.session.state = state;
-    //passport.authenticate('onshape', { state: uuidv4(state) })(req, res);
-  } else {
-    //res.statusCode = 405;
-    //res.end();
+
+    // Uncomment below line if you want to use passport and uuidv4
+    // passport.authenticate('onshape', { state: uuidv4() })(req, res);
+  } 
+  // Uncomment the below lines if you want to handle methods other than GET
+  /*
+  else {
+    res.statusCode = 405;
+    res.end();
   }
+  */
 };
+
+export default handleOauthSignin;

@@ -1,15 +1,12 @@
 
 import React, { useEffect, useContext } from 'react';
 import AppContext from 'src/contexts/ArenaContext';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
+
 
 export default function UrlOutput() {
-  const isXS = useMediaQuery('(max-width:600px)');
-  const theme = useTheme();
 
   const {
-    selectedGUID, arenaEndPoint, arenaSessionId, externalURL
+    externalURL
   } = useContext(AppContext);
 
   // if we are getting a file

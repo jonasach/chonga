@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { CalendarPicker, DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import Button from '@mui/material/Button';
-import { FormControl, TextField } from '@mui/material';
+import {TextField } from '@mui/material';
 import { Switch, FormControlLabel } from '@mui/material';
 import dayjs from 'dayjs';
-import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import utc from 'dayjs/plugin/utc';
 import advancedFormat from 'dayjs/plugin/advancedFormat';
 
@@ -18,7 +17,6 @@ export default function CalendarOutput() {
 
 
 
-  const currentYear = dayjs().year();
   const [isEditMode, setIsEditMode] = useState(false);
   const [selectedDate, setSelectedDate] = useState(dayjs());
   

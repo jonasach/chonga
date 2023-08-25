@@ -30,6 +30,6 @@ export const passportInitialize = passport.initialize();
 export const passportSession = passport.session();
 
 // Function to refresh access token
-export const refreshAccessToken = async (user) => {
+export const refreshAccessToken = async () => {
   // Logic to refresh the access token here...
 };

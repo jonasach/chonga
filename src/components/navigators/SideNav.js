@@ -17,10 +17,9 @@ function SideNav() {
     setArenaEndPoint,
     setArenaSearchEndPoint,
     setShowListNav,
-    showSideNav,
     setShowSideNav,
     setShowMainBody, setExternalURL,
-    outputPage, setOutputPage
+    setOutputPage
 
   } = useContext(AppContext);
   
@@ -76,5 +75,5 @@ function SideNav() {
       ))}
     </List>
   );
-};
+}
 export default SideNav;

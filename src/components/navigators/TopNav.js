@@ -1,5 +1,4 @@
   import React, { useContext } from 'react';
-  import AppBar from '@mui/material/AppBar';
   import Toolbar from '@mui/material/Toolbar';
   import IconButton from '@mui/material/IconButton';
   import MenuIcon from '@mui/icons-material/Menu';
@@ -14,7 +13,7 @@
   import { useTheme } from '@mui/material/styles';
   import AppContext from 'src/contexts/ArenaContext';
 
-  function TopNav({ toggleListNav, activeView, onBackArrowClick }) {
+  function TopNav() {
     const { 
       showSettingsNav, 
       setShowSettingsNav, 
@@ -103,5 +102,5 @@
         </Button>
         </Toolbar>
     );  
-          }; 
+          } 
   export default TopNav;

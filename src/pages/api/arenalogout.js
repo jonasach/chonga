@@ -1,3 +1,5 @@
+
+
 export default async function handler(req, res) {
   if (req.method !== 'PUT') {
     res.status(405).json({ message: 'Method not allowed' });
@@ -5,6 +7,8 @@ export default async function handler(req, res) {
   }
 
  
+  const arenaSessionId = req.headers['arena-session-id']; 
+  
   const remoteApiResponse = await fetch('https://api.arenasolutions.com/v1/logout', {
     method: 'PUT', // Assuming it's a GET request
     headers: {

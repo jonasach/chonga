@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from 'react';
 import { FormControl, TextField, Grid, Divider } from '@mui/material';
 import { Switch, FormControlLabel } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import axios from 'axios';
 import AppContext from 'src/contexts/ArenaContext';
 import useSession from 'src/hooks/useSession';
@@ -11,7 +10,6 @@ import Button from '@mui/material/Button'; // Import Button from MUI
 
 
 export default function FormOutput() {
-  const isXS = useMediaQuery('(max-width:600px)');
   const theme = useTheme();
   const [data, setData] = useState(null);
   
@@ -26,7 +24,7 @@ export default function FormOutput() {
   const backgroundColor = theme.palette.background.paper;
   const [isEditMode, setIsEditMode] = useState(false);
 
-  const handleValueChange = (event) => {
+  const handleValueChange = () => {
     // Placeholder for handling field value changes
     // Update this function as needed
   };

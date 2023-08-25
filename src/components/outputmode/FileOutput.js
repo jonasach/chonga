@@ -3,8 +3,6 @@ import { Document, Page, pdfjs } from 'react-pdf';
 import React, { useContext, useEffect, useState } from 'react';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
 import AppContext from 'src/contexts/ArenaContext';
 import axios from 'axios';
 
@@ -14,11 +12,6 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 
 
 export default function FileOutput() {
-  // Move relevant state and logic from MainBody.js here...
-  const isXS = useMediaQuery('(max-width:600px)');
-  const theme = useTheme();
-
-
   const [pdfData, setPdfData] = useState(null);
   const [numPages, setNumPages] = useState(null);
 
@@ -49,7 +42,7 @@ useEffect(() => {
       };  
       fetchData();
   }
-}, [selectedGUID, arenaEndPoint]);
+}, [selectedGUID, arenaEndPoint, arenaSessionId]);
 
   return (
     <div style={{ height: 'calc(100% - 48px)', overflowY: 'auto' }}>
