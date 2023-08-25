@@ -1,10 +1,10 @@
 import React, { useContext, useState, useEffect} from 'react';
-import TopNav from 'src/components/TopNav';
-import Footer from 'src/components/Footer';
-import SideNav from 'src/components/SideNav';
-import ListNav from 'src/components/ListNav';
-import MainBody from 'src/components/MainBody';
-import Settings from 'src/components/Settings';
+import TopNav from 'src/components/navigators/TopNav';
+import Footer from 'src/components/navigators/Footer';
+import SideNav from 'src/components/navigators/SideNav';
+import ListNav from 'src/components/navigators/ListNav';
+import MainBody from 'src/components/navigators/MainBody';
+import Settings from 'src/components/navigators/Settings';
 
 
 import AppBar from '@mui/material/AppBar';
@@ -18,6 +18,10 @@ import Toolbar from '@mui/material/Toolbar';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import AppContext from 'src/contexts/ArenaContext';
+
+import useArenaQualityTemplates from 'src/hooks/useArenaQualityTemplates';
+
+
 
 function MainLayout() {
 
@@ -39,7 +43,8 @@ function MainLayout() {
     }
   }, [isMdOrLess]);
 
-
+ useArenaQualityTemplates(); // This will run the logic to fetch and set the data
+  
    return (
 
   <Grid container >

@@ -44,5 +44,26 @@
       "arenaListName": "",
       "arenaListNumber": "",
       "outputPage":"UrlOutput"
-  }
+  },
+
+  {
+    "label": "Audit Calendar",
+    "icon": "FcPlanner",
+    "selectedPage": "arenalist",
+    "arenaEndPoint": "qualityprocesses?template.guid=HZJ27VMR84NJ2L4FZGTM",
+    "arenaListName": "",
+    "arenaListNumber": "",
+    "outputPage":"CalendarOutput"
+},
+
+{
+    "label": "Quality Templates",
+    "icon": "FcSurvey",
+    "selectedPage": "arenalist",
+    "arenaEndPoint": "",
+    "arenaListName": "",
+    "arenaListNumber": "",
+    "outputPage":"RawOutput"
+}
+
 ]

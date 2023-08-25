@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
-import Header from 'src/components/topnav';
-import Footer from 'src/components/Footer';
-import Toc from 'src/components/sidenav';
+import Header from 'src/components/navigators/topnav';
+import Footer from 'src/components/navigators/Footer';
+import Toc from 'src/components/navigators/sidenav';
 import dynamic from 'next/dynamic';
 import { Hidden, Container, Grid, Divider, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';

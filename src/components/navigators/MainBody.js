@@ -3,9 +3,10 @@ import React, { useContext, useEffect, useState } from 'react';
 import AppContext from 'src/contexts/ArenaContext';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import FormOutput from './FormOutput';
-import FileOutput from './FileOutput';
-import UrlOutput from './UrlOutput';
+import FormOutput from 'src/components/outputmode/FormOutput';
+import FileOutput from 'src/components/outputmode/FileOutput';
+import UrlOutput from 'src/components/outputmode/UrlOutput';
+import CalendarOutput from 'src/components/outputmode/CalendarOutput';
 
 function MainBody({ onSelect }) {
 
@@ -26,6 +27,8 @@ function MainBody({ onSelect }) {
         {outputPage === 'FormOutput' && <FormOutput />}
         {outputPage === 'FileOutput' && <FileOutput />}
         {outputPage === 'UrlOutput' && <UrlOutput />}
+        {outputPage === 'CalendarOutput' && <CalendarOutput />}
+        {outputPage === 'RawOutput' && <RawOutput />}
       </div>
     );
 }

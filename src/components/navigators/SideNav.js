@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { List, ListItemButton, ListItemText, ListItemIcon } from '@mui/material';
-import menuItems from '../../config/arenaworlds.json';
+import menuItems from '../../../config/arenaworlds.json';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 

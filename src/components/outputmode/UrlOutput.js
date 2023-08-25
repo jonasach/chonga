@@ -23,7 +23,7 @@ export default function UrlOutput() {
       frameborder="0" 
       src={externalURL} 
       width="100%" 
-      height="950px" 
+      height="1500" 
       allowTransparency="false">
     </iframe>
   );

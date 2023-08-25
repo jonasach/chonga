@@ -3,6 +3,8 @@ import MainLayout from 'src/layouts/LandingPage/layout';
 import { useMediaQuery } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';import AppContext from 'src/contexts/ArenaContext'; // If needed
+//import useArenaQualityTemplates from 'src/hooks/useArenaQualityTemplates';
+
 
 function Home() {
   const theme = createTheme({
@@ -39,8 +41,10 @@ function Home() {
   const [searchParams, setSearchParams] = useState("default");
   const [outputPage, setOutputPage] = useState("default");
 
+  const [qualityTemplates, setQualityTemplates] = useState("default");
 
   const [selectedGUID, setSelectedGUID] = useState(null);
+
 
   useEffect(() => {
     const storedSessionId = document.cookie.split('; ').reduce((acc, cookie) => {
@@ -51,11 +55,8 @@ function Home() {
       
     }, {}).arenaSessionId;
     setArenaSessionId(storedSessionId);  
-      //console.log('home.js.arenaSessionId:47', arenaSessionId );
     if (storedSessionId) {
-      //console.log('home.js.storedSessionId:49', storedSessionId);
       setArenaSessionId(storedSessionId);
-      //console.log('home.js.arenaSessionId51', arenaSessionId);   
     }
   }, []);
 
@@ -87,6 +88,7 @@ function Home() {
           externalURL, setExternalURL,
           searchParams, setSearchParams,
           outputPage, setOutputPage,
+          qualityTemplates, setQualityTemplates,
           isXS, isSM, isMD, isLG, isXL,
         }}
       >

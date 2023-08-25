@@ -1,13 +1,16 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { FormControl, TextField, Grid, Divider } from '@mui/material';
+import { Switch, FormControlLabel } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import axios from 'axios';
 import AppContext from 'src/contexts/ArenaContext';
 import useSession from 'src/hooks/useSession';
-import columnConfig from '../../config/columns.json'; // Adjust the path accordingly
+import columnConfig from '../../../config/columns.json'; // Adjust the path accordingly
+import Button from '@mui/material/Button'; // Import Button from MUI
 
-export default function FormOutput({ isEditMode }) {
+
+export default function FormOutput() {
   const isXS = useMediaQuery('(max-width:600px)');
   const theme = useTheme();
   const [data, setData] = useState(null);
@@ -20,21 +23,18 @@ export default function FormOutput({ isEditMode }) {
   const textColor = theme.palette.text.primary;
   const columns = columnConfig[arenaEndPoint] || [];
 
+  const backgroundColor = theme.palette.background.paper;
+  const [isEditMode, setIsEditMode] = useState(false);
+
   const handleValueChange = (event) => {
     // Placeholder for handling field value changes
     // Update this function as needed
   };
 
-  console.log('FormOutput.js.line 29:selectedGUID',selectedGUID )
-  console.log('FormOutput.js.line 29:arenaSessionId',arenaSessionId ) 
-  console.log('FormOutput.js.line 29:arenaEndPoint',arenaEndPoint ) 
 
     // if we are getting a file
     useEffect(() => {
 
-    console.log('FormOutput.js.line 30:selectedGUID',selectedGUID )
-    console.log('FormOutput.js.line 30:arenaSessionId',arenaSessionId ) 
-    console.log('FormOutput.js.line 30:arenaEndPoint',arenaEndPoint ) 
 
       if (selectedGUID && arenaEndPoint) {
         const fetchData = async () => {
@@ -53,7 +53,35 @@ export default function FormOutput({ isEditMode }) {
   
 
     return (
-      <div style={{ height: 'calc(100% - 48px)', overflowY: 'auto' }}>
+      <div style={{ backgroundColor: backgroundColor, height: '100%', color: textColor }}>
+
+        <div style={{ backgroundColor: '#222', padding: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={isEditMode}
+                onChange={() => setIsEditMode(!isEditMode)}
+                color="primary"
+              />
+            }
+            label={isEditMode ? 'Edit Mode' : 'View Mode'}
+            style={{ color: 'white' }}
+          />
+          {isEditMode && (
+            <Button
+              variant="contained"
+              color="primary"
+              style={{ backgroundColor: 'green', color: 'white' }}
+              onClick={() => {}}
+            >
+              Submit
+            </Button>
+          )}
+        </div>
+
+
+      
+
         {selectedGUID && data && (
           <form style={{ height: '100%', display: 'flex', flexDirection: 'column', paddingLeft: '16px' }}>
             <Grid container>
