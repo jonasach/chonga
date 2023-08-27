@@ -4,6 +4,7 @@ import { useMediaQuery } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import AppContext from 'src/contexts/ArenaContext';
+import menuItems from '../../config/arenaworlds.json';
 import axios from 'axios';
 
 
@@ -44,6 +45,8 @@ function Home() {
   const [selectedGUID, setSelectedGUID] = useState(null);
   const [selectedItemWorld, setSelectedItemWorld] = useState(null);
 
+  const [fetchedData, setFetchedData] = useState({});
+
   useEffect(() => {
     const storedSessionId = document.cookie.split('; ').reduce((acc, cookie) => {
       const [name, value] = cookie.split('=');
@@ -61,7 +64,10 @@ function Home() {
           headers: { 'arena-session-id': arenaSessionId },
         });
 
-       setStateFunction(response.data);
+
+console.log("home.js:line 68:response.data", response.data)
+
+        setStateFunction(response.data);
     
       } catch (error) {
         console.error('Error fetching data:', error);

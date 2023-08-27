@@ -4,6 +4,7 @@ import axios from 'axios';
 import AppContext from 'src/contexts/ArenaContext';
 import Grid from '@mui/material/Grid';
 import { AppBar, Toolbar } from '@mui/material';
+
 import { useTheme } from '@mui/material/styles';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -21,8 +22,8 @@ export default function FormOutput() {
 
   const [header, setHeader] = useState(null);
   const [steps, setSteps] = useState(null);
-  const [setTemplateData] = useState(null);
-
+  const [templateData, setTemplateData] = useState(null);
+  const theme = useTheme();
   
   const [isEditMode, setIsEditMode] = useState(false);
   const handleToggleEditMode = () => {
@@ -83,18 +84,35 @@ export default function FormOutput() {
     const { number, name, owner, creationDateTime, status } = header;
   
     return (
-      <AppBar position="static" style={{ backgroundColor: '#1976d2' }}>
-        <Grid container>
-        <Avatar alt="Joe Erickson" src="/assets/images/avatar/1.jpg" />
-          <Grid item xs={2}><Typography variant="body2">{number || 'N/A'}</Typography></Grid>
-          <Grid item xs={2}><Typography variant="body2">{name || 'N/A'}</Typography></Grid>
-          <Grid item xs={2}><Typography variant="body2">
-            {owner ? <a href={`mailto:${owner.email}`} style={{ color: '#cccccc' }}>{owner.fullName}</a> : 'N/A'}
-          </Typography></Grid>
-          <Grid item xs={2}><Typography variant="body2">{creationDateTime ? new Date(creationDateTime).toISOString().split('T')[0] : 'N/A'}</Typography></Grid>
-          <Grid item xs={2}><Typography variant="body2">{status || 'N/A'}</Typography></Grid>
+<AppBar position="static" style={{ backgroundColor: '#1976d2' }}>
+    <Grid container alignItems="center">
+        <Grid item xs={2} sm={1} md={1}>
+            <Avatar alt="Joe Erickson" src="/assets/images/avatar/1.jpg" />
         </Grid>
-      </AppBar>
+        <Grid item xs={10} sm={11} md={11}>
+            <Grid container>
+                <Grid item xs={4} sm={4} md={4}>
+                    <Typography variant="body2">{number || 'N/A'}</Typography>
+                </Grid>
+                <Grid item xs={4} sm={4} md={4}>
+                    <Typography variant="body2">{creationDateTime ? new Date(creationDateTime).toISOString().split('T')[0] : 'N/A'}</Typography>
+                </Grid>
+                <Grid item xs={4} sm={4} md={4}>
+                    <Typography variant="body2">{status || 'N/A'}</Typography>
+                </Grid>
+                <Grid item xs={6} sm={6} md={6}>
+                    <Typography variant="body2">{name || 'N/A'}</Typography>
+                </Grid>
+                <Grid item xs={6} sm={6} md={6}>
+                    <Typography variant="body2">
+                        {owner ? <a href={`mailto:${owner.email}`} style={{ color: '#cccccc' }}>{owner.fullName}</a> : 'N/A'}
+                    </Typography>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</AppBar>
+
     ); 
   };
 
@@ -104,18 +122,30 @@ export default function FormOutput() {
         const fullName = step.assignees && step.assignees.users && step.assignees.users.length > 0 ? step.assignees.users[0].fullName : null;
         return (
           <Accordion key={index}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />} style={{ backgroundColor: '#808080' }}>
-              <Grid container>
-                <Grid item xs={1}>
-                  {fullName === 'Joseph Erickson' && <Avatar alt="Joseph Erickson" src="/assets/images/avatar/1.jpg" />}
-                </Grid>
-                <Grid item xs={2}><Typography variant="body2">{step.order || 'N/A'}</Typography></Grid>
-                <Grid item xs={2}><Typography variant="body2">{step.name || 'N/A'}</Typography></Grid>
-                <Grid item xs={2}><Typography variant="body2">{fullName ? <a href={`mailto:${step.assignees.users[0].email}`} style={{ color: '#cccccc' }}>{fullName}</a> : 'N/A'}</Typography></Grid>
-                <Grid item xs={2}><Typography variant="body2">{step.dueDateTime ? new Date(step.dueDateTime).toISOString().split('T')[0] : 'N/A'}</Typography></Grid>
-                <Grid item xs={2}><Typography variant="body2">{step.status || 'N/A'}</Typography></Grid>
-              </Grid>
-            </AccordionSummary>
+<AccordionSummary expandIcon={<ExpandMoreIcon />} style={{ backgroundColor: '#808080' }}>
+  <Grid container>
+    <Grid item xs={2} sm={1} md={1}>
+      {fullName === 'Joseph Erickson' && <Avatar alt="Joseph Erickson" src="/assets/images/avatar/1.jpg" />}
+    </Grid>
+    <Grid item xs={10} sm={11} md={11}>
+      <Grid container>
+        <Grid item xs={6} sm={4} md={4}>
+          <Typography variant="body2">{step.name || 'N/A'}</Typography>
+        </Grid>
+        <Grid item xs={6} sm={4} md={4}>
+          <Typography variant="body2">{step.dueDateTime ? new Date(step.dueDateTime).toISOString().split('T')[0] : 'N/A'}</Typography>
+        </Grid>
+        <Grid item xs={6} sm={4} md={4}>
+          <Typography variant="body2">{fullName ? <a href={`mailto:${step.assignees.users[0].email}`} style={{ color: '#cccccc' }}>{fullName}</a> : 'N/A'}</Typography>
+        </Grid>
+        <Grid item xs={6} sm={4} md={4}>
+          <Typography variant="body2">{step.status || 'N/A'}</Typography>
+        </Grid>
+      </Grid>
+    </Grid>
+  </Grid>
+</AccordionSummary>
+
             <AccordionDetails>
                 {step.attributes && renderAttributes(step.attributes, isEditMode)}
             </AccordionDetails>
@@ -163,3 +193,4 @@ export default function FormOutput() {
     </div>
   );
 }
+  

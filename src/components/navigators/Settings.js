@@ -26,7 +26,7 @@ function Settings() {
     externalURL, setExternalURL, 
     searchParams, setSearchParams,
     qualityProcessTemplates,
-    isXS, isSM, isMD, isLG, isXL,selectedItemWorld,qualityProcessStepAtrributes,
+    isXS, isSM, isMD, isLG, isXL,selectedItemWorld,qualityProcessStepAttributes,
   } = useContext(AppContext);
 
   const [state, setState] = React.useState({ right: false });
@@ -133,7 +133,7 @@ function Settings() {
         <ListItem><ListItemText primary={`isLG: ${isLG}`} /></ListItem>
         <ListItem><ListItemText primary={`isXL: ${isXL}`} /></ListItem>
         <ListItem><ListItemText primary={`quality templates: ${qualityProcessTemplates}`} /></ListItem>
-        <ListItem><ListItemText primary={`quality attributes: ${qualityProcessStepAtrributes}`} /></ListItem>
+        <ListItem><ListItemText primary={`quality attributes: ${qualityProcessStepAttributes}`} /></ListItem>
 
       </List>
     </Box>
