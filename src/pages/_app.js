@@ -4,6 +4,9 @@ import CssBaseline from '@mui/material/CssBaseline';
 import AppContext from 'src/contexts/ArenaContext'; // If needed
 
 function App({ Component, pageProps }) {
+
+  console.log("_app.js:line8", "during server start up ")
+
   const theme = createTheme({
     palette: {
       mode: 'dark',

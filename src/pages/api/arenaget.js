@@ -12,6 +12,9 @@ export default async function handler(req, res) {
     return;
   }
 
+console.log("arenaget.js:arenaSessionId", arenaSessionId)
+
+
   // Construct the URL based on the endpoint name
   const remoteApiUrl = `https://api.arenasolutions.com/v1/${endpointName}`;
  

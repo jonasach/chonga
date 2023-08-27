@@ -1,79 +1,115 @@
-import React, { useContext } from 'react';
-import { List, ListItemButton, ListItemText, ListItemIcon } from '@mui/material';
+import React, { useContext, useState } from 'react';
+import { List, ListItemButton, ListItemText, ListItemIcon, Collapse, Divider, ListItem } from '@mui/material';
 import menuItems from '../../../config/arenaworlds.json';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import AppContext from 'src/contexts/ArenaContext';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
 
 function SideNav() {
-
   const {
-    setArenaListName,
-    setArenaListNumber,
-    setSelectedPage,
-    setArenaEndPoint,
-    setArenaSearchEndPoint,
     setShowListNav,
     setShowSideNav,
-    setShowMainBody, setExternalURL,
-    setOutputPage
-
+    setShowMainBody,
+    setSelectedItemWorld
   } = useContext(AppContext);
-  
+
   const theme = useTheme();
   const isMdOrLess = useMediaQuery(theme.breakpoints.down('md'));
-
   const textColor = theme.palette.text.primary;
+  const [open, setOpen] = useState({});
+
   const handleClick = (item) => {
-
-  console.log('sidenav.js.line 33:isMdOrLess',isMdOrLess )
-
-      setOutputPage(item.outputPage);
-
-    if (isMdOrLess) {
-      console.log('sidenav.js.line 36:isMdOrLess',isMdOrLess )
-      setShowSideNav(false); // Hide SideNav
-      setShowListNav(true);  // Show ListNav
+    setSelectedItemWorld(item);
+    if (item.children) {
+      setOpen(prevOpen => ({
+        ...prevOpen,
+        [item.id]: !prevOpen[item.id]
+      }));
+      return;
     }
 
-    if (item.selectedPage !== 'externalLink') {
+    switch (item.outputPage) {
+      case 'FormOutput':
+        if (isMdOrLess) {
+          setShowSideNav(false);
+          setShowListNav(true);
+          setShowMainBody(false);
+        } else {
+          setShowSideNav(true);
+          setShowListNav(true);
+          setShowMainBody(true);
+        }
+        break;
 
+      case 'FileOutput':
+        setShowSideNav(true);
+        setShowListNav(true);
+        setShowMainBody(true);
+        break;
 
-      setSelectedPage(item.selectedPage);
-      setArenaEndPoint(item.arenaEndPoint);
-      setArenaSearchEndPoint(item.arenaSearchEndPoint);
-      setArenaListName(item.arenaListName);
-      setArenaListNumber(item.arenaListNumber);
-    } else {
-      setShowSideNav(true); // Hide SideNav
-      setShowListNav(false); // Hide ListNav
-      setShowMainBody(true); // Show MainBody
+      case 'UrlOutput':
+        break;
 
-      setExternalURL(item.arenaEndPoint)
-      setSelectedPage(item.selectedPage);
-      setArenaEndPoint(item.arenaEndPoint);
+      case 'CalendarOutput':
+        break;
+
+      case 'RawOutput':
+        if (isMdOrLess) {
+          setShowSideNav(false);
+          setShowListNav(true);
+          setShowMainBody(false);
+        } else {
+          setShowSideNav(true);
+          setShowListNav(true);
+          setShowMainBody(true);
+        }
+        break;
+
+      default:
+        console.warn(`Unknown outputPage value: ${item.outputPage}`);
+        break;
     }
+
   };
 
-  return (
+  const renderMenuItems = (items, parentId = null) => {
+    return items
+      .filter(item => item.parentId === parentId)
+      .map((menuItem) => {
+        const children = items.filter(item => item.parentId === menuItem.id);
+        return (
+          <React.Fragment key={menuItem.id}>
+            <ListItem disablePadding>
+              <ListItemButton onClick={() => handleClick(menuItem)} style={{ color: textColor, paddingLeft: menuItem.parentId ? 32 : 16 }}>
+                {menuItem.icon && <ListItemIcon>
+                  {React.createElement(require('react-icons/fc')[menuItem.icon], { size: 32 })}
+                </ListItemIcon>}
+                <ListItemText primary={menuItem.label} style={{ color: textColor }} />
+                {children.length > 0 && (open[menuItem.id] ? <ExpandLess /> : <ExpandMore />)}
+              </ListItemButton>
+            </ListItem>
+            <Divider /> {/* Add Divider here */}
+            {children.length > 0 && <Collapse in={open[menuItem.id]} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                {renderMenuItems(items, menuItem.id)}
+              </List>
+            </Collapse>}
+          </React.Fragment>
+        );
+      });
+  };
+  
+  
+  
+return (
     <List>
-      {menuItems.map((item, index) => (
-        <React.Fragment key={item.label}>
-          <ListItem disablePadding>
-            <ListItemButton onClick={() => handleClick(item)} style={{ color: textColor }}>
-              <ListItemIcon>
-                {React.createElement(require('react-icons/fc')[item.icon], { size: 32 })}
-              </ListItemIcon>
-              <ListItemText primary={item.label} style={{ color: textColor }} />
-            </ListItemButton>
-          </ListItem>
-          {index !== menuItems.length - 1 && <Divider />}
-        </React.Fragment>
-      ))}
+      {renderMenuItems(menuItems)}
+      {menuItems.length > 0 && <Divider />}
     </List>
   );
+
 }
+
 export default SideNav;

@@ -14,6 +14,12 @@
       { "name": "name", "label": "Name", "editable": false, "multiline":false },
       { "name": "guid", "label": "guid", "editable": false, "multiline":false },
       { "name": "description", "label": "Description", "editable": true, "multiline":true }
+    ],
+    "settings/qualityprocesses/templates": [
+      { "name": "number", "label": "Number", "editable": false, "multiline":false },
+      { "name": "name", "label": "Name", "editable": false, "multiline":false },
+      { "name": "guid", "label": "guid", "editable": false, "multiline":false },
+      { "name": "description", "label": "Description", "editable": true, "multiline":true }
     ]
   }
    

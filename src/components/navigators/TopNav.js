@@ -1,14 +1,11 @@
   import React, { useContext } from 'react';
   import Toolbar from '@mui/material/Toolbar';
-  import IconButton from '@mui/material/IconButton';
-  import MenuIcon from '@mui/icons-material/Menu';
   import ListItem from '@mui/material/ListItem';
   import FormControlLabel from '@mui/material/FormControlLabel';
   import Switch from '@mui/material/Switch';
   import Avatar from '@mui/material/Avatar';
   import Button from '@mui/material/Button';
-  
-
+  import SettingsIcon from '@mui/icons-material/Settings';
   import useMediaQuery from '@mui/material/useMediaQuery';
   import { useTheme } from '@mui/material/styles';
   import AppContext from 'src/contexts/ArenaContext';
@@ -20,7 +17,7 @@
       setArenaSessionId, 
       setShowSideNav,
       setShowMainBody,
-      setShowListNav
+      setShowListNav,
     
     } = useContext(
       AppContext
@@ -56,30 +53,6 @@
       <Avatar alt="Joe Erickson" src="/assets/images/avatar/1.jpg" />
 
 
-          <IconButton
-          size="large"
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          sx={{ mr: 2 }}
-        >
-        <MenuIcon />
-        </IconButton>
-        
-        {/* Switch to control visibility of settings */}
-        <ListItem>
-          <FormControlLabel
-            control={
-              <Switch
-                checked={showSettingsNav}
-                onChange={() => setShowSettingsNav(!showSettingsNav)}
-              />
-            }
-            label="Settings"
-          />
-        </ListItem>
-    
-
         {isMdOrLess && (
         <Button
             variant="outlined"
@@ -90,6 +63,22 @@
           Home
         </Button>
       )}
+
+<ListItem>
+  <FormControlLabel
+    control={
+      <Switch
+        checked={showSettingsNav}
+        onChange={() => setShowSettingsNav(!showSettingsNav)}
+      />
+    }
+    label={<>
+      <SettingsIcon />
+      {!isMdOrLess && "Settings"}
+    </>}
+  />
+</ListItem>
+
 
 
         {/* Logout button */}

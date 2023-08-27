@@ -24,6 +24,8 @@ export default async function handler(req, res) {
   const remoteApiUrl = `https://api.arenasolutions.com/v1/files/${guid}/content`;
 
   try {
+    console.log('arenafilecontent:line27:remoteApiUrl', remoteApiUrl)
+
     const remoteApiResponse = await axios.get(remoteApiUrl, {
       headers: {
         'arena_session_id': arenaSessionId,

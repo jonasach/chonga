@@ -4,7 +4,7 @@ import SideNav from 'src/components/navigators/SideNav';
 import ListNav from 'src/components/navigators/ListNav';
 import MainBody from 'src/components/navigators/MainBody';
 import Settings from 'src/components/navigators/Settings';
-
+import BottomNav from 'src/components/navigators/BottomNav';  // Import BottomNav
 
 import AppBar from '@mui/material/AppBar';
 import Divider from '@mui/material/Divider';
@@ -18,17 +18,20 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import AppContext from 'src/contexts/ArenaContext';
 
-import useArenaQualityTemplates from 'src/hooks/useArenaQualityTemplates';
-
-
-
 function MainLayout() {
 
   const theme = useTheme();
   const isMdOrLess = useMediaQuery(theme.breakpoints.down('md'));
+
+
   const { showSideNav, setShowSideNav  } = useContext(AppContext);
   const { showListNav, setShowListNav } = useContext(AppContext);
   const { showMainBody, setShowMainBody  } = useContext(AppContext);
+
+  const {
+    arenaSessionId
+  } = useContext(AppContext);
+
   
   useEffect(() => {
     if (isMdOrLess) {
@@ -42,9 +45,8 @@ function MainLayout() {
     }
   }, [isMdOrLess,setShowSideNav,setShowMainBody,setShowListNav]);
 
- useArenaQualityTemplates(); // This will run the logic to fetch and set the data
-  
-   return (
+
+  return (
 
   <Grid container >
 
@@ -64,23 +66,34 @@ function MainLayout() {
         <Divider orientation="vertical" />
   
     
-          {!isMdOrLess || (isMdOrLess && showListNav) ? (
-            <Grid item xs={isMdOrLess ? 12 : 1} md={2}>
-              <Toolbar />
-              <div><ListNav /></div>
-            </Grid>
-          ) : null}
+        {!isMdOrLess || (isMdOrLess && showListNav) ? (
+            <Grid item xs={isMdOrLess ? 12 : 1} md={2} style={{ display: showListNav ? 'block' : 'none' }}>
+            <Toolbar />
+            <div><ListNav /></div>
+          </Grid>
+        ) : null}
 
         <Divider orientation="vertical" />
 
         {!isMdOrLess || (isMdOrLess && showMainBody) ? (
-            <Grid item xs={isMdOrLess ? 12 : 1} md={7} style={{ height: '100%' }}>
-                < Box sx={{ maxHeight: 'calc(100vh - 0px)', overflowY: 'auto' } }>
-                  <Toolbar />
-                  <MainBody />
-                </Box>
-            </Grid>
-          ) : null}
+            <Grid item xs={12} md={
+              showSideNav && showListNav ? 7 :
+              (!showSideNav && showListNav) || (showSideNav && !showListNav) ? 9 :
+              11
+            } style={{ height: '100%' }}>
+              <Box sx={{ maxHeight: 'calc(100vh - 0px)', overflowY: 'auto' }}>
+                <Toolbar />
+                <MainBody />
+              </Box>
+
+
+            {/* Render BottomNav if isMdOrLess is true */}
+            {isMdOrLess && <BottomNav />}
+
+
+        </Grid>
+      ) : null}
+
       
           <Settings />
 

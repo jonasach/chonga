@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import MainLayout from 'src/layouts/LandingPage/layout';
 import { useMediaQuery } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';import AppContext from 'src/contexts/ArenaContext'; // If needed
-//import useArenaQualityTemplates from 'src/hooks/useArenaQualityTemplates';
+import CssBaseline from '@mui/material/CssBaseline';
+import AppContext from 'src/contexts/ArenaContext';
+import axios from 'axios';
 
 
 function Home() {
@@ -24,46 +25,59 @@ function Home() {
   const [showMainBody, setShowMainBody] = useState(false);
   const [showSettingsNav, setShowSettingsNav] = useState(false);
 
-  const [populateSideNav, setPopulateSideNav] = useState(true);
-  const [populateListNav, setPopulateListNav] = useState(false);
-  const [populateMainBody, setPopulateMainBody] = useState(false);
-
   const [selectedItem, setSelectedItem] = useState("default");
-  const [selectedPage, setSelectedPage] = useState("default");
-  const [arenaEndPoint, setArenaEndPoint] = useState("default");
-  const [arenaSearchEndPoint, setArenaSearchEndPoint] = useState("default");
 
-  const [arenaListName, setArenaListName] = useState("default");
-  const [arenaListNumber, setArenaListNumber] = useState("default");
   const [arenaSessionId, setArenaSessionId] = useState("default");
 
   const [externalURL, setExternalURL] = useState("default");
   const [searchParams, setSearchParams] = useState("default");
-  const [outputPage, setOutputPage] = useState("default");
 
-  const [qualityTemplates, setQualityTemplates] = useState("default");
+  const [outputPage, setOutputPage] = useState("default");
+  const [outputPage2, setOutputPage2] = useState("default");
+
+  const [qualityProcessTemplates, setQualityProcessTemplates] = useState("default");
+  const [qualityProcessSummmaryAttributes, setQualityProcessSummmaryAttributes] = useState("default");
+  const [qualityProcessStepAttributes, setQualityProcessStepAttributes] = useState("default");
+
+  const [itemCategories, setItemCategories] = useState("default");
 
   const [selectedGUID, setSelectedGUID] = useState(null);
-
+  const [selectedItemWorld, setSelectedItemWorld] = useState(null);
 
   useEffect(() => {
     const storedSessionId = document.cookie.split('; ').reduce((acc, cookie) => {
-      console.log('home.js.Stored session ID:', '10');
       const [name, value] = cookie.split('=');
       acc[name] = value;
       return acc;
-      
     }, {}).arenaSessionId;
-    setArenaSessionId(storedSessionId);  
-    if (storedSessionId) {
-      setArenaSessionId(storedSessionId);
-    }
+    setArenaSessionId(storedSessionId);
   }, []);
-
 
   useEffect(() => {
-    // Your existing useEffect code for arenaSessionId
-  }, []);
+    if (arenaSessionId === 'default') return;
+      const fetchData = async (endpoint, setStateFunction) => {
+      try {
+        const response = await axios.get(`/api/arenaget?endpoint=${endpoint}`, {
+          headers: { 'arena-session-id': arenaSessionId },
+        });
+
+       setStateFunction(response.data);
+    
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+  
+    fetchData("settings/qualityprocesses/steps/attributes",setQualityProcessStepAttributes)
+    fetchData("settings/qualityprocesses/attributes",setQualityProcessSummmaryAttributes)
+    fetchData("settings/qualityprocesses/templates",setQualityProcessTemplates)
+    fetchData("settings/items/categories",setItemCategories)
+
+
+  }, [arenaSessionId] );
+  
+  // ...
+  
 
   return (
     <ThemeProvider theme={theme}>
@@ -74,28 +88,22 @@ function Home() {
           showListNav, setShowListNav,
           showMainBody, setShowMainBody,
           showSettingsNav, setShowSettingsNav,
-          populateSideNav, setPopulateSideNav,
-          populateListNav, setPopulateListNav,
-          populateMainBody, setPopulateMainBody,
           selectedItem, setSelectedItem,
-          selectedPage, setSelectedPage,
-          arenaEndPoint, setArenaEndPoint,
-          arenaSearchEndPoint, setArenaSearchEndPoint,
-          arenaListName, setArenaListName,
-          arenaListNumber, setArenaListNumber,
           arenaSessionId, setArenaSessionId,
           selectedGUID, setSelectedGUID,
           externalURL, setExternalURL,
           searchParams, setSearchParams,
           outputPage, setOutputPage,
-          qualityTemplates, setQualityTemplates,
+          itemCategories, setItemCategories,
+          outputPage2, setOutputPage2,
+          selectedItemWorld, setSelectedItemWorld,
           isXS, isSM, isMD, isLG, isXL,
+          qualityProcessTemplates, setQualityProcessTemplates,
+          qualityProcessSummmaryAttributes, setQualityProcessSummmaryAttributes,
+          qualityProcessStepAttributes, setQualityProcessStepAttributes
         }}
-      >
-        <MainLayout 
-          selectedPage={selectedPage} 
-          setSelectedPage={setSelectedPage}
-        >
+      >setQualityProcessSummmaryAttributes
+        <MainLayout>
           {/* Your content and components */}
         </MainLayout>
       </AppContext.Provider>

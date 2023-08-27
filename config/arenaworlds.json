@@ -1,69 +1,146 @@
 [
-  {
-      "label": "Item",
-      "icon": "FcTreeStructure",
-      "selectedPage": "arenalist",
-      "arenaEndPoint": "items",
-      "arenaListName": "number",
-      "arenaListNumber": "name",
-      "outputPage":"FormOutput"
-  },
-  {
-      "label": "Files",
-      "icon": "FcDocument",
-      "selectedPage": "arenalist",
-      "arenaEndPoint": "files?format=pdf",
-      "arenaListName": "number",
-      "arenaListNumber": "title",
-      "outputPage":"FileOutput"
-  },
-  {
-      "label": "Changes",
-      "icon": "FcBiohazard",
-      "selectedPage": "arenalist",
-      "arenaEndPoint": "changes",
-      "arenaListName": "number",
-      "arenaListNumber": "title",
-      "outputPage":"FormOutput"
-  },
-  {
-      "label": "Quality",
-      "icon": "FcProcess",
-      "selectedPage": "arenalist",
-      "arenaSearchEndPoint": "qualityprocesses?template.guid=HZJ27VMR84NJ2L4FZGTM",
-      "arenaEndPoint": "qualityprocesses",
-      "arenaListName": "number",
-      "arenaListNumber": "name",
-      "outputPage":"FormOutput"
-  },
-  {
-      "label": "ThingWorx",
-      "icon": "FcBarChart",
-      "selectedPage": "externalLink",
-      "arenaEndPoint": "iframetester.com",
-      "arenaListName": "",
-      "arenaListNumber": "",
-      "outputPage":"UrlOutput"
-  },
-
-  {
-    "label": "Audit Calendar",
-    "icon": "FcPlanner",
-    "selectedPage": "arenalist",
-    "arenaEndPoint": "qualityprocesses?template.guid=HZJ27VMR84NJ2L4FZGTM",
-    "arenaListName": "",
-    "arenaListNumber": "",
-    "outputPage":"CalendarOutput"
-},
-
-{
-    "label": "Quality Templates",
-    "icon": "FcSurvey",
-    "selectedPage": "arenalist",
-    "arenaEndPoint": "",
-    "arenaListName": "",
-    "arenaListNumber": "",
-    "outputPage":"RawOutput"
-}
-
+    {
+        "id": "1",
+        "parentId": null,
+        "label": "Item",
+        "icon": "FcGenealogy",
+        "selectedPage": "arenalist",
+        "arenaEndPoint": "items",
+        "arenaListName": "number",
+        "arenaListNumber": "name",
+        "outputPage":"FormOutput"
+    },
+    {
+        "id": "2",
+        "parentId": null,
+        "label": "Files",
+        "icon": "FcDocument",
+        "selectedPage": "arenalist",
+        "arenaEndPoint": "files?format=pdf",
+        "arenaListName": "number",
+        "arenaListNumber": "title",
+        "outputPage":"FileOutput"
+    },
+    {
+        "id": "3",
+        "parentId": null,
+        "label": "Changes",
+        "icon": "FcBiohazard",
+        "selectedPage": "arenalist",
+        "arenaEndPoint": "changes",
+        "arenaListName": "number",
+        "arenaListNumber": "title",
+        "outputPage":"FormOutput"
+    },
+    {
+        "id": "4",
+        "parentId": null,
+        "label": "Quality",
+        "icon": "FcProcess",
+        "selectedPage": "arenalist",
+        "arenaSearchEndPoint": "qualityprocesses?template.guid=HZJ27VMR84NJ2L4FZGTM",
+        "arenaEndPoint": "qualityprocesses",
+        "arenaListName": "number",
+        "arenaListNumber": "name",
+        "outputPage":"FormOutput"
+    },
+    {
+        "id": "5",
+        "parentId": null,
+        "label": "ThingWorx",
+        "icon": "FcBarChart",
+        "selectedPage": "externalLink",
+        "arenaEndPoint": "iframetester.com",
+        "arenaListName": "",
+        "arenaListNumber": "",
+        "outputPage":"UrlOutput"
+    },
+    {
+        "id": "6",
+        "parentId": null,
+        "label": "Audit Calendar",
+        "icon": "FcPlanner",
+        "selectedPage": "arenalist",
+        "arenaEndPoint": "qualityprocesses?template.guid=HZJ27VMR84NJ2L4FZGTM",
+        "arenaListName": "",
+        "arenaListNumber": "",
+        "outputPage":"CalendarOutput"
+    },
+    {
+        "id": "70",
+        "parentId": null,
+        "label": "Settings",
+        "icon": "FcOrgUnit",
+        "children": ["71", "81"]
+    },
+    {
+        "id": "71",
+        "parentId": "70",
+        "label": "Quality Settings",
+        "icon": "FcProcess",
+        "children": ["72", "73", "74"]
+    },
+    {
+        "id": "72",
+        "parentId": "71",
+        "label": "Quality Templates",
+        "icon": "FcSurvey",
+        "selectedPage": "arenalist",
+        "arenaEndPoint": "settings/qualityprocesses/templates",
+        "arenaListName": "name",
+        "arenaListNumber": "guid",
+        "outputPage":"RawOutput",
+        "outputPage2":"QualityTemplates",
+        "preload":"true",
+        "useState":"setQualityProcessTemplates"
+    },
+    {
+        "id": "73",
+        "parentId": "71",
+        "label": "Quality Process Summary Attributes",
+        "icon": "FcSurvey",
+        "selectedPage": "arenalist",
+        "arenaEndPoint": "settings/qualityprocesses/attributes",
+        "arenaListName": "name",
+        "arenaListNumber": "apiName",
+        "outputPage":"RawOutput",
+        "outputPage2":"QualityTemplates",
+        "preload":"true",
+        "useState":"setQualityProcessSummmaryAtrributes"
+    },
+    {
+        "id": "74",
+        "parentId": "71",
+        "label": "Quality Process Step Templates",
+        "icon": "FcSurvey",
+        "selectedPage": "arenalist",
+        "arenaEndPoint": "settings/qualityprocesses/steps/attributes",
+        "arenaListName": "name",
+        "arenaListNumber": "apiName",
+        "outputPage":"RawOutput",
+        "outputPage2":"QualityTemplates",
+        "preload":"true",
+        "useState":"setQualityProcessTemplates"
+    },
+    {
+        "id": "81",
+        "parentId": "70",
+        "label": "Items Settings",
+        "icon":"FcGenealogy",
+        "children": ["82"]
+    },
+    {
+        "id": "82",
+        "parentId": "81",
+        "label": "Item Categories",
+        "icon": "FcSurvey",
+        "selectedPage": "arenalist",
+        "arenaEndPoint": "settings/items/categories",
+        "arenaListName": "name",
+        "arenaListNumber": "guid",
+        "outputPage":"RawOutput",
+        "outputPage2":"ItemCategories",
+        "preload":"true",
+        "useState":"setItemCategories"
+    }
 ]

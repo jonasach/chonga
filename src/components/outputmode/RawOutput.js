@@ -1,27 +1,25 @@
-
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import AppContext from 'src/contexts/ArenaContext';
 
-
 export default function RawOutput() {
+  const {selectedItemWorld, selectedGUID } = useContext(AppContext);
+  const [Component, setComponent] = useState(null);
 
-  const {
-    externalURL
-  } = useContext(AppContext);
+  const outputPage2 = selectedItemWorld?.outputPage2;
 
-  // if we are getting a file
   useEffect(() => {
-    // Your useEffect logic here (if needed)
-    // ...
-  }, [externalURL]);
+    async function loadComponent() {
+      if (outputPage2 && selectedGUID) {
+        const { default: dynamicComponent } = await import(`src/components/admin/${outputPage2}`);
+        setComponent(() => dynamicComponent);
+      }
+    }
+    loadComponent();
+  }, [selectedGUID,outputPage2]);
+  
 
-  return (
-    <iframe 
-      frameborder="0" 
-      src={externalURL} 
-      width="100%" 
-      height="1500" 
-      allowTransparency="false">
-    </iframe>
-  );
+  if (!Component) return null;
+
+  return <Component />;
 }
+  

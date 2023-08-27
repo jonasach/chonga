@@ -13,26 +13,20 @@ import Grid from '@mui/material/Grid';
 
 import TextField from '@mui/material/TextField'; // <-- Import the TextField component
 
-
-
 function Settings() {
+
+
   const {
-    selectedGUID, arenaEndPoint,
-    arenaSearchEndPoint,
-    selectedPage, selectedItem,
-    arenaListName, arenaListNumber,
+    selectedGUID,selectedItem,
     arenaSessionId, setArenaSessionId,
     showSideNav, setShowSideNav,
     showListNav, setShowListNav,
     showMainBody, setShowMainBody,
-    populateSideNav, setPopulateSideNav,
-    populateListNav, setPopulateListNav,
-    populateMainBody, setPopulateMainBody,
     showSettingsNav, setShowSettingsNav, 
     externalURL, setExternalURL, 
     searchParams, setSearchParams,
-    outputPage,
-    isXS, isSM, isMD, isLG, isXL
+    qualityProcessTemplates,
+    isXS, isSM, isMD, isLG, isXL,selectedItemWorld,qualityProcessStepAtrributes,
   } = useContext(AppContext);
 
   const [state, setState] = React.useState({ right: false });
@@ -83,37 +77,20 @@ function Settings() {
           />
         </ListItem>
         {/* Loading Controls */}
-        <ListItem>
-          <FormControlLabel
-            control={<Switch checked={populateSideNav} onChange={() => setPopulateSideNav(!populateSideNav)} />}
-            label="Populate Side Nav"
-          />
-        </ListItem>
-        <ListItem>
-          <FormControlLabel
-            control={<Switch checked={populateListNav} onChange={() => setPopulateListNav(!populateListNav)} />}
-            label="Populate List Nav"
-          />
-        </ListItem>
-        <ListItem>
-          <FormControlLabel
-            control={<Switch checked={populateMainBody} onChange={() => setPopulateMainBody(!populateMainBody)} />}
-            label="Populate Main Body"
-          />
-        </ListItem>
       </List>
       <Divider />
       <List>
         {/* Read-Only Fields */}
 
-        <ListItem><ListItemText primary={`Show Side Nav: ${showSideNav}`} /></ListItem>
         <ListItem><ListItemText primary={`Selected Item: ${selectedItem}`} /></ListItem>
-        <ListItem><ListItemText primary={`Selected Page: ${selectedPage}`} /></ListItem>
-        <ListItem><ListItemText primary={`Arena End Point: ${arenaEndPoint}`} /></ListItem>
-        <ListItem><ListItemText primary={`Arena Search End Point: ${arenaSearchEndPoint}`} /></ListItem>
-        <ListItem><ListItemText primary={`Arena List Name: ${arenaListName}`} /></ListItem>
-        <ListItem><ListItemText primary={`Arena List Number: ${arenaListNumber}`} /></ListItem>
 
+        <ListItem><ListItemText primary={`API End Point: ${selectedItemWorld?.outputPage}`} /></ListItem>
+        <ListItem><ListItemText primary={`Search End Point: ${selectedItemWorld?.outputPage2}`} /></ListItem>
+        <ListItem><ListItemText primary={`API End Point: ${selectedItemWorld?.arenaEndPoint}`} /></ListItem>
+        <ListItem><ListItemText primary={`Search End Point: ${selectedItemWorld?.arenaSearchEndPoint}`} /></ListItem>
+        <ListItem><ListItemText primary={`ListNav Name: ${selectedItemWorld?.arenaListName}`} /></ListItem>
+        <ListItem><ListItemText primary={`ListNav Number: ${selectedItemWorld?.arenaListNumber}`} /></ListItem>
+        
 
         <ListItem>
         <ListItemText primary="External URL:" />
@@ -149,14 +126,15 @@ function Settings() {
         />
         </ListItem>
             
-
-        <ListItem><ListItemText primary={`outputPage: ${outputPage}`} /></ListItem>
         <ListItem><ListItemText primary={`Selected GUID: ${selectedGUID}`} /></ListItem>
         <ListItem><ListItemText primary={`isXS: ${isXS}`} /></ListItem>
         <ListItem><ListItemText primary={`isSM: ${isSM}`} /></ListItem>
         <ListItem><ListItemText primary={`isMD: ${isMD}`} /></ListItem>
         <ListItem><ListItemText primary={`isLG: ${isLG}`} /></ListItem>
         <ListItem><ListItemText primary={`isXL: ${isXL}`} /></ListItem>
+        <ListItem><ListItemText primary={`quality templates: ${qualityProcessTemplates}`} /></ListItem>
+        <ListItem><ListItemText primary={`quality attributes: ${qualityProcessStepAtrributes}`} /></ListItem>
+
       </List>
     </Box>
   );
