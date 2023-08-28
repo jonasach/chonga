@@ -23,7 +23,7 @@ return (
     width="100%" 
     height="900"
     style={{
-      transform: 'scale(.9)',
+      transform: 'scale(1)',
       transformOrigin: '0 0',
     }}
   >
