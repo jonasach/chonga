@@ -1,7 +1,8 @@
 
 import React, { useEffect, useContext } from 'react';
 import AppContext from 'src/contexts/ArenaContext';
-
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 export default function UrlOutput() {
 
@@ -17,11 +18,11 @@ export default function UrlOutput() {
 
   return (
     <iframe 
-      frameborder="0" 
       src={externalURL} 
       width="100%" 
       height="1500" 
-      allowTransparency="false">
+
+      >
     </iframe>
   );
 }

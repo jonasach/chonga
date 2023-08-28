@@ -12,7 +12,7 @@ function SideNav() {
     setShowListNav,
     setShowSideNav,
     setShowMainBody,
-    setSelectedItemWorld
+    setSelectedItemWorld, setExternalURL
   } = useContext(AppContext);
 
   const theme = useTheme();
@@ -22,6 +22,8 @@ function SideNav() {
 
   const handleClick = (item) => {
     setSelectedItemWorld(item);
+
+
     if (item.children) {
       setOpen(prevOpen => ({
         ...prevOpen,
@@ -29,6 +31,8 @@ function SideNav() {
       }));
       return;
     }
+    
+    setExternalURL(item.externalURL)
 
     switch (item.outputPage) {
       case 'FormOutput':
