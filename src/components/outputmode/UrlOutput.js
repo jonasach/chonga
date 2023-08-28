@@ -23,11 +23,11 @@ return (
     width="100%" 
     height="1200"
     style={{
-      transform: 'scale(1.5)',
+      transform: 'scale(.8)',
       transformOrigin: '0 0',
     }}
   >
   </iframe>
 );
   }
-  
+
