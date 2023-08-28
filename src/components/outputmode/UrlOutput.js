@@ -16,13 +16,18 @@ export default function UrlOutput() {
     // ...
   }, [externalURL]);
 
-  return (
-    <iframe 
-      src={externalURL} 
-      width="100%" 
-      height="1200" 
 
-      >
-    </iframe>
-  );
-}
+return (
+  <iframe 
+    src={externalURL} 
+    width="100%" 
+    height="1200"
+    style={{
+      transform: 'scale(1.5)',
+      transformOrigin: '0 0',
+    }}
+  >
+  </iframe>
+);
+  }
+  
