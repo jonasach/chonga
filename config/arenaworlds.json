@@ -50,7 +50,7 @@
         "label": "ThingWorx",
         "icon": "FcBarChart",
         "selectedPage": "externalLink",
-        "arenaEndPoint": "iframetester.com",
+        "arenaEndPoint": "https://pp-23070619160j.portal.ptc.io/Thingworx/Runtime/index.html#mashup=PTC.FTLDP.ProblemReporting.SystemicProblem_MU&appKey=59c94d5e-85f0-4a2e-9ad5-9534589ab93d&x-thingworx-session=true",
         "arenaListName": "",
         "arenaListNumber": "",
         "outputPage":"UrlOutput"

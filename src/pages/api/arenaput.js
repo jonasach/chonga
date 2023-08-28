@@ -1,30 +1,43 @@
 export default async function handler(req, res) {
-    if (req.method !== 'POST') {
-      res.status(405).json({ message: 'Method not allowed' });
-      return;
-    }
-  
-    const arenaSessionId = req.headers['arena-session-id']; 
-    const endpointName = req.query.endpoint; 
-  
-    if (!arenaSessionId || !endpointName) {
-      res.status(400).json({ message: 'arena2.get:Session ID and endpoint name are required' });
-      return;
-    }
-  
-    // Construct the URL based on the endpoint name
-    const remoteApiUrl = `https://api.arenasolutions.com/v1/${endpointName}`;
-   
-  console.log('arenaget.remoteApiUrl', remoteApiUrl)
-    // Call the remote API endpoint, passing the session ID as a header
+  if (req.method !== 'PUT') {
+    res.status(405).json({ message: 'Method not allowed' });
+    return;
+  }
+
+  const arenaSessionId = req.headers['arena-session-id'];
+  const endpointName = req.query.endpoint;
+
+  console.log("arenaput.js:endpointName", endpointName)
+
+  if (!arenaSessionId || !endpointName) {
+    res.status(400).json({ message: 'Session ID and endpoint name are required' });
+    return;
+  }
+
+  // Get the request body with updated form data
+  const updatedFormData = req.body; // Make sure this matches the structure of your form data
+
+  // Construct the URL based on the endpoint name
+  const remoteApiUrl = `https://api.arenasolutions.com/v1/${endpointName}`;
+
+console.log("arenaput.js:remoteApiUrl", remoteApiUrl)
+
+
+  try {
+    // Call the remote API endpoint with the updated data
     const remoteApiResponse = await fetch(remoteApiUrl, {
-      method: 'GET', // Assuming it's a GET request
+      method: 'PUT',
       headers: {
-        'arena_session_id': arenaSessionId, // Passing the session ID as a header
+        'Content-Type': 'application/json',
+        'arena_session_id': arenaSessionId,
       },
+      body: JSON.stringify(updatedFormData), // Send the updated form data as the request body
     });
-  
+
     const data = await remoteApiResponse.json();
     res.status(200).json(data);
+  } catch (error) {
+    console.error('Error updating form data:', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
-  
+}

@@ -4,7 +4,7 @@ import axios from 'axios';
 import AppContext from 'src/contexts/ArenaContext';
 import Grid from '@mui/material/Grid';
 import { AppBar, Toolbar } from '@mui/material';
-
+import Button from '@mui/material/Button';
 import { useTheme } from '@mui/material/styles';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -30,9 +30,54 @@ export default function FormOutput() {
     setIsEditMode((prev) => !prev);
   };
 
+  const [formState, setFormState] = useState({});
+
+  const handleInputChange = (event, apiName) => {
+    const newValue = event.target.value;
+    setFormState((prevFormState) => ({
+      ...prevFormState,
+      [apiName]: newValue,
+    }));
+  };
+  
+
+  const handleFormSubmit = async () => {
+    try {
+      const requestBody = {
+        attributes: Object.entries(formState).map(([apiName, value]) => ({
+          guid: apiName, // Use the apiName as the guid
+          value: value || '', // Use the user input value or an empty string
+        })),
+      };
+  
+      console.log('Form data to be submitted:', requestBody);
+      const endpoint = `/api/arenaput?endpoint=qualityprocesses/${selectedGUID}/steps/7P9SXLCHYUD9SBU4UAC8`;
+    
+  
+      const response = await axios.put(
+        endpoint,
+        requestBody,
+        {
+          headers: {
+            'arena-session-id': arenaSessionId,
+          },
+        }
+      );
+  
+      // Handle success response if needed
+      console.log('Form data updated:', response.data);
+    } catch (error) {
+      // Handle error if needed
+      console.error('Error updating form data:', error);
+    }
+  };
+  
+  
+
+
   const handleValueChange = (event, attribute) => {
     if (!isEditMode) return;
-  
+    
     const newValue = event.target.value;
     setSteps(prevSteps => {
       const newResults = prevSteps.results.map(result => {
@@ -188,11 +233,16 @@ export default function FormOutput() {
                   </Grid>
                 </AccordionSummary>
                 <AccordionDetails>
-                  <AttributesRenderer
-                    attributes={step.attributes || []}
-                    templateAttributes={templateStep?.attributes || []}
-                    isEditMode={isEditMode}
-                  />
+  
+                <AttributesRenderer
+                  attributes={step.attributes || []}
+                  templateAttributes={templateStep?.attributes || []}
+                  isEditMode={isEditMode}
+                  additionalAttributes={qualityProcessStepAttributes.results || []}
+                  formState={formState}           // Pass the formState here
+                  handleInputChange={handleInputChange} // Pass the handleInputChange function here
+/>
+
                 </AccordionDetails>
               </Accordion>
             );
@@ -200,7 +250,6 @@ export default function FormOutput() {
         </Box>
       );
       
-  
 
       const renderResults = () => {
         if (!steps || !steps.results) {
@@ -218,15 +267,29 @@ export default function FormOutput() {
 
   return (
     <div>
-      <AppBar position="static">
-        <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Edit Mode
-          </Typography>
-   
-          <Switch checked={isEditMode} onChange={handleToggleEditMode} />
+     <AppBar position="static">
+        <Toolbar style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <Typography variant="h6" component="div" sx={{ marginRight: '16px' }}>
+              Edit Mode
+            </Typography>
+            <Switch checked={isEditMode} onChange={handleToggleEditMode} />
+          </div>
+          {isEditMode && (
+  <Button
+    variant="contained"
+    color="primary"
+    style={{ backgroundColor: 'green', color: 'white' }}
+    onClick={() => handleFormSubmit()} // Call the function by adding parentheses
+
+  >
+    Submit
+  </Button>
+)}
         </Toolbar>
       </AppBar>
+
       {header && (
         <Box>
           {renderHeader()}
@@ -235,6 +298,7 @@ export default function FormOutput() {
       <Box>
         {renderResults(isEditMode)}
       </Box>
+
     </div>
   );
 }

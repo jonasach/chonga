@@ -11,6 +11,7 @@ function ListNav() {
 
   const theme = useTheme();
   const isMdOrLess = useMediaQuery(theme.breakpoints.down('md'));
+  const [selectedItemGuid, setSelectedItemGuid] = useState(null);
 
   const {
     setSelectedGUID,

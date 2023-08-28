@@ -2,7 +2,8 @@ import React from 'react';
 import { TextField, Select, MenuItem, Box } from '@mui/material';
 import { DatePicker } from '@mui/lab';
 
-export const renderTextField = (attribute, index, isEditMode) => (
+
+export const renderTextField = (attribute, index, isEditMode,handleInputChange) => (
   <TextField
     key={index}
     label={attribute.name || 'N/A'}
@@ -15,10 +16,33 @@ export const renderTextField = (attribute, index, isEditMode) => (
     InputLabelProps={{
       shrink: true,
     }}
+    onChange={(event) => handleInputChange(event, attribute.apiName)} // Call handleInputChange when the value changes
+ 
+    inputProps={{ 'data-apiName': attribute.apiName }} // Add the apiName attribute to the input
   />
 );
 
-export const renderSingleTextField = (attribute, index, isEditMode) => {
+  export const renderSingleTextField = (attribute, index, isEditMode,handleInputChange) => {
+    return (
+      <TextField
+        key={index}
+        label={attribute.name || 'N/A'}
+        defaultValue={attribute.value || 'N/A'}
+        variant="outlined"
+        fullWidth
+        rowax={4}
+        margin="normal"
+        disabled={!isEditMode}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        onChange={(event) => handleInputChange(event, attribute.apiName)} // Call handleInputChange when the value changes
+ 
+        inputProps={{ 'data-apiName': attribute.apiName }} // Add the apiName attribute to the input
+      />
+    );
+  };
+export const renderMultiTextField = (attribute, index, isEditMode,handleInputChange) => {
   return (
     <TextField
       key={index}
@@ -27,35 +51,25 @@ export const renderSingleTextField = (attribute, index, isEditMode) => {
       variant="outlined"
       fullWidth
       rowax={4}
-      margin="normal"
-      disabled={!isEditMode}
-      InputLabelProps={{
-        shrink: true,
-      }}
-    />
-  );
-};
-
-export const renderMultiTextField = (attribute, index, isEditMode) => {
-  return (
-    <TextField
-      key={index}
-      label={attribute.name || 'N/A'}
-      defaultValue={attribute.value || 'N/A'}
-      variant="outlined"
-      fullWidth
-      rowax={4}
-      margin="normal"
-      disabled={!isEditMode}
       multiline
+      margin="normal"
+      disabled={!isEditMode}
       InputLabelProps={{
         shrink: true,
       }}
+      //onChange={(event) => handleInputChange(event, attribute.apiName)} // Call handleInputChange when the value changes
+      onBlur={(event) => handleInputChange(event, attribute.apiName)} 
+
+      inputProps={{ 'data-apiName': attribute.apiName }} // Add the apiName attribute to the input
     />
   );
 };
 
-export const renderDropDown = (attribute, index, isEditMode) => (
+
+
+// Similarly, add the apiName attribute to the other render functions
+
+export const renderDropDown = (attribute, index, isEditMode,handleInputChange) => (
   <Select
     key={index}
     label={attribute.name || 'N/A'}
@@ -64,42 +78,55 @@ export const renderDropDown = (attribute, index, isEditMode) => (
     variant="outlined"
     margin="normal"
     disabled={!isEditMode}
+    onChange={(event) => handleInputChange(event, attribute.apiName)} // Call handleInputChange when the value changes
+ 
   >
     <MenuItem value={attribute.value || 'N/A'}>{attribute.value || 'N/A'}</MenuItem>
   </Select>
 );
 
-export const renderDatePicker = (attribute, index, isEditMode) => (
+export const renderDatePicker = (attribute, index, isEditMode,handleInputChange) => (
   <DatePicker
     key={index}
     label={attribute.name || 'N/A'}
     value={attribute.value ? new Date(attribute.value) : null}
     format="yyyy/MM/dd"
     readOnly={!isEditMode}
-    renderInput={(params) => <TextField {...params} variant="outlined" fullWidth margin="normal" />} s
+    renderInput={(params) => <TextField {...params} variant="outlined" fullWidth margin="normal" />}
+    inputProps={{ 'data-apiName': attribute.apiName }} // Add the apiName attribute to the input
+    onChange={(event) => handleInputChange(event, attribute.apiName)} // Call handleInputChange when the value changes
+ 
   />
 );
-
-export const AttributesRenderer = ({ attributes, templateAttributes, isEditMode }) => (
+export const AttributesRenderer = ({ attributes, templateAttributes, isEditMode, additionalAttributes, formState, handleInputChange }) => (
   <Box>
     {templateAttributes.map((templateAttribute, index) => {
       // Find the corresponding attribute in step.attributes using apiName
       const stepAttribute = attributes.find(attr => attr.apiName === templateAttribute.apiName);
 
-      console.log("formrender.js:line 89:templateAttribute", templateAttributes)
-      console.log("formrender.js:line 90:stepAttribute", attributes)
+      // Find the corresponding attribute in qualityProcessStepAttributes using apiName
+      const additionalAttribute = additionalAttributes.find(attr => attr.apiName === templateAttribute.apiName);
 
-      switch (templateAttribute.fieldType) {
+      // Find the fieldType for the additional attribute
+      const fieldType = additionalAttribute ? additionalAttribute.fieldType : null;
+
+      const fieldValue = formState[templateAttribute.apiName] || ''; // Get the value from formState
+
+      console.log("fieldType", fieldType)
+
+      switch (fieldType) {
         case 'FIXED_DROP_DOWN':
-          return renderDropDown(stepAttribute || templateAttribute, index, isEditMode);
+          return renderDropDown(stepAttribute || templateAttribute, index, isEditMode, handleInputChange);
         case 'DATE':
-          return renderDatePicker(stepAttribute || templateAttribute, index, isEditMode);
+          return renderDatePicker(stepAttribute || templateAttribute, index, isEditMode, handleInputChange);
         case 'SINGLE_LINE_TEXT':
-          return renderSingleTextField(stepAttribute || templateAttribute, index, isEditMode);
+          return renderSingleTextField(stepAttribute || templateAttribute, index, isEditMode, handleInputChange);
+        // Add other cases for field types
         case 'MULTI_LINE_TEXT':
-          return renderMultiTextField(stepAttribute || templateAttribute, index, isEditMode);
+          return renderMultiTextField(stepAttribute || templateAttribute, index, isEditMode, handleInputChange);
+        // Add other cases for field types
         default:
-          return renderTextField(stepAttribute || templateAttribute, index, isEditMode);
+          return renderTextField(stepAttribute || templateAttribute, index, isEditMode, handleInputChange);
       }
     })}
   </Box>
