@@ -21,9 +21,9 @@ return (
   <iframe 
     src={externalURL} 
     width="100%" 
-    height="1200"
+    height="900"
     style={{
-      transform: 'scale(.8)',
+      transform: 'scale(.9)',
       transformOrigin: '0 0',
     }}
   >
