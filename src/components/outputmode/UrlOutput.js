@@ -19,8 +19,8 @@ export default function UrlOutput() {
   return (
     <iframe 
       src={externalURL} 
-      width="100%" 
-      height="1500" 
+      width="85%" 
+      height="1200" 
 
       >
     </iframe>
