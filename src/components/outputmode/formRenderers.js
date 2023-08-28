@@ -80,20 +80,26 @@ export const renderDatePicker = (attribute, index, isEditMode) => (
   />
 );
 
-export const AttributesRenderer = ({ attributes, isEditMode }) => (
+export const AttributesRenderer = ({ attributes, templateAttributes, isEditMode }) => (
   <Box>
-    {attributes.map((attribute, index) => {
-      switch (attribute.fieldType) {
+    {templateAttributes.map((templateAttribute, index) => {
+      // Find the corresponding attribute in step.attributes using apiName
+      const stepAttribute = attributes.find(attr => attr.apiName === templateAttribute.apiName);
+
+      console.log("formrender.js:line 89:templateAttribute", templateAttributes)
+      console.log("formrender.js:line 90:stepAttribute", attributes)
+
+      switch (templateAttribute.fieldType) {
         case 'FIXED_DROP_DOWN':
-          return renderDropDown(attribute, index, isEditMode);
+          return renderDropDown(stepAttribute || templateAttribute, index, isEditMode);
         case 'DATE':
-          return renderDatePicker(attribute, index, isEditMode);
+          return renderDatePicker(stepAttribute || templateAttribute, index, isEditMode);
         case 'SINGLE_LINE_TEXT':
-          return renderSingleTextField(attribute, index, isEditMode);
+          return renderSingleTextField(stepAttribute || templateAttribute, index, isEditMode);
         case 'MULTI_LINE_TEXT':
-          return renderMultiTextField(attribute, index, isEditMode);
+          return renderMultiTextField(stepAttribute || templateAttribute, index, isEditMode);
         default:
-          return renderTextField(attribute, index, isEditMode);
+          return renderTextField(stepAttribute || templateAttribute, index, isEditMode);
       }
     })}
   </Box>
