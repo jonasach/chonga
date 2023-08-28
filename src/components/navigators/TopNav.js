@@ -14,7 +14,6 @@
     const { 
       showSettingsNav, 
       setShowSettingsNav, 
-      setArenaSessionId, 
       setShowSideNav,
       setShowMainBody,
       setShowListNav,
@@ -35,19 +34,11 @@
 
     // Function to handle logout
     const handleLogout = () => {
-      // Clear session-related data and redirect to login
-      setArenaSessionId(''); // Clear session ID
-      sessionStorage.removeItem('arenaSessionId'); // Clear session ID from sessionStorage
-      // You can also clear any other user-related data if necessary
-
-      // Redirect to the login page
       window.location.href = '/'; // Change this URL to your login page's URL
     }; 
 
     return (  
       
-
-
       <Toolbar>
 
       <Avatar alt="Joe Erickson" src="/assets/images/avatar/1.jpg" />

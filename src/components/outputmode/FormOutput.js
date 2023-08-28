@@ -14,7 +14,7 @@ import Avatar from '@mui/material/Avatar';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-import { renderAttributes } from './formRenderers';
+import { AttributesRenderer } from './formRenderers';
 
 export default function FormOutput() {
   const { selectedItemWorld, selectedGUID, arenaSessionId, qualityProcessTemplates, qualityProcessStepAttributes } = useContext(AppContext);
@@ -64,7 +64,9 @@ export default function FormOutput() {
   
           setTemplateData(exactTemplate);
   
-          const stepsResponse = await axios.get(`/api/arenagetGUID?endpoint=${arenaEndPoint}&guid=${selectedGUID}/steps`, {
+          console.log("formatoutout.js:line 67:response.exactTemplate", exactTemplate)
+
+          const stepsResponse = await axios.get(`/api/arenagetGUID?endpoint=${arenaEndPoint}&guid=${selectedGUID}/steps?includeEmptyAdditionalAttributes=true`, {
             headers: { 'arena-session-id': arenaSessionId },
           });
           setSteps(stepsResponse.data);
@@ -146,9 +148,12 @@ export default function FormOutput() {
   </Grid>
 </AccordionSummary>
 
-            <AccordionDetails>
-                {step.attributes && renderAttributes(step.attributes, isEditMode)}
-            </AccordionDetails>
+<AccordionDetails>
+
+  {step.attributes && <AttributesRenderer attributes={step.attributes} isEditMode={isEditMode} />
+}
+</AccordionDetails>
+
           </Accordion>
         );
       })}

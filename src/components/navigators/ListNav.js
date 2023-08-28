@@ -57,7 +57,7 @@ function ListNav() {
     } else {
       setData(null);
     }
-  }, [selectedItemWorld, showListNav, selectedSideNavValue, arenaSessionId]);
+  }, [selectedItemWorld, showListNav, selectedSideNavValue, ]);
   
 
   return (

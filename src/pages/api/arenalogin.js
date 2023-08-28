@@ -6,7 +6,6 @@ export default async function handler(req, res) {
 
   const { email, password, workspaceId } = req.body;
 
-
   const remoteApiResponse = await fetch('https://api.arenasolutions.com/v1/login', {
     method: 'POST',
     headers: {
@@ -15,7 +14,10 @@ export default async function handler(req, res) {
     body: JSON.stringify({ email, password, workspaceId }),
   });
 
+//  console.log("arenalogin.js:line 18:arenaSessionId:", JSON.stringify({ email, password, workspaceId }))
   const data = await remoteApiResponse.json();
+//  console.log("arenalogin.js:line 20:arenaSessionId:", remoteApiResponse)
+//  console.log("arenalogin.js:line 20:arenaSessionId:", remoteApiResponse.json())
 
   // Check if the status is 400 and handle the error response
   if (remoteApiResponse.status === 400) {
@@ -33,6 +35,7 @@ export default async function handler(req, res) {
     res.status(400).json(errorResponse);
     return;
   }
+
 
   res.status(200).json(data);
 }

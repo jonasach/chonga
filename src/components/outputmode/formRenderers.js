@@ -6,47 +6,54 @@ export const renderTextField = (attribute, index, isEditMode) => (
   <TextField
     key={index}
     label={attribute.name || 'N/A'}
-    value={attribute.value || 'N/A'}
+    defaultValue={attribute.value || 'N/A'}
     variant="outlined"
     fullWidth
     rowax={4}
     margin="normal"
-    InputProps={{ readOnly: !isEditMode }}
+    disabled={!isEditMode}
+    InputLabelProps={{
+      shrink: true,
+    }}
   />
 );
 
 export const renderSingleTextField = (attribute, index, isEditMode) => {
-  
-    return (
-      <TextField
-        key={index}
-        label={attribute.name || 'N/A'}
-        value={attribute.value || 'N/A'}
-        variant="outlined"
-        fullWidth
-        rowax={4}
-        margin="normal"
-        readOnly={!isEditMode}
+  return (
+    <TextField
+      key={index}
+      label={attribute.name || 'N/A'}
+      defaultValue={attribute.value || 'N/A'}
+      variant="outlined"
+      fullWidth
+      rowax={4}
+      margin="normal"
+      disabled={!isEditMode}
+      InputLabelProps={{
+        shrink: true,
+      }}
+    />
+  );
+};
 
-        
-      />
-    );
-  };
-  
-
-export const renderMultiTextField = (attribute, index, isEditMode) => (
-  <TextField
-    key={index}
-    label={attribute.name || 'N/A'}
-    value={attribute.value || 'N/A'}
-    variant="outlined"
-    fullWidth
-    rowax={4}
-    multiline
-    margin="normal"
-    readOnly={!isEditMode}
-  />
-);
+export const renderMultiTextField = (attribute, index, isEditMode) => {
+  return (
+    <TextField
+      key={index}
+      label={attribute.name || 'N/A'}
+      defaultValue={attribute.value || 'N/A'}
+      variant="outlined"
+      fullWidth
+      rowax={4}
+      margin="normal"
+      disabled={!isEditMode}
+      multiline
+      InputLabelProps={{
+        shrink: true,
+      }}
+    />
+  );
+};
 
 export const renderDropDown = (attribute, index, isEditMode) => (
   <Select
@@ -69,11 +76,11 @@ export const renderDatePicker = (attribute, index, isEditMode) => (
     value={attribute.value ? new Date(attribute.value) : null}
     format="yyyy/MM/dd"
     readOnly={!isEditMode}
-    renderInput={(params) => <TextField {...params} variant="outlined" fullWidth margin="normal" />}
+    renderInput={(params) => <TextField {...params} variant="outlined" fullWidth margin="normal" />} s
   />
 );
 
-export const renderAttributes = (attributes, isEditMode) => (
+export const AttributesRenderer = ({ attributes, isEditMode }) => (
   <Box>
     {attributes.map((attribute, index) => {
       switch (attribute.fieldType) {

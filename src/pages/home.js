@@ -4,8 +4,8 @@ import { useMediaQuery } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import AppContext from 'src/contexts/ArenaContext';
-import menuItems from '../../config/arenaworlds.json';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
 
 function Home() {
@@ -14,6 +14,11 @@ function Home() {
       mode: 'dark',
     },
   });
+
+  console.log("home.js:line 19:remounting", "remounting")
+
+  const shouldRenderMainLayout = true; // Change this value as needed
+
 
   const isXS = useMediaQuery(theme.breakpoints.down('xs'));
   const isSM = useMediaQuery(theme.breakpoints.between('sm', 'md'));
@@ -28,7 +33,12 @@ function Home() {
 
   const [selectedItem, setSelectedItem] = useState("default");
 
-  const [arenaSessionId, setArenaSessionId] = useState("default");
+  const router = useRouter();
+  const arenaSessionId = router.query.arenaSessionId; 
+  const arenaUser = router.query.email; 
+
+  console.log("home.js:line 36:arenaSessionId:", arenaSessionId)
+  console.log("home.js:line 36:arenaSessionId:", arenaUser)
 
   const [externalURL, setExternalURL] = useState("default");
   const [searchParams, setSearchParams] = useState("default");
@@ -45,16 +55,7 @@ function Home() {
   const [selectedGUID, setSelectedGUID] = useState(null);
   const [selectedItemWorld, setSelectedItemWorld] = useState(null);
 
-  const [fetchedData, setFetchedData] = useState({});
-
-  useEffect(() => {
-    const storedSessionId = document.cookie.split('; ').reduce((acc, cookie) => {
-      const [name, value] = cookie.split('=');
-      acc[name] = value;
-      return acc;
-    }, {}).arenaSessionId;
-    setArenaSessionId(storedSessionId);
-  }, []);
+  //const [fetchedData, setFetchedData] = useState({});
 
   useEffect(() => {
     if (arenaSessionId === 'default') return;
@@ -64,8 +65,7 @@ function Home() {
           headers: { 'arena-session-id': arenaSessionId },
         });
 
-
-console.log("home.js:line 68:response.data", response.data)
+        console.log("home.js:line 68:response.data", response.data)
 
         setStateFunction(response.data);
     
@@ -80,22 +80,21 @@ console.log("home.js:line 68:response.data", response.data)
     fetchData("settings/items/categories",setItemCategories)
 
 
-  }, [arenaSessionId] );
+  }, [] );
   
-  // ...
-  
+
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <AppContext.Provider
         value={{
-          showSideNav, setShowSideNav,
+          showSideNav, setShowSideNav,arenaUser,
           showListNav, setShowListNav,
           showMainBody, setShowMainBody,
           showSettingsNav, setShowSettingsNav,
           selectedItem, setSelectedItem,
-          arenaSessionId, setArenaSessionId,
+          arenaSessionId,
           selectedGUID, setSelectedGUID,
           externalURL, setExternalURL,
           searchParams, setSearchParams,
@@ -109,12 +108,19 @@ console.log("home.js:line 68:response.data", response.data)
           qualityProcessStepAttributes, setQualityProcessStepAttributes
         }}
       >setQualityProcessSummmaryAttributes
-        <MainLayout>
-          {/* Your content and components */}
-        </MainLayout>
+    {shouldRenderMainLayout ? (
+          <MainLayout>
+            {/* Your content and components */}
+          </MainLayout>
+        ) : (
+          /* Your content and components without MainLayout */
+          <div>
+            {/* Your content */}
+          </div>
+        )}
       </AppContext.Provider>
     </ThemeProvider>
   );
 }
 
-export default Home;
+export default Home;  

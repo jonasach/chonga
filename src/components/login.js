@@ -4,8 +4,6 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import Cookies from 'js-cookie';
-import Image from 'next/image';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -18,7 +16,7 @@ function Login() {
   const sessionIDInputRef = useRef(null);
   const router = useRouter();
 
-  const [getNewSessionId, setGetNewSessionId] = useState(false);
+  const [getNewSessionId, setGetNewSessionId] = useState(true);
 
   useEffect(() => {
     axios
@@ -38,21 +36,12 @@ function Login() {
 
     sessionIDInputRef.current.blur();
 
-    const storedSessionId = Cookies.get('arenaSessionId');
-    if (storedSessionId) {
-      setArenaSessionId(storedSessionId);
-    }
+
+   
   }, []);
 
   const handleSignIn = () => {
-    if (arenaSessionId && !getNewSessionId) {
-      router.push({
-        pathname: '/home',
-        query: { arenaSessionId },
-      });
-      return;
-    }
-  
+
     if (!email || !password || !workspaceId || !apiUrl) {
       return;
     }
@@ -71,19 +60,18 @@ function Login() {
           setError(response.data.errors[0].message);
           return;
         }
-  
+
         const sessionId = response.data.arenaSessionId;
         setArenaSessionId(sessionId);
   
-        if (getNewSessionId) {
-          // Store the new session ID in a cookie
-          Cookies.set('arenaSessionId', sessionId, { expires: 7 });
-        }
-  
         router.push({
           pathname: '/home',
-          query: { sessionId },
+          query: {
+            arenaSessionId: sessionId,
+            email: email,
+          },
         });
+
       })
       .catch((error) => {
         console.error(`POST /login error:`, error);
@@ -136,6 +124,7 @@ function Login() {
         id="password"
         label="Password"
         type="password"
+        autoComplete="current-password" 
         variant="filled"
         value={password}
         onChange={(e) => setPassword(e.target.value)}

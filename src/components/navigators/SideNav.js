@@ -73,7 +73,6 @@ function SideNav() {
     }
 
   };
-
   const renderMenuItems = (items, parentId = null) => {
     return items
       .filter(item => item.parentId === parentId)
@@ -88,6 +87,7 @@ function SideNav() {
                 </ListItemIcon>}
                 <ListItemText primary={menuItem.label} style={{ color: textColor }} />
                 {children.length > 0 && (open[menuItem.id] ? <ExpandLess /> : <ExpandMore />)}
+                {children.length === 0 && <div style={{ color: textColor }}>{" > "}</div>}
               </ListItemButton>
             </ListItem>
             <Divider /> {/* Add Divider here */}
@@ -100,6 +100,8 @@ function SideNav() {
         );
       });
   };
+  
+  
   
   
   
