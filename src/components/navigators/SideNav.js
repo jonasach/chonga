@@ -50,6 +50,15 @@ function SideNav() {
         break;
 
       case 'UrlOutput':
+        if (isMdOrLess) {
+          setShowSideNav(false);
+          setShowListNav(false);
+          setShowMainBody(true);
+        } else {
+          setShowSideNav(true);
+          setShowListNav(true);
+          setShowMainBody(true);
+        }
         break;
 
       case 'CalendarOutput':
