@@ -91,16 +91,28 @@ function SideNav() {
       .filter(item => item.parentId === parentId)
       .map((menuItem) => {
         const children = items.filter(item => item.parentId === menuItem.id);
+        const isSvgFile = (icon) => {
+          return icon.includes('.png');
+      };
+        const isSvg = isSvgFile(menuItem.icon);
         return (
           <React.Fragment key={menuItem.id}>
             <ListItem disablePadding>
               <ListItemButton onClick={() => handleClick(menuItem)} style={{ color: textColor, paddingLeft: menuItem.parentId ? 32 : 16 }}>
-                {menuItem.icon && <ListItemIcon>
-                  {React.createElement(require('react-icons/fc')[menuItem.icon], { size: 32 })}
-                </ListItemIcon>}
-                <ListItemText primary={menuItem.label} style={{ color: textColor }} />
+              <ListItemIcon>
+    {isSvg
+        ? <img src={`/assets/logos/${menuItem.icon}`} alt="" style={{ maxWidth: "16%", height: "auto" }} />
+        : React.createElement(require('react-icons/fc')[menuItem.icon], { size: 32 })
+    }
+</ListItemIcon>
+
+
+{!isSvg && <ListItemText primary={menuItem.label} style={{ color: textColor }} />}
                 {children.length > 0 && (open[menuItem.id] ? <ExpandLess /> : <ExpandMore />)}
-                {children.length === 0 && <div style={{ color: textColor }}>{" > "}</div>}
+   
+    
+
+
               </ListItemButton>
             </ListItem>
             <Divider /> {/* Add Divider here */}

@@ -135,7 +135,7 @@ export default function FormOutput() {
         const { number, name, owner, creationDateTime, status } = header;
       
         return (
-          <AppBar position="static" style={{ backgroundColor: '#1976d2' }}>
+          <AppBar position="static" style={{ backgroundColor: '#6ebe4c' }}>
             <Grid container alignItems="center">
               <Grid item xs={2} sm={1} md={1}>
                 <Avatar alt="Joe Erickson" src="/assets/images/avatar/1.jpg" />

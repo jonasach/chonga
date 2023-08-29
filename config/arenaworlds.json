@@ -11,11 +11,12 @@
         "arenaListNumber": "title",
         "outputPage":"FileOutput"
     },
+
     {
         "id": "4",
         "parentId": null,
         "label": "arena",
-        "icon": "FcProcess",
+        "icon": "arena.png",
         "selectedPage": "arenalist",
         "arenaSearchEndPoint": "qualityprocesses?template.guid=HZJ27VMR84NJ2L4FZGTM&owner.guid=5N7QVJAFWS9SBUDWU63Z",
         "arenaEndPoint": "qualityprocesses",
@@ -27,100 +28,14 @@
         "id": "5",
         "parentId": null,
         "label": "thingworx",
-        "icon": "FcBarChart",
+        "icon": "thingworx.png",
         "selectedPage": "externalLink",
         "arenaEndPoint": "",
         "arenaListName": "",
         "arenaListNumber": "",
         "outputPage":"UrlOutput",
         "externalURL": "https://pp-23070619160j.portal.ptc.io/Thingworx/Runtime/index.html#mashup=PTC.FTLDP.ProblemReporting.SystemicProblem_MU&appKey=59c94d5e-85f0-4a2e-9ad5-9534589ab93d&x-thingworx-session=true"        
-    },
-    {
-        "id": "6",
-        "parentId": null,
-        "label": "Audit Calendar",
-        "icon": "FcPlanner",
-        "selectedPage": "arenalist",
-        "arenaEndPoint": "qualityprocesses?template.guid=HZJ27VMR84NJ2L4FZGTM",
-        "arenaListName": "",
-        "arenaListNumber": "",
-        "outputPage":"CalendarOutput"
-    },
-    {
-        "id": "70",
-        "parentId": null,
-        "label": "Settings",
-        "icon": "FcOrgUnit",
-        "children": ["71", "81"]
-    },
-    {
-        "id": "71",
-        "parentId": "70",
-        "label": "Quality Settings",
-        "icon": "FcProcess",
-        "children": ["72", "73", "74"]
-    },
-    {
-        "id": "72",
-        "parentId": "71",
-        "label": "Quality Templates",
-        "icon": "FcSurvey",
-        "selectedPage": "arenalist",
-        "arenaEndPoint": "settings/qualityprocesses/templates",
-        "arenaListName": "name",
-        "arenaListNumber": "guid",
-        "outputPage":"RawOutput",
-        "outputPage2":"QualityTemplates",
-        "preload":"true",
-        "useState":"setQualityProcessTemplates"
-    },
-    {
-        "id": "73",
-        "parentId": "71",
-        "label": "Quality Process Summary Attributes",
-        "icon": "FcSurvey",
-        "selectedPage": "arenalist",
-        "arenaEndPoint": "settings/qualityprocesses/attributes",
-        "arenaListName": "name",
-        "arenaListNumber": "apiName",
-        "outputPage":"RawOutput",
-        "outputPage2":"QualityTemplates",
-        "preload":"true",
-        "useState":"setQualityProcessSummmaryAtrributes"
-    },
-    {
-        "id": "74",
-        "parentId": "71",
-        "label": "Quality Process Step Templates",
-        "icon": "FcSurvey",
-        "selectedPage": "arenalist",
-        "arenaEndPoint": "settings/qualityprocesses/steps/attributes",
-        "arenaListName": "name",
-        "arenaListNumber": "apiName",
-        "outputPage":"RawOutput",
-        "outputPage2":"QualityTemplates",
-        "preload":"true",
-        "useState":"setQualityProcessTemplates"
-    },
-    {
-        "id": "81",
-        "parentId": "70",
-        "label": "Items Settings",
-        "icon":"FcGenealogy",
-        "children": ["82"]
-    },
-    {
-        "id": "82",
-        "parentId": "81",
-        "label": "Item Categories",
-        "icon": "FcSurvey",
-        "selectedPage": "arenalist",
-        "arenaEndPoint": "settings/items/categories",
-        "arenaListName": "name",
-        "arenaListNumber": "guid",
-        "outputPage":"RawOutput",
-        "outputPage2":"ItemCategories",
-        "preload":"true",
-        "useState":"setItemCategories"
     }
+   
+
 ]

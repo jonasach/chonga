@@ -41,7 +41,11 @@
       
       <Toolbar>
 
-      <Avatar alt="Joe Erickson" src="/assets/images/avatar/1.jpg" />
+<Avatar 
+    alt="Joe Erickson" 
+    src="/assets/images/avatar/1.jpg" 
+    style={{backgroundColor: 'black'}}
+/>
 
 
         {isMdOrLess && (
