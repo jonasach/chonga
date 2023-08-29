@@ -1,5 +1,15 @@
 [
-
+    {
+        "id": "1",
+        "parentId": null,
+        "label": "Item",
+        "icon": "FcGenealogy",
+        "selectedPage": "arenalist",
+        "arenaEndPoint": "items",
+        "arenaListName": "number",
+        "arenaListNumber": "name",
+        "outputPage":"FormOutput"
+    },
     {
         "id": "2",
         "parentId": null,
@@ -12,9 +22,20 @@
         "outputPage":"FileOutput"
     },
     {
+        "id": "3",
+        "parentId": null,
+        "label": "Changes",
+        "icon": "FcBiohazard",
+        "selectedPage": "arenalist",
+        "arenaEndPoint": "changes",
+        "arenaListName": "number",
+        "arenaListNumber": "title",
+        "outputPage":"FormOutput"
+    },
+    {
         "id": "4",
         "parentId": null,
-        "label": "arena",
+        "label": "Quality",
         "icon": "FcProcess",
         "selectedPage": "arenalist",
         "arenaSearchEndPoint": "qualityprocesses?template.guid=HZJ27VMR84NJ2L4FZGTM&owner.guid=5N7QVJAFWS9SBUDWU63Z",
@@ -26,7 +47,7 @@
     {
         "id": "5",
         "parentId": null,
-        "label": "thingworx",
+        "label": "ThingWorx",
         "icon": "FcBarChart",
         "selectedPage": "externalLink",
         "arenaEndPoint": "",

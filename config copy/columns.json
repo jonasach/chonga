@@ -1,0 +1,25 @@
+{
+    "items": [
+      { "name": "name", "label": "Name", "editable": false,"multiline":false },
+      { "name": "number", "label": "Number", "editable": true,"multiline":false },
+      { "name": "guid", "label": "guid", "editable": true,"multiline":false }
+    ],
+    "changes": [
+      { "name": "number", "label": "Number", "editable": false,"multiline":false },
+      { "name": "title", "label": "Title", "editable": true,"multiline":false },
+      { "name": "guid", "label": "guid", "editable": false,"multiline":false }
+    ],
+    "qualityprocesses": [
+      { "name": "number", "label": "Number", "editable": false, "multiline":false },
+      { "name": "name", "label": "Name", "editable": false, "multiline":false },
+      { "name": "guid", "label": "guid", "editable": false, "multiline":false },
+      { "name": "description", "label": "Description", "editable": true, "multiline":true }
+    ],
+    "settings/qualityprocesses/templates": [
+      { "name": "number", "label": "Number", "editable": false, "multiline":false },
+      { "name": "name", "label": "Name", "editable": false, "multiline":false },
+      { "name": "guid", "label": "guid", "editable": false, "multiline":false },
+      { "name": "description", "label": "Description", "editable": true, "multiline":true }
+    ]
+  }
+   
