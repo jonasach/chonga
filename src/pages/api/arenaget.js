@@ -13,6 +13,7 @@ export default async function handler(req, res) {
   }
 
 console.log("arenaget.js:arenaSessionId", arenaSessionId)
+console.log("arenaget.js:endpointName", req.query.endpoint)
 
 
   // Construct the URL based on the endpoint name

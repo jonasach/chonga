@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start"
   },
-  "author": "Ron Gajdos <rgajdos@ptc.com>",
+  "author": "Joe Erickson",
   "license": "MIT",
   "main": "bin/www",
   "dependencies": {

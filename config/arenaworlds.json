@@ -38,7 +38,7 @@
         "label": "Quality",
         "icon": "FcProcess",
         "selectedPage": "arenalist",
-        "arenaSearchEndPoint": "qualityprocesses?template.guid=HZJ27VMR84NJ2L4FZGTM",
+        "arenaSearchEndPoint": "qualityprocesses?template.guid=HZJ27VMR84NJ2L4FZGTM&owner.guid=5N7QVJAFWS9SBUDWU63Z",
         "arenaEndPoint": "qualityprocesses",
         "arenaListName": "number",
         "arenaListNumber": "name",

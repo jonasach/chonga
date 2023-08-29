@@ -45,8 +45,12 @@ function ListNav() {
       const fetchData = async () => {
         // If arenaSearchEndPoint is not empty, use it. Otherwise, use arenaEndPoint.
         const endpoint = arenaSearchEndPoint ? arenaSearchEndPoint : arenaEndPoint;
+ 
+        console.log("ListNav.js:line 48:endpoint", endpoint)
+        console.log("ListNav.js:line 49:arenaSearchEndPoint", arenaSearchEndPoint)
+
         try {
-          const response = await axios.get(`/api/arenaget?endpoint=${endpoint}`, {
+          const response = await axios.get(`/api/arenaget?endpoint=${encodeURIComponent(endpoint)}`, {
             headers: { 'arena-session-id': arenaSessionId },
           });
           setData(response.data);
