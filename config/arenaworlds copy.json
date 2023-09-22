@@ -1,9 +1,8 @@
-
 [
     {
         "id": "1",
         "parentId": null,
-        "label": "Item",
+        "label": "项目",
         "icon": "FcGenealogy",
         "selectedPage": "arenalist",
         "arenaEndPoint": "items",
@@ -14,7 +13,7 @@
     {
         "id": "2",
         "parentId": null,
-        "label": "Files",
+        "label": "文件",
         "icon": "FcDocument",
         "selectedPage": "arenalist",
         "arenaEndPoint": "files?format=pdf",
@@ -25,7 +24,7 @@
     {
         "id": "3",
         "parentId": null,
-        "label": "Changes",
+        "label": "更改",
         "icon": "FcBiohazard",
         "selectedPage": "arenalist",
         "arenaEndPoint": "changes",
@@ -36,7 +35,7 @@
     {
         "id": "4",
         "parentId": null,
-        "label": "Quality",
+        "label": "质量",
         "icon": "FcProcess",
         "selectedPage": "arenalist",
         "arenaSearchEndPoint": "qualityprocesses?template.guid=HZJ27VMR84NJ2L4FZGTM&owner.guid=5N7QVJAFWS9SBUDWU63Z",
@@ -55,12 +54,12 @@
         "arenaListName": "",
         "arenaListNumber": "",
         "outputPage":"UrlOutput",
-        "externalURL": "https://pp-23070619160j.portal.ptc.io/Thingworx/Runtime/index.html#mashup=PTC.FTLDP.ProblemReporting.SystemicProblem_MU&appKey=59c94d5e-85f0-4a2e-9ad5-9534589ab93d&x-thingworx-session=true"        
+        "externalURL": "https://pp-23070619160j.portal.ptc.io/Thingworx/Runtime/index.html#mashup=PTC.FTLDP.ProblemReporting.SystemicProblem_MU&appKey=59c94d5e-85f0-4a2e-9ad5-9534589ab93d&x-thingworx-session=true"
     },
     {
         "id": "6",
         "parentId": null,
-        "label": "Audit Calendar",
+        "label": "审计日历",
         "icon": "FcPlanner",
         "selectedPage": "arenalist",
         "arenaEndPoint": "qualityprocesses?template.guid=HZJ27VMR84NJ2L4FZGTM",
@@ -71,21 +70,21 @@
     {
         "id": "70",
         "parentId": null,
-        "label": "Settings",
+        "label": "设置",
         "icon": "FcOrgUnit",
         "children": ["71", "81"]
     },
     {
         "id": "71",
         "parentId": "70",
-        "label": "Quality Settings",
+        "label": "质量设置",
         "icon": "FcProcess",
         "children": ["72", "73", "74"]
     },
     {
         "id": "72",
         "parentId": "71",
-        "label": "Quality Templates",
+        "label": "质量模板",
         "icon": "FcSurvey",
         "selectedPage": "arenalist",
         "arenaEndPoint": "settings/qualityprocesses/templates",
@@ -99,7 +98,7 @@
     {
         "id": "73",
         "parentId": "71",
-        "label": "Quality Process Summary Attributes",
+        "label": "质量流程摘要属性",
         "icon": "FcSurvey",
         "selectedPage": "arenalist",
         "arenaEndPoint": "settings/qualityprocesses/attributes",
@@ -113,7 +112,7 @@
     {
         "id": "74",
         "parentId": "71",
-        "label": "Quality Process Step Templates",
+        "label": "质量流程步骤模板",
         "icon": "FcSurvey",
         "selectedPage": "arenalist",
         "arenaEndPoint": "settings/qualityprocesses/steps/attributes",
@@ -127,14 +126,14 @@
     {
         "id": "81",
         "parentId": "70",
-        "label": "Items Settings",
+        "label": "项目设置",
         "icon":"FcGenealogy",
         "children": ["82"]
     },
     {
         "id": "82",
         "parentId": "81",
-        "label": "Item Categories",
+        "label": "项目类别",
         "icon": "FcSurvey",
         "selectedPage": "arenalist",
         "arenaEndPoint": "settings/items/categories",
