@@ -7,9 +7,10 @@
         "icon": "FcGenealogy",
         "selectedPage": "arenalist",
         "arenaEndPoint": "items",
+        "arenaSearchEndPoint": "items?limit=200&criteria=%5B%20%5B%20%7B%22attribute%22%3A%20%22number%22%2C%22value%22%3A%20%2282%22%2C%22operator%22%3A%20%22STARTS_WITH%22%7D%20%5D%20%5D", 
         "arenaListName": "number",
         "arenaListNumber": "name",
-        "outputPage":"FormOutput"
+        "outputPage":"FormOutputDefault"
     },
     {
         "id": "2",
@@ -31,7 +32,7 @@
         "arenaEndPoint": "changes",
         "arenaListName": "number",
         "arenaListNumber": "title",
-        "outputPage":"FormOutput"
+        "outputPage":"FormOutputDefault"
     },
     {
         "id": "4",

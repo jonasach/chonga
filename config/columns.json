@@ -2,7 +2,9 @@
     "items": [
       { "name": "name", "label": "Name", "editable": false,"multiline":false },
       { "name": "number", "label": "Number", "editable": true,"multiline":false },
-      { "name": "guid", "label": "guid", "editable": true,"multiline":false }
+      { "name": "guid", "label": "guid", "editable": true,"multiline":false },      
+      { "name": "description", "label": "Description", "editable": true,"multiline":true },
+      { "name": "revisionNumber", "label": "Revision", "editable": false,"multiline":false }
     ],
     "changes": [
       { "name": "number", "label": "Number", "editable": false,"multiline":false },

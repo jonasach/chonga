@@ -83,15 +83,12 @@ function Settings() {
         {/* Read-Only Fields */}
 
         <ListItem><ListItemText primary={`Selected Item: ${selectedItem}`} /></ListItem>
-
-        <ListItem><ListItemText primary={`API End Point: ${selectedItemWorld?.outputPage}`} /></ListItem>
-        <ListItem><ListItemText primary={`Search End Point: ${selectedItemWorld?.outputPage2}`} /></ListItem>
+        <ListItem><ListItemText primary={`Output Page: ${selectedItemWorld?.outputPage}`} /></ListItem>
         <ListItem><ListItemText primary={`API End Point: ${selectedItemWorld?.arenaEndPoint}`} /></ListItem>
         <ListItem><ListItemText primary={`Search End Point: ${selectedItemWorld?.arenaSearchEndPoint}`} /></ListItem>
         <ListItem><ListItemText primary={`ListNav Name: ${selectedItemWorld?.arenaListName}`} /></ListItem>
         <ListItem><ListItemText primary={`ListNav Number: ${selectedItemWorld?.arenaListNumber}`} /></ListItem>
         
-
         <ListItem>
         <ListItemText primary="External URL:" />
         <TextField
