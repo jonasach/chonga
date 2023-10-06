@@ -200,5 +200,5 @@ const handleValueChange = (event) => {
       </div>
     </div>
   );
-        };
+        }
 export default MainBody;
