@@ -3,7 +3,10 @@ import AppContext from 'src/contexts/ArenaContext';
 import { Typography, Box } from '@mui/material';
 
 export default function QualityTemplates() {
-  const { qualityTemplates, selectedGUID } = useContext(AppContext);
+  const { qualityProcessTemplates, selectedGUID } = useContext(AppContext);
+
+
+  console.log("QualityTemplates.js:line 9:poing", qualityProcessTemplates)
 
   const renderAttributes = (attributes) => (
     <Box paddingLeft={4}>
@@ -44,10 +47,10 @@ export default function QualityTemplates() {
 
   return (
     <div>
-      {qualityTemplates && qualityTemplates.results && (
+      {qualityProcessTemplates && qualityProcessTemplates.results && (
         <Box padding={2}>
           <Typography variant="h4">Quality Templates</Typography>
-          {renderResults(qualityTemplates.results)}
+          {renderResults(qualityProcessTemplates.results)}
         </Box>
       )}
     </div>

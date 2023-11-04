@@ -151,7 +151,7 @@ export default function FormOutput() {
                     </Typography>
                   </Grid>
                   <Grid item xs={4} sm={4} md={4}>
-                    <Typography style={{ color: '#000000' }} variant="body2">{status || 'N/A'}</Typography>
+                    <Typography style={{ color: '#F8F8FF' }} variant="body2">{status || 'N/A'}</Typography>
                   </Grid>
                   <Grid item xs={6} sm={6} md={6}>
                     <Typography style={{ color: '#000000' }} variant="body2">{name || 'N/A'}</Typography>
@@ -193,26 +193,26 @@ export default function FormOutput() {
 
             return (
               <Accordion key={index}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />} style={{ backgroundColor: '#dae3e9' }}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />} style={{ backgroundColor: '#005b90' }}>
                   <Grid container>
                     <Grid item xs={2} sm={1} md={1}>
                     </Grid>
                     <Grid item xs={10} sm={11} md={11}>
                       <Grid container>
                         <Grid item xs={6} sm={4} md={4}>
-                          <Typography style={{ color: '#000000' }} variant="body2">{step.name || 'N/A'}</Typography>
+                          <Typography style={{ color: '#F8F8FF' }} variant="body2">{step.name || 'N/A'}</Typography>
                         </Grid>
                         <Grid item xs={6} sm={4} md={4}>
-                          <Typography style={{ color: '#000000' }} variant="body2">
+                          <Typography style={{ color: '#F8F8FF' }} variant="body2">
                             {step.dueDateTime
                               ? new Date(step.dueDateTime).toISOString().split('T')[0]
                               : 'N/A'}
                           </Typography>
                         </Grid>
                         <Grid item xs={6} sm={4} md={4}>
-                          <Typography style={{ color: '#000000' }} variant="body2">
+                          <Typography style={{ color: '#F8F8FF' }} variant="body2">
                             {fullName ? (
-                              <a href={`mailto:${step.assignees.users[0].email}`} style={{ color: '#000000' }}>
+                              <a href={`mailto:${step.assignees.users[0].email}`} style={{ color: '#F8F8FF' }}>
                                 {fullName}
                               </a>
                             ) : (
@@ -221,7 +221,7 @@ export default function FormOutput() {
                           </Typography>
                         </Grid>
                         <Grid item xs={6} sm={4} md={4}>
-                          <Typography style={{ color: '#000000' }} variant="body2">{step.status || 'N/A'}</Typography>
+                          <Typography style={{ color: '#F8F8FF' }} variant="body2">{step.status || 'N/A'}</Typography>
                         </Grid>
                       </Grid>
                     </Grid>
