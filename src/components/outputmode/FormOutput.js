@@ -52,7 +52,7 @@ export default function FormOutput() {
   
       console.log('Form data to be submitted:', requestBody);
       console.log('selectedGUID:', selectedGUID);
-      const endpoint = `/api/arenaput?endpoint=qualityprocesses/${selectedGUID}/steps/7P9SXLCHYUD9SBU4UAC8`;
+      const endpoint = `/api/arenaput?endpoint=qualityprocesses/${selectedGUID}/steps/8QATYMDIZVEATCV5TX1D`;
 
 
       //HZJ27VMR84NJ2L4FZGTM
