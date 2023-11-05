@@ -45,9 +45,6 @@ function ListNav() {
       const fetchData = async () => {
         // If arenaSearchEndPoint is not empty, use it. Otherwise, use arenaEndPoint.
         const endpoint = arenaSearchEndPoint ? arenaSearchEndPoint : arenaEndPoint;
- 
-        console.log("ListNav.js:line 48:endpoint", endpoint)
-        console.log("ListNav.js:line 49:arenaSearchEndPoint", arenaSearchEndPoint)
 
         try {
           const response = await axios.get(`/api/arenaget?endpoint=${encodeURIComponent(endpoint)}`, {
@@ -64,29 +61,37 @@ function ListNav() {
     }
   }, [selectedItemWorld, showListNav, selectedSideNavValue, ]);
   
+  const favs = ['2014','2016','1974','1862','0401','0501','0126', '1845']; // Your favorite numbers as an array of strings
 
   return (
     <Box sx={{ maxHeight: 'calc(100vh - 64px)', overflowY: 'auto' }}>
       <List>
         {data && data.results ? (
-          data.results.map((item) => (
-            <React.Fragment key={item.guid}>
-              <ListItemButton onClick={() => handleItemClick(item.guid)}>
-                <ListItemText
-                  primary={<span>Number: {item[selectedItemWorld?.arenaListName]}</span>}
-                  secondary={`Name: ${item[selectedItemWorld?.arenaListNumber]}`}
-                />
-                <div style={{ color: textColor }}>{" > "}</div>
-              </ListItemButton>
-              <Divider />
-            </React.Fragment>
-          ))
+          data.results.map((item) => {
+            const arenaListName = item[selectedItemWorld?.arenaListName];
+            const isFavorite = favs.some(fav => arenaListName.includes(fav)); // Check if any number in favs array is in arenaListName
+    
+            return (
+              <React.Fragment key={item.guid}>
+                <ListItemButton onClick={() => handleItemClick(item.guid)}>
+                  <ListItemText
+                    primary={<span>Number: {arenaListName}</span>}
+                    secondary={`Name: ${item[selectedItemWorld?.arenaListNumber]}`}
+                  />
+                  <div style={{ color: isFavorite ? 'red' : textColor }}>{" > "}</div>
+                </ListItemButton>
+                <Divider />
+              </React.Fragment>
+            );
+          })
         ) : (
           <></>
         )}
       </List>
     </Box>
   );
+  
+
 }
 
 export default ListNav;
