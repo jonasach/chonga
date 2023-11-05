@@ -51,7 +51,13 @@ export default function FormOutput() {
       };
   
       console.log('Form data to be submitted:', requestBody);
+      console.log('selectedGUID:', selectedGUID);
       const endpoint = `/api/arenaput?endpoint=qualityprocesses/${selectedGUID}/steps/7P9SXLCHYUD9SBU4UAC8`;
+
+
+      //HZJ27VMR84NJ2L4FZGTM
+
+
     
   
       const response = await axios.put(
