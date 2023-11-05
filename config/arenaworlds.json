@@ -18,7 +18,7 @@
         "label": "Files",
         "icon": "FcDocument",
         "selectedPage": "arenalist",
-        "arenaEndPoint": "files?number=*001*&format=pdf",
+        "arenaEndPoint": "files?limit=50&number=*01*&format=pdf",
         "arenaListName": "number",
         "arenaListNumber": "title",
         "outputPage":"FileOutput"
