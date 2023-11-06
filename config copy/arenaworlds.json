@@ -8,7 +8,9 @@
         "arenaEndPoint": "items",
         "arenaListName": "number",
         "arenaListNumber": "name",
-        "outputPage":"FormOutput"
+        "outputPage":"UrlOutput",
+        "externalURL": "https://app.bom.com/O6Q9E2TYFBU2LZKYT67V"        
+         
     },
     {
         "id": "2",

@@ -51,6 +51,8 @@ export default function FormOutput() {
     return (
       <div style={{ backgroundColor: backgroundColor, height: '100%', color: textColor }}>
 
+<iframe frameborder="0" src="https://arenasolutions.na.gooddata.com/dashboard.html#workspace=/gdc/workspaces/qy77hw96y43e7f55o8dkj8rzwyoggan3&dashboard=/gdc/md/qy77hw96y43e7f55o8dkj8rzwyoggan3/obj/395681" width="100%" height="380px" allowTransparency="false"></iframe>    
+
         <div style={{ backgroundColor: '#222', padding: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <FormControlLabel
             control={
@@ -109,7 +111,7 @@ export default function FormOutput() {
             </Grid>
           </form>
         )}
-      </div>
+  </div>
   );
   
 }
